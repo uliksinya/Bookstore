@@ -8,14 +8,14 @@
 }
 h1{
     font-family: "Bebas";
-    font-size: 56px;
     font-weight: 700;
     line-height: 64px;
     letter-spacing: 0em;
     text-align: left;
+    text-transform: uppercase;
 }
 h2{
-    font-family: "Bebas";
+    font-family: "Bebas", sans-serif;
     font-size: 40px;
     font-weight: 700;
     line-height: 60px;
@@ -23,7 +23,7 @@ h2{
     text-align: left;
 }
 h3{
-    font-family: Bebas Neue;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;

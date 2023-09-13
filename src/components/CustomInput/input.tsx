@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./input.module.scss";
-import searchIcon from "./search_icon.png";
+import searchIcon from "../../utils/img/search_icon.png";
 
 type InputType = "text" | "email" | "password" | "tel";
 
@@ -8,7 +8,6 @@ interface InputProps {
   onChange:(e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   value: string;
   placeholder: string;
-  inputTitle: string;
   inputType: InputType;
   disabled: boolean;
   isValid:boolean;
@@ -20,7 +19,6 @@ export const CustomInput = ({
   onChange,
   value,
   placeholder,
-  inputTitle,
   inputType,
   disabled = false,
   isValid,
@@ -30,10 +28,8 @@ export const CustomInput = ({
 }: InputProps) => {
   return (
         <div>
-          <p>{inputTitle}</p>
-          <div className={styles.input_container}>
+          <div className={styles.input_container} style={{ width }}>
             <input
-              style={{ width }}
               className={`${value ? styles.active_input : styles.default_input} ${isValid ? '' : styles.error_input}`}
               value={value}
               placeholder={placeholder}
@@ -41,6 +37,7 @@ export const CustomInput = ({
               disabled={disabled}
               type={inputType}
             />
+            
             {isSearchInput && (
             <div className={styles.searchIcon_container}>
               <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />

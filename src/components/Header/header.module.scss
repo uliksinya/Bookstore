@@ -1,13 +1,17 @@
 @import "../../styles/mixins.scss";
 .header{
-    width: calc(1120px * 100% / 1920px);
+    width: calc(1120px * 100vw / 1920px);
     height: 104px;
     @include flex-vertical-center;
+    align-items: center;
+    position: relative;
 }
 .header_icons_container{
     width: 184px;
     height: 56px;
     @include flex-sp-between;
+    position: absolute;
+    right: 0px;
 }
 .header_icons_container img{
     width: 56px;

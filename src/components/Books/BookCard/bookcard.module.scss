@@ -1,0 +1,15 @@
+.bookcard_container{
+    border: 1px solid black;
+    width: 352px;
+    height: 454px;
+}
+.background{
+    width: 352px;
+    height: 264px;
+    background-color: rgba(202, 239, 240, 1);
+}
+#book_image{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

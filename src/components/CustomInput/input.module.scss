@@ -1,21 +1,22 @@
 @import "../../styles/variables.scss";
-
+@import "../../styles/fonts.scss";
 *{
   outline:none;
 }
 .default_input {
-  // width: 500px;
+//   width: 100%;
   height: 40px;
   border: 1px solid $gray;
   padding-left: 20px;
   font-size: 15px;
   color: $secondary-gray;
   background-color: white;  
-  outline:none;  
+  outline:none; 
+  width: -webkit-fill-available; 
 }
 .default_input::placeholder {
   color: $secondary-gray;
-  font-family: "Helios";
+  font-family: "Helios", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 32px;
@@ -30,41 +31,46 @@
   border: 2px solid $gray;
 }
 .active_input{
-  width: 500px;
+  width: 100%;
   height: 40px;
   border: 1px solid $gray;
   padding-left: 20px;
   font-size: 15px;
   color: $secondary-gray;
   background-color: white;  
-  outline:none;  
+  outline:none; 
+  width: -webkit-fill-available;
 }
 .error_input {
   border: 1px solid $red;
+  width: -webkit-fill-available;
 }
 .search_icon{
   width: 24px;
   height: 24px;
 }
 #error_text{
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 10px;
-  font-family: Helios;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: $red;
+    font-family: "Helios", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: $red;
 }
 .input_container{
-  width: 500px;
+//   width: 100%;
   height: 40px;
   position: relative;
+  margin-left: 152px;
+//   border: 1px solid black;
 }
 .searchIcon_container{
   position: absolute;
-  right: 16px;
-  top: 7px;
+  right: 10px;
+  top: 10px;
+  width: 24px;
+  height: 24px;
 }
