@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Helios";
+    src: url("../utils/fonts/Helios\ Regular.ttf");
+}
+@font-face {
+    font-family: "Bebas";
+    src: url("../utils/fonts/BebasNeue-Regular.ttf");
+}
+h1{
+    font-family: "Bebas";
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 64px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+h2{
+    font-family: "Bebas";
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+h3{
+    font-family: Bebas Neue;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+}

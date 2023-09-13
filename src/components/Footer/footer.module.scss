@@ -1,0 +1,28 @@
+@import "../../styles/fonts.scss";
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+.footer{
+    width: calc(1120px * 100% / 1920px);
+    height: 95px;   
+}
+#line{
+    width: 100%;
+    height: 1px;
+    background-color: $secondary-gray;
+}
+p{
+    font-family: "Helios", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: $secondary-gray;
+}
+.footer_text{
+    @include  flex-sp-between;
+    width: 100%;
+    height: 24px;
+    margin-top: 36px;
+    align-items: center;
+}

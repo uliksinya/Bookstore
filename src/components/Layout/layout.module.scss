@@ -1,0 +1,6 @@
+@import "../../styles/mixins.scss";
+.layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

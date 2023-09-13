@@ -1,0 +1,32 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/fonts.scss";
+@import "../../styles/variables.scss";
+.tabs{
+  width: 563px;
+  height: 48px;
+  margin: 0px;
+}
+ul{
+  @include flex-row;
+  justify-content: space-between;
+  list-style-type: none;   
+  margin:0;
+  padding: 0;
+}
+.active_tab{
+  border-bottom: 2px solid $primary-black;
+}
+.not_active_tab{
+  color: $secondary-gray;
+}
+.not_active_tab:hover{
+  color: $primary-black;
+}
+li{
+  width: 161px;
+  height: 48px;
+  @include flex-horizontal-center; 
+  font-family: "Helios",  sans-serif;;
+  color: $primary-black;
+  cursor: pointer;
+}

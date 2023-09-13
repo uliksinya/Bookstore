@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+
+*{
+  outline:none;
+}
+.default_input {
+  // width: 500px;
+  height: 40px;
+  border: 1px solid $gray;
+  padding-left: 20px;
+  font-size: 15px;
+  color: $secondary-gray;
+  background-color: white;  
+  outline:none;  
+}
+.default_input::placeholder {
+  color: $secondary-gray;
+  font-family: "Helios";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.default_input:disabled{
+  background-color: $gray;
+  box-shadow: none;    
+}
+.default_input:focus{
+  border: 2px solid $gray;
+}
+.active_input{
+  width: 500px;
+  height: 40px;
+  border: 1px solid $gray;
+  padding-left: 20px;
+  font-size: 15px;
+  color: $secondary-gray;
+  background-color: white;  
+  outline:none;  
+}
+.error_input {
+  border: 1px solid $red;
+}
+.search_icon{
+  width: 24px;
+  height: 24px;
+}
+#error_text{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 10px;
+  font-family: Helios;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: $red;
+}
+.input_container{
+  width: 500px;
+  height: 40px;
+  position: relative;
+}
+.searchIcon_container{
+  position: absolute;
+  right: 16px;
+  top: 7px;
+}
