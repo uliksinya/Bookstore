@@ -1,10 +1,13 @@
+@import "../../../styles/fonts.scss";
+@import "../../../styles/mixins.scss";
+
 .bookcard_container{
-    border: 1px solid black;
-    width: 352px;
+    // border: 1px solid black;
+    width: 100%;
     height: 454px;
 }
 .background{
-    width: 352px;
+    width: 100%;
     height: 264px;
     background-color: rgba(202, 239, 240, 1);
 }
@@ -12,4 +15,18 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+#title{
+    margin-top: 20px;
+    height: 64px;
+}
+p{
+    margin: 0;
+}
+.author_data{
+    margin-top: 8px;
+}
+.bookcard_footer{
+    margin-top: 40px;
+    @include flex-sp-between;
 }

@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts"
-import { selectBooks, fetchBooks, BookState, fetchFoundedBooks} from "../../../redux/products/products";
+import { selectReleasedBooks, fetchBooks, BookState, fetchFoundedBooks} from "../../../redux/products/products";
 import { BookCard } from "../BookCard/bookcard";
 import styles from "./releasedbooks.module.scss"
 import { useSearchParams } from "react-router-dom";
 
 export const ReleasedBooks = () => {
-    const books = useAppSelector(selectBooks);
-    console.log(books);
+    const books = useAppSelector(selectReleasedBooks);
     
     const dispatch = useAppDispatch();
     // const [searchParams, setSearchParams] = useSearchParams();

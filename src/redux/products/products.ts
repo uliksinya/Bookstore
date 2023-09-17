@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
@@ -12,42 +12,48 @@ export interface BookState {
     url?: string,
 }
 
-const initialState: BookState[] = [];
+const initialState:{
+    releasedBooks: BookState[];
+    foundedBooks: BookState[];
+  } = {
+    releasedBooks: [],
+    foundedBooks: [],
+  };
 
 export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
     const response = await axios.get("https://api.itbook.store/1.0/new");
-    console.log(response.data.books);
+    // console.log(response.data.books);
     return response.data.books;
 }); 
 
-export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async(searchParams: string|undefined) => {
-    const response = await axios.get(`https://api.itbook.store/1.0/search/?${searchParams || ""}`);
+export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async(params: string|undefined) => {
+    const response = await axios.get(`https://api.itbook.store/1.0/search/${params || ""}`);
+    console.log(response.data.books);
     return response.data;
 })
 
+// ... (ваш импорт и начальные настройки)
+
 export const bookSlice = createSlice({
-  name: 'book',
-  initialState,
-  reducers: {
-    
-  },
-  extraReducers: (builder) => {
-  builder
-    .addCase(fetchBooks.fulfilled, (state, action) => {
-        return [...action.payload];
-    })
-    .addCase(fetchFoundedBooks.fulfilled, (state, action) => {
-        console.log(...action.payload);
-        return [...action.payload];
-    })
-  }
-})
-
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value
-
-export const selectBooks = (state: RootState) => state.book; 
+    name: 'book',
+    initialState,
+    reducers: {
+      // Здесь вы можете добавить свои дополнительные редукторы, если они понадобятся в будущем.
+    },
+    extraReducers: (builder) => {
+      builder
+        .addCase(fetchBooks.fulfilled, (state, action) => {
+          state.releasedBooks = [...action.payload];
+        })
+        .addCase(fetchFoundedBooks.fulfilled, (state, action) => {
+            if(action.payload.books !== undefined){
+                state.foundedBooks = [...action.payload.books];
+            }
+        });
+    }
+  })
+  
+  export const selectReleasedBooks = (state: RootState) => state.book.releasedBooks;
+  export const selectFoundedBooks = (state: RootState) => state.book.foundedBooks;  
 
 export default bookSlice.reducer

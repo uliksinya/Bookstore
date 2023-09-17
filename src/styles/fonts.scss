@@ -1,10 +1,43 @@
 @font-face {
-    font-family: "Helios";
-    src: url("../utils/fonts/Helios\ Regular.ttf");
+    font-family: "Helios-Light";
+    font-weight: 400;
+    font-style: normal;
+    src: local('Helios Light'), local('Helios Light'),
+        url('../utils/fonts/HeliosLightC.woff2') format('woff2'),
+        url('../utils/fonts/HeliosLightC.woff') format('woff'),
+        url('../utils/fonts/HeliosLightC.ttf') format('ttf'),
+        url('../utils/fonts/HeliosLightC.eot') format('eof')
+
+}
+@font-face {
+    font-family: "Helios-Bold";
+    font-weight: 700;
+    font-style: normal;
+    src: local('Helios Bold'), local('Helios Bold'),
+        url('../utils/fonts/HeliosC-Bold.woff2') format('woff2'),
+        url('../utils/fonts/HeliosC-Bold.woff') format('woff'),
+        url('../utils/fonts/HeliosC-Bold.ttf') format('ttf'),
+        url('../utils/fonts/HeliosC-Bold.eot') format('eof')
 }
 @font-face {
     font-family: "Bebas";
-    src: url("../utils/fonts/BebasNeue-Regular.ttf");
+    font-weight: 700;
+    font-style: normal;
+    src: local('Bebas Neue'), local('Bebas Neue'),
+        url('../utils/fonts/BebasNeuePro-ExpandedExtraBold.woff2') format('woff2'),
+        url('../utils/fonts/BebasNeuePro-ExpandedExtraBold.woff') format('woff'),
+        url('../utils/fonts/BebasNeuePro-ExpandedExtraBold.ttf') format('ttf'),
+        url('../utils/fonts/BebasNeuePro-ExpandedExtraBold.eot') format('eof')
+}
+@font-face {
+    font-family: "Din-Pro";
+    font-weight: 400;
+    font-style: normal;
+    src: local('Din Pro'), local('Din Pro'),
+        url('../utils/fonts/DINPro.woff2') format('woff2'),
+        url('../utils/fonts/DINPro.woff') format('woff'),
+        url('../utils/fonts/DINPro.ttf') format('ttf'),
+        url('../utils/fonts/DINPro.eot') format('eof')
 }
 h1{
     font-family: "Bebas";
@@ -13,20 +46,25 @@ h1{
     letter-spacing: 0em;
     text-align: left;
     text-transform: uppercase;
+    margin: 0;
 }
 h2{
-    font-family: "Bebas", sans-serif;
+    font-family: "Bebas";
     font-size: 40px;
     font-weight: 700;
     line-height: 60px;
     letter-spacing: 0em;
     text-align: left;
+    text-transform: uppercase;
+    margin: 0;
 }
 h3{
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Bebas";
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: left;    
+    text-transform: uppercase;
+    margin: 0;
 }

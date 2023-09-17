@@ -1,0 +1,54 @@
+@import "../../styles/mixins.scss";
+.subscribe_container{
+    background-color: rgba(244, 238, 253, 1);
+    width: calc(1120px * 100vw / 1920px) ;
+    height: 288px;
+    padding-left: 64px;
+    padding-top: 56px;
+}
+p{
+    font-family: var(--din-pro);
+    height: 28px;
+}
+.text_container{
+    width: 691px;
+    height: 88px;
+    border: 1px solid black;
+
+}
+.title_container{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#title{
+    height: auto;
+}
+.input_container{
+    width: 992px;
+    height: 56px;
+    @include flex-row;
+    margin-top: 32px;
+}
+.subscribe_input{
+    width: calc(818px * 100% / 992px);
+    height: 100%;
+}
+button{
+    width: calc(174px * 100% / 992px);
+    height: 100%;
+    background-color: var(--primary-black);
+    border: none;
+}
+#button_text{
+    font-family: var(--font-bebas);
+    color: var(--white-standart);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    text-transform: uppercase;
+    @include flex-center;
+}

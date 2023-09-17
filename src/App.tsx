@@ -15,7 +15,6 @@ function App() {
   return (
     <Provider store={store}>
     <div className={styles.container}>
-      <div className={styles.center}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -23,7 +22,6 @@ function App() {
             </Route>            
           </Routes>
         </BrowserRouter>
-      </div>
     </div>
     </Provider>
     // <div>
