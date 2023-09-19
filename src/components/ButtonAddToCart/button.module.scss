@@ -1,0 +1,19 @@
+@import "../../styles/mixins.scss";
+.btn{
+    margin-top: 59px;
+    width: 448px;
+    height: 56px;
+}
+h3{
+    color: var(--white-standart);
+    @include flex-horizontal-center;
+}
+.btn:hover{
+    background-color: var(--primary-2-black);
+}
+.btn_disabled{
+    margin-top: 59px;
+    width: 448px;
+    height: 56px;
+    background-color: var(--secondary-gray);
+}

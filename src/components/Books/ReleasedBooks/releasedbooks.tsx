@@ -1,43 +1,31 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts"
-import { selectReleasedBooks, fetchBooks, BookState, fetchFoundedBooks} from "../../../redux/products/products";
+import { selectReleasedBooks, fetchBooks, BookState} from "../../../redux/products/products";
 import { BookCard } from "../BookCard/bookcard";
 import styles from "./releasedbooks.module.scss"
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const ReleasedBooks = () => {
-    const books = useAppSelector(selectReleasedBooks);
-    
+export const ReleasedBooks = () => {   
     const dispatch = useAppDispatch();
-    // const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const books = useAppSelector(selectReleasedBooks);  
 
     useEffect(() => {
         if(books.length === 0){
             dispatch(fetchBooks());
         }   
     }, [dispatch, books]);
+    
+    const redirectToPostPage = (id: number) => {
+        navigate(`/books/${id}`);
+        console.log("переход на страницу книги");
+    };
 
-    // useEffect(() => {
-    //    const stringParams = searchParams.toString();
-    //    dispatch(fetchFoundedBooks(stringParams))
-    // }, [searchParams]);
-
-    // const handleSearchInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    //     setSearchParams((prevParams) => {
-    //         if(!e.target.value.length){
-    //             prevParams.delete("name");
-    //         }
-    //         else{
-    //             prevParams.set("name", e.target.value);
-    //         }
-    //         return prevParams;
-    //     });
-    // }
     return (
         <div className={styles.books_container}>
             {books.map((book: BookState) => (
                 <div key={book.isbn13}>
-                    <BookCard title={book.title} subtitle={book.subtitle} price={book.price} image={book.image}/>
+                    <BookCard book={book} onClick={() => redirectToPostPage(Number(book.isbn13))}/>
                 </div>
             ))}
         </div>

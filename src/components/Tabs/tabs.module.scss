@@ -6,7 +6,7 @@
   height: 48px;
   margin: 0px;
 }
-ul{
+.tabs_menu{
   @include flex-row;
   justify-content: space-between;
   list-style-type: none;   
@@ -22,7 +22,7 @@ ul{
 .not_active_tab:hover{
   color: $primary-black;
 }
-li{
+#menu_item{
   width: 161px;
   height: 48px;
   @include flex-horizontal-center; 

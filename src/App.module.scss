@@ -1,9 +1,8 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center; 
+  // width: calc(1120px * 100vw / 1920px);
   width: 1120px;
-  border: 1px solid black;
   border: none;
-  /* box-sizing: border-box;
-} */
 }

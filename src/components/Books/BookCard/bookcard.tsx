@@ -1,11 +1,11 @@
 import styles from "./bookcard.module.scss";
-import {BookState} from "../../../redux/products/products"
 import Grade from "../../../utils/img/grade.png";
+import { IBookCard } from "../../api/types";
 
 
-export const BookCard = (book: BookState) => {
+export const BookCard = ({ book, onClick } : IBookCard) => {
     return (
-        <div className={styles.bookcard_container}>
+        <div className={styles.bookcard_container} onClick={onClick}>
             <div className={styles.background}>
                 <img src={book.image} id={styles.book_image}/>
                 <h3 id={styles.title}>{book.title}</h3>

@@ -1,0 +1,60 @@
+@import "../../styles/mixins.scss";
+.content_container{
+    margin-bottom: 72px;
+}
+.img_container{
+    margin-top: 72px;
+    cursor: pointer;
+}
+.img_background{
+    width: 544px;
+    height: 472px;
+    background-color: var(--purple);
+}
+.book_desription{
+    margin-top: 48px;
+    @include flex-row;
+    justify-content: space-between;
+}
+.book_img{
+    @include flex-center;
+}
+.book_information{
+    width: 448px;
+    height: 472px;
+    border-top: 1px solid var( --gray);
+}
+.grade{
+    @include flex-row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;    
+}
+.main_menu, .additionally_menu{
+    margin: 0;
+    padding: 0;
+    margin-top: 24px
+}
+li{
+    @include flex-row;
+    justify-content: space-between;
+}
+#descr{
+    color: var(--primary-black);
+}
+.menu{
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+#menu::after{
+    content: "";
+    background-image: url("../../utils/img/arr_down.jpg");
+    display: block; /* Убедитесь, что элемент имеет блочный тип */
+    width: 16px; /* Задайте ширину и высоту изображения */
+    height: 16px; 
+    position: absolute;
+    top: 5px;
+    left: 104px;
+    color: var(--primary-black);
+}

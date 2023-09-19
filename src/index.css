@@ -13,6 +13,8 @@
     --orange: rgba(254, 233, 226, 1);
     --purple: rgba(244, 238, 253, 1);
     --font-bebas: 'Bebas', sans-serif;
+    --helios-light: 'Helios-Light', sans-serif;
+    --helios-bold: 'Helios-Bold', sans-serif;
     --din-pro: 'Din-Pro', sans-serif;
 }
 body{
