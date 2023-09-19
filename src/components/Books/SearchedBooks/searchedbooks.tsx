@@ -14,7 +14,7 @@ export const SearchedBooks = () => {
     };
 
     return (
-        <div className={styles.books_container}>
+        <div className={styles.books_content_container}>
             {searchedBooks.map((book: BookState) => (
                 <div key={book.isbn13}>
                     <BookCard book={book} onClick={() => redirectToPostPage(Number(book.isbn13))}/>

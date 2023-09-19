@@ -1,8 +1,5 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  // width: calc(1120px * 100vw / 1920px);
-  width: 1120px;
-  border: none;
+.main_container {
+  width: calc(1120px * 100vw / 1920px);
+  box-sizing: border-box;
+  margin: 0 auto;  
 }

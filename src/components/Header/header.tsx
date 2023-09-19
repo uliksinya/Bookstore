@@ -22,7 +22,7 @@ export const Header = () => {
     } 
     return (
         <div className={styles.header}>
-            <h2>Bookstore</h2>
+            <div className={styles.logo}><h2 id={styles.logo_text}>Bookstore</h2></div>
             <div className={styles.input_container}>
                 <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
                 <img src={SearchIcon} className={styles.search_icon}/>

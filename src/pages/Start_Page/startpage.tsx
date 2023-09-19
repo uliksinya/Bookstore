@@ -13,12 +13,12 @@ export const StartPage = () => {
             {/* если есть value и =0 то пустой див если есть велью и не
               0 то серч если нету велью то релизд */}
             {searchedBooks.length !==0  ? 
-            <div>
+            <div className={styles.books_container}>
                 <h1 className={styles.title_text}>"" search results</h1>
                 <SearchedBooks/>
             </div>
             : 
-            <div>
+            <div className={styles.books_container}>
                 <h1 className={styles.title_text}>New Releases Books</h1>
                 <ReleasedBooks/>
             </div>

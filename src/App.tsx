@@ -10,7 +10,7 @@ import { SinglePage } from "./pages/SingleBookPage/singlePage";
 function App() { 
   return (
     <Provider store={store}>
-      <div className={styles.container}>
+      <div className={styles.main_container}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>

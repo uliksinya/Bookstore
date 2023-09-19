@@ -2,7 +2,7 @@ import { useAppSelector } from "../../redux/hooks"
 import { useAppDispatch } from "../../redux/hooks";
 import { useEffect, useState } from "react";
 import { fetchSelectedBook } from "../../redux/products/products";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { selectSelectedBook } from "../../redux/products/products";
 import ArrowIcon from "../../utils/img/arrow_icon.png";
 import styles from "./singlepage.module.scss"
@@ -14,6 +14,7 @@ import { ButtonAddToCart } from "../../components/ButtonAddToCart/button";
 export const SinglePage = () => {
     const id = useParams();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const book = useAppSelector(selectSelectedBook);
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
 
@@ -25,11 +26,14 @@ export const SinglePage = () => {
     const toggleEditState = () => {
         setIsMenuActive(!isMenuActive);
     }
+    const toggleNavigateToHome = () => {
+        navigate('/books');
+    }
 
     return(
         <div>
             <div className={styles.content_container}>
-                <div className={styles.img_container}><img src={ArrowIcon}/></div>
+                <div className={styles.img_container} onClick={toggleNavigateToHome}><img src={ArrowIcon}/></div>
                 <h1>{book.title}</h1>
                 <div className={styles.book_desription}>
                     <div className={styles.img_background}>
@@ -55,7 +59,7 @@ export const SinglePage = () => {
                         </ul>
                         :
                         <ul className={styles.menu}><p id={styles.menu} onClick={toggleEditState}>More detalize</p></ul> }    
-                        <ButtonAddToCart disabled={true}/>                
+                        <ButtonAddToCart disabled={false}/>                
                     </div>
                 </div>            
             </div>
