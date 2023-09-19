@@ -2,25 +2,29 @@
 .content_container{
     margin-bottom: 72px;
 }
+.single_title{
+    width: calc(1044px * 100% / 1120px);
+    height: 128px;
+    @include flex-vertical-center;
+}
 .img_container{
     margin-top: 72px;
     cursor: pointer;
 }
 .img_background{
-    width: 544px;
-    height: 472px;
+    width:  calc(544px * 100% / 1120px);
+    height:  472px;
     background-color: var(--purple);
+    @include flex-center;
 }
 .book_desription{
+    width: 100%;
     margin-top: 48px;
     @include flex-row;
     justify-content: space-between;
 }
-.book_img{
-    @include flex-center;
-}
 .book_information{
-    width: 448px;
+    width:  calc(448px * 100% / 1120px);
     height: 472px;
     border-top: 1px solid var( --gray);
 }
@@ -35,12 +39,13 @@
     padding: 0;
     margin-top: 24px
 }
-li{
+.main_menu li, .additionally_menu li{
     @include flex-row;
     justify-content: space-between;
 }
 #descr{
     color: var(--primary-black);
+    text-align: right;
 }
 .menu{
     position: relative;
@@ -50,11 +55,30 @@ li{
 #menu::after{
     content: "";
     background-image: url("../../utils/img/arr_down.jpg");
-    display: block; /* Убедитесь, что элемент имеет блочный тип */
-    width: 16px; /* Задайте ширину и высоту изображения */
+    display: block; 
+    width: 16px; 
     height: 16px; 
     position: absolute;
-    top: 5px;
+    top: 6px;
     left: 104px;
     color: var(--primary-black);
+}
+.book_description{
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+#single_desc{
+    font-family: var(--helios-light);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.icons_container{
+    width: 120px;
+    height: 24px;
+    @include flex-row;
+    justify-content: space-between;
+    margin-bottom: 72px;
 }

@@ -22,12 +22,15 @@ export const Header = () => {
     } 
     return (
         <div className={styles.header}>
-            <div className={styles.logo}><h2 id={styles.logo_text}>Bookstore</h2></div>
+            <div className={styles.logo}>
+                <h2 id={styles.logo_text}>
+                    Bookstore
+                </h2>
+            </div>
             <div className={styles.input_container}>
                 <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
                 <img src={SearchIcon} className={styles.search_icon}/>
             </div>
-            {/* <CustomInput onChange={handleSearchInputChange} value={value} placeholder="Search..." inputType='text' disabled={false} isValid={true} isSearchInput={true} errorText='Error text...' width="28.23vw" /> */}
             <div className={styles.header_icons_container}>
                 <img src={LikeLogo} alt="Like Icon" />
                 <img src={ShopLogo} alt="Shop Icon" />

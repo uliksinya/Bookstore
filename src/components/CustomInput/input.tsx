@@ -39,12 +39,11 @@ export const CustomInput = ({
             />
             
             {isSearchInput && (
-            <div className={styles.searchIcon_container}>
-              <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
-            </div>
+              <div className={styles.searchIcon_container}>
+                <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
+              </div>
             )}
-          </div>
-          
+          </div>          
           {isValid ? "" : <h3 id={styles.error_text}>{errorText}</h3>}
         </div>
       );

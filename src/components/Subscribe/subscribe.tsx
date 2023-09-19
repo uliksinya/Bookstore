@@ -1,4 +1,3 @@
-import { CustomInput } from "../CustomInput/input";
 import styles from "./subscribe.module.scss";
 
 export const Subscribe = () => {
@@ -10,8 +9,12 @@ export const Subscribe = () => {
                     <p>Be the first to know about new IT books, upcoming releases, exclusive offers and more.</p>
                 </div>
                 <div className={styles.input_container}>
-                    <input className={styles.subscribe_input}/>
-                    <button><p id={styles.button_text}>Subscribe</p></button>
+                    <input className={styles.subscribe_input} placeholder="Your Email"/>
+                    <button>
+                        <p id={styles.button_text}>
+                            Subscribe
+                        </p>
+                    </button>
                 </div>
             </div>           
         </div>

@@ -2,8 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
-import { createSelector } from '@reduxjs/toolkit';
-import { useAppSelector } from '../hooks';
 
 export interface BookState {
   title: string,
@@ -17,6 +15,7 @@ export interface BookState {
   language?: string;
   pages?: string;
   year?: string;
+  desc?: string;
 }
 
 const initialState:{
@@ -56,7 +55,7 @@ export const bookSlice = createSlice({
     name: 'book',
     initialState,
     reducers: {
-      // Здесь вы можете добавить свои дополнительные редукторы, если они понадобятся в будущем.
+      
     },
     extraReducers: (builder) => {
       builder

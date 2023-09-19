@@ -1,6 +1,4 @@
 @import "../../styles/mixins.scss";
-@import "../../styles/fonts.scss";
-@import "../../styles/variables.scss";
 .tabs{
   width: 563px;
   height: 48px;
@@ -14,19 +12,18 @@
   padding: 0;
 }
 .active_tab{
-  border-bottom: 2px solid $primary-black;
+  border-bottom: 2px solid var(--primary-black);
 }
 .not_active_tab{
-  color: $secondary-gray;
+  color: var(--secondary-gray);
 }
 .not_active_tab:hover{
-  color: $primary-black;
+  color: var(--primary-black);
 }
 #menu_item{
   width: 161px;
   height: 48px;
   @include flex-horizontal-center; 
-  font-family: "Helios",  sans-serif;;
-  color: $primary-black;
+  font-family: var(--helios-light);
   cursor: pointer;
 }

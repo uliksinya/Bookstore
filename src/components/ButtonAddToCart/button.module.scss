@@ -4,7 +4,7 @@
     width: 448px;
     height: 56px;
 }
-.btn_text{
+#btn_text{
     color: var(--white-standart);
     @include flex-horizontal-center;
 }
