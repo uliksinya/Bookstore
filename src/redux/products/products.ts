@@ -35,7 +35,7 @@ const initialState:{
 
 export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
   const response = await axios.get("https://api.itbook.store/1.0/new");
-  // console.log(response.data.books);
+  console.log(response.data.books);
   return response.data.books;
 }); 
 

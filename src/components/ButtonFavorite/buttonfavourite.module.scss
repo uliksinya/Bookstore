@@ -1,3 +1,15 @@
-.like_icon:hover{
-    background-image: url("../../utils/img/favourite_hover.png");
+.default_like {
+    background-image: url('../../utils/img/favourite_def.png');
+    width: 56px;
+    height: 56px;
+}
+.default_like:hover {
+    background-image: url('../../utils/img/favourite_hover.png');
+    width: 56px;
+    height: 56px;
+}
+.active_like{
+    background-image: url('../../utils/img/favourite_active.png');
+    width: 56px;
+    height: 56px;
 }

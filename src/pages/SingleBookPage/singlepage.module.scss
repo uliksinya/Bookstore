@@ -16,6 +16,12 @@
     height:  472px;
     background-color: var(--purple);
     @include flex-center;
+    position: relative;
+}
+.like_component{
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .book_desription{
     width: 100%;

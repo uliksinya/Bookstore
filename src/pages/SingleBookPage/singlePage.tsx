@@ -45,6 +45,9 @@ export const SinglePage = () => {
                 </div>
                 <div className={styles.book_desription}>
                     <div className={styles.img_background}>
+                        <div className={styles.like_component}>
+                            <ButtonFavourite disabled={false}/>
+                        </div>                        
                         <div className={styles.book_img}><img src={book.image}/></div>
                     </div>
                     <div className={styles.book_information}>
@@ -102,7 +105,6 @@ export const SinglePage = () => {
                 <div><img src={MenuIcon}/></div>                
             </div>
             <Subscribe/>
-            <ButtonFavourite disabled={false}/>
         </div>        
     )
 }
