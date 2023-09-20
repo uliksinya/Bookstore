@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import book from "../redux/products/products"
+import book from "./books/books"
+import searchInputValue from "./searchValue/searchValue"
 
 export const store = configureStore({
-  reducer: {book},
+  reducer: {book, searchInputValue}
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

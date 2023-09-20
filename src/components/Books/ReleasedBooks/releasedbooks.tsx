@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts"
-import { selectReleasedBooks, fetchBooks, BookState} from "../../../redux/products/products";
+import { selectReleasedBooks, fetchBooks, BookState} from "../../../redux/books/books.ts";
 import { BookCard } from "../BookCard/bookcard";
 import styles from "./releasedbooks.module.scss"
 import { useNavigate } from "react-router-dom";

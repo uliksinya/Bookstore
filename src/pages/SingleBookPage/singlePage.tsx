@@ -1,9 +1,9 @@
 import { useAppSelector } from "../../redux/hooks"
 import { useAppDispatch } from "../../redux/hooks";
 import { useEffect, useState } from "react";
-import { fetchSelectedBook } from "../../redux/products/products";
+import { fetchSelectedBook } from "../../redux/books/books";
 import { useNavigate, useParams } from "react-router-dom";
-import { selectSelectedBook } from "../../redux/products/products";
+import { selectSelectedBook } from "../../redux/books/books";
 import ArrowIcon from "../../utils/img/arrow_icon.png";
 import styles from "./singlepage.module.scss"
 import Grade from "../../utils/img/grade.png";

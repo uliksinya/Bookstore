@@ -1,24 +1,24 @@
-import styles from "./header.module.scss"
+import styles from "./header.module.scss";
 import LikeLogo from "../../utils/img/Like_icon.png";
 import ShopLogo from "../../utils/img/Shop_icon.png";
 import UserLogo from "../../utils/img/User_icon.png";
-import { useState } from "react";
 import React from "react";
-import { fetchFoundedBooks } from "../../redux/products/products";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { selectFoundedBooks } from "../../redux/products/products";
+import { fetchFoundedBooks } from "../../redux/books/books";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../utils/img/search_icon.png";
+import { selectSearchInputValue } from "../../redux/searchValue/searchValue";
+import { setValue } from "../../redux/searchValue/searchValue";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
-    const searchedBooks = useAppSelector(selectFoundedBooks);
-    console.log(searchedBooks);
-    const [value, setValue] = useState<string>("");
+    const value = useAppSelector(selectSearchInputValue);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        setValue(newValue);
-        dispatch(fetchFoundedBooks(newValue));     
+        const value = e.target.value;
+        dispatch(setValue(value));
+        dispatch(fetchFoundedBooks(value));
+
+        console.log(typeof(value));
     } 
     return (
         <div className={styles.header}>

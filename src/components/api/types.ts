@@ -1,4 +1,4 @@
-import { BookState } from "../../redux/products/products";
+import { BookState } from "../../redux/books/books";
 
 export interface Book {
     title: string,
@@ -11,3 +11,5 @@ export interface IBookCard{
     onClick: () => void;
     book: BookState;
 }
+
+export type Arrows = "Prev" | "Next";
