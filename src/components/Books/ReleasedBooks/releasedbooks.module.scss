@@ -6,3 +6,13 @@
     width: 100%;
     margin-top: 48px;
 }
+@media (max-width: 768px){
+    .books_content_container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 320px){
+    .books_content_container{
+        grid-template-columns: 1fr;
+    }
+}

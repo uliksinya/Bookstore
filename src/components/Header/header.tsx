@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../utils/img/search_icon.png";
 import { selectSearchInputValue } from "../../redux/searchValue/searchValue";
 import { setValue } from "../../redux/searchValue/searchValue";
+import { HeaderBurgerMenu } from "../HeaderBurgerMenu/burgermenu";
+import {useState} from "react";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
@@ -20,7 +22,14 @@ export const Header = () => {
 
         console.log(typeof(value));
     } 
+
+    const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
+    const toogleMenuState = () => {
+        console.log("Нажали на бургер");
+        setIsActiveMenu(!isActiveMenu);
+    }
     return (
+        <div>
         <div className={styles.header}>
             <div className={styles.logo}>
                 <h2 id={styles.logo_text}>
@@ -30,12 +39,23 @@ export const Header = () => {
             <div className={styles.input_container}>
                 <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
                 <img src={SearchIcon} className={styles.search_icon}/>
-            </div>
+            </div>          
             <div className={styles.header_icons_container}>
                 <img src={LikeLogo} alt="Like Icon" />
                 <img src={ShopLogo} alt="Shop Icon" />
                 <img src={UserLogo} alt="User Icon" />
             </div>
+            <div className={styles.media_header_icons_container}>
+                <img src={ShopLogo} alt="Shop Icon" />
+                <HeaderBurgerMenu onClick={toogleMenuState}/>
+            </div>            
+        </div>
+        {isActiveMenu && 
+                <div className={styles.menu_input_container}>
+                    <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
+                    <img src={SearchIcon} className={styles.search_icon}/>
+                </div> 
+        }
         </div>
     )
 }

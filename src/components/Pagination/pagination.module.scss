@@ -44,3 +44,16 @@
     color: var(--primary-2-black);
     cursor: pointer;
 }
+@media (max-width: 768px){
+    .numeration{
+        width: calc(175px * 100% / 688px);
+    }
+}
+@media (max-width: 320px){
+    #arr_text{
+        display: none;
+    }
+    .numeration{
+        width: calc(134px * 100% / 272px);
+    }
+}

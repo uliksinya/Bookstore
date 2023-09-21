@@ -35,7 +35,7 @@ export const Pagination = ({activeNum, setActiveNum, activeArrow, setActiveArrow
         <div className={styles.pagination_container}>
             <div className={styles.prev_container} onClick={handlePrevArrowClick}>
                 <div><img src={prevArrow}/></div>
-                <div><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
+                <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
             </div>
             <div className={styles.numeration}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
@@ -46,7 +46,7 @@ export const Pagination = ({activeNum, setActiveNum, activeArrow, setActiveArrow
             </div>
             <div className={styles.next_container} onClick={handleNextArrowClick}>
                 <div><img src={nextArrow}/></div>
-                <div><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
+                <div id={styles.arr_text}><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
             </div>
         </div>
     )

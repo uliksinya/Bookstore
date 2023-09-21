@@ -25,3 +25,16 @@ p{
     margin-top: 36px;
     align-items: center;
 }
+@media (max-width: 320px){
+    .footer{
+        height: 153px;
+    }
+    .footer_text{
+        margin-top: 40px;
+        @include flex-column;
+    }
+    #second_f_text{
+        margin-top: 24px;
+        margin-bottom: 40px;
+    }
+}

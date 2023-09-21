@@ -3,3 +3,14 @@
   box-sizing: border-box;
   margin: 0 auto;  
 }
+
+@media (max-width: 768px){
+  .main_container {
+    width: calc(688px * 100vw / 768px);
+  }
+}
+@media (max-width: 320px){
+  .main_container {
+    width: calc(272px * 100vw / 320px);
+  }
+}

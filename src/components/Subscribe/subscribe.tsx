@@ -6,11 +6,11 @@ export const Subscribe = () => {
             <div className={styles.subscribe_content_container}>
                 <div className={styles.text_container}>
                     <div className={styles.title_container}><h2 id={styles.title}>Subscribe to Newsletter</h2></div>
-                    <p>Be the first to know about new IT books, upcoming releases, exclusive offers and more.</p>
+                    <div><p id={styles.subscr_text}>Be the first to know about new IT books, upcoming releases, exclusive offers and more.</p></div>
                 </div>
                 <div className={styles.input_container}>
                     <input className={styles.subscribe_input} placeholder="Your Email"/>
-                    <button>
+                    <button className={styles.subscribe_button}>
                         <p id={styles.button_text}>
                             Subscribe
                         </p>

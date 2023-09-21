@@ -10,7 +10,7 @@
     padding-left: calc(64px * 100% / 1120px);
     padding-top: calc(56px * 100% / 1120px);
 }
-p{
+#subscr_text{
     font-family: var(--din-pro);
     height: 28px;
 }
@@ -39,7 +39,7 @@ p{
     height: 100%;
     box-sizing: border-box;
 }
-button{
+.subscribe_button{
     width: calc(174px * 100% / 992px);
     height: 100%;
     background-color: var(--primary-black);
@@ -55,4 +55,55 @@ button{
     text-align: left;
     text-transform: uppercase;
     @include flex-center;
+}
+@media (max-width: 768px){
+    .subscribe_input{
+        width: calc(441px * 100% / 608px)
+    }  
+    .subscribe_button{
+        width: calc(167px * 100% / 608px);
+    }
+    .text_container{
+        width: 77.778%;
+        height: 116px;
+    }
+}
+@media (max-width: 320px){
+    .subscribe_content_container{
+        padding-left: calc(24px * 100% / 272px);
+        padding-top: calc(24px * 100% / 272px);
+    }
+    .subscribe_container{
+        height: 360px;
+    }
+    .text_container{
+        width: 90.323%;
+        height: 152px;
+    }
+    #title{
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 40px;
+    }
+    #subscr_text{
+        height: 72px;
+    }
+    .title_container{
+        height: 80px;
+    }
+    .input_container{
+        margin-top: 24px;
+    }
+    .input_container{
+        @include flex-column;
+        width: calc(224px * 100% / 248px);
+        height: 136px;
+    }
+    .subscribe_input{
+        width: 100%;
+    }
+    .subscribe_button{
+        margin-top: 24px;
+        width: 100%;
+    }
 }
