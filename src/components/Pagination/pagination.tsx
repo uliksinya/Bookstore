@@ -1,12 +1,12 @@
 import styles from "./pagination.module.scss";
 import prevArrow from "../../utils/img/left_arrow.png";
 import nextArrow from "../../utils/img/right_arrow.png";
-import { Arrows } from "../../api/types";
-import { useAppDispatch} from "../../redux/hooks";
+import { Arrows } from "../../api/types.ts";
+import { useAppDispatch} from "../../redux/hooks.ts";
 import { setPagesArray } from '../../redux/pagination/pagination.ts';
 import { useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks.ts";
 import { selectPagesArray } from "../../redux/pagination/pagination.ts";
 import { BookState } from "../../redux/books/books.ts";
 

@@ -4,7 +4,7 @@ import { BookCard } from "../BookCard/bookcard.tsx";
 import styles from "./Books.module.scss"
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-import { createPaginationRelBooksObject } from "../../Pagination/pagination.tsx";
+import { createPaginationRelBooksObject } from "../../Pagination/Pagination.tsx";
 
 interface BooksProps{
     booksArr: BookState[];
@@ -35,7 +35,7 @@ export const Books = ({ booksArr} : BooksProps) => {
             return 1;
         }
     };
-   
+
     const currPageString = findCurrentPage().toString()
     const selectedArray = paginated[currPageString];      
     

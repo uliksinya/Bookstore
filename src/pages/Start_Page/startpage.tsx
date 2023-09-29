@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Arrows } from "../../api/types";
 import { selectSearchInputValue } from "../../redux/books/books";
 import { selectReleasedBooks } from "../../redux/books/books";
-import { Pagination } from "../../components/Pagination/pagination";
+import { Pagination } from "../../components/Pagination/Pagination";
 import { selectTotalReleasedBooks } from '../../redux/books/books';
 import { useSearchParams } from "react-router-dom";
 import throttle from 'lodash/throttle';
