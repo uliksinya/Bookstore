@@ -1,0 +1,13 @@
+.signin_up_container{
+    width: calc(544px * 100% / 1120px);
+    border: 1px solid var(--gray);
+    box-sizing: border-box;
+}
+.line{
+    width: 100%;
+    height: 1px solid var(--gray);
+    margin-top:-2px;
+}
+.inputs_container{
+    width: calc(480px * 100% / 544px);
+}

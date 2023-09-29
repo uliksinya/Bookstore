@@ -6,56 +6,58 @@ import React from "react";
 import { fetchFoundedBooks } from "../../redux/books/books";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../utils/img/search_icon.png";
-import { selectSearchInputValue } from "../../redux/searchValue/searchValue";
-import { setValue } from "../../redux/searchValue/searchValue";
+import { selectSearchInputValue } from "../../redux/books/books";
+import { setValue } from "../../redux/books/books";
 import { HeaderBurgerMenu } from "../HeaderBurgerMenu/burgermenu";
 import {useState} from "react";
+import throttle from 'lodash/throttle';
+import {useMemo} from "react";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
-    const value = useAppSelector(selectSearchInputValue);
+    const inputValue = useAppSelector(selectSearchInputValue);
+    // const firstPage = 1;
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        dispatch(setValue(value));
-        dispatch(fetchFoundedBooks(value));
-
-        console.log(typeof(value));
+        dispatch(setValue(value));  
     } 
+    const throttlingSearchInputChange = useMemo(() => {
+        return throttle(handleSearchInputChange, 500);       
+    }, [handleSearchInputChange]);
 
     const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
     const toogleMenuState = () => {
-        console.log("Нажали на бургер");
         setIsActiveMenu(!isActiveMenu);
     }
     return (
         <div>
-        <div className={styles.header}>
-            <div className={styles.logo}>
-                <h2 id={styles.logo_text}>
-                    Bookstore
-                </h2>
+            <div className={styles.header}>
+                <div className={styles.logo}>
+                    <h2 id={styles.logo_text}>
+                        Bookstore
+                    </h2>
+                </div>
+                <div className={styles.input_container}>
+                    <input onChange={throttlingSearchInputChange} value={inputValue} placeholder="Search..." type='text' disabled={false}/>
+                    <img src={SearchIcon} className={styles.search_icon}/>
+                </div>          
+                <div className={styles.header_icons_container}>
+                    <img src={LikeLogo} alt="Like Icon" />
+                    <img src={ShopLogo} alt="Shop Icon" />
+                    <img src={UserLogo} alt="User Icon" />
+                </div>
+                <div className={styles.media_header_icons_container}>
+                    <img src={ShopLogo} alt="Shop Icon" />
+                    <HeaderBurgerMenu onClick={toogleMenuState}/>
+                </div>            
             </div>
-            <div className={styles.input_container}>
-                <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
-                <img src={SearchIcon} className={styles.search_icon}/>
-            </div>          
-            <div className={styles.header_icons_container}>
-                <img src={LikeLogo} alt="Like Icon" />
-                <img src={ShopLogo} alt="Shop Icon" />
-                <img src={UserLogo} alt="User Icon" />
-            </div>
-            <div className={styles.media_header_icons_container}>
-                <img src={ShopLogo} alt="Shop Icon" />
-                <HeaderBurgerMenu onClick={toogleMenuState}/>
-            </div>            
-        </div>
-        {isActiveMenu && 
+            {isActiveMenu && 
                 <div className={styles.menu_input_container}>
-                    <input onChange={handleSearchInputChange} value={value} placeholder="Search..." type='text' disabled={false}/>
+                    <input onChange={throttlingSearchInputChange} value={inputValue} placeholder="Search..." type='text' disabled={false}/>
                     <img src={SearchIcon} className={styles.search_icon}/>
                 </div> 
-        }
-        </div>
+            }
+      </div>
     )
 }

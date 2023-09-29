@@ -20,14 +20,14 @@ export const Tabs = () => {
           Description          
         </li>
         <li   
-         id={styles.menu_item}          
+          id={styles.menu_item}          
           onClick={() => toggleTabVisibility("Authors")}
           className={activeTab === "Authors" ? styles.active_tab : styles.not_active_tab}
         >
           Authors
         </li>
         <li  
-         id={styles.menu_item}            
+          id={styles.menu_item}            
           onClick={() => toggleTabVisibility("Rewiews")}
           className={activeTab === "Rewiews" ? styles.active_tab : styles.not_active_tab}
         >

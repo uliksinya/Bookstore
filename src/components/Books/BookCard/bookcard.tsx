@@ -1,6 +1,6 @@
 import styles from "./bookcard.module.scss";
 import Grade from "../../../utils/img/grade.png";
-import { IBookCard } from "../../api/types";
+import { IBookCard } from "../../../api/types";
 
 export const BookCard = ({ book, onClick } : IBookCard) => {
     return (
@@ -11,7 +11,7 @@ export const BookCard = ({ book, onClick } : IBookCard) => {
                     {book.title}
                 </h3>
                 <div className={styles.author_data}>
-                    <p>by Lentin Joseph, Apress 2018</p>                    
+                    <p>{book.subtitle}</p>                    
                 </div>  
                 <div className={styles.bookcard_footer}>
                     <h3>{book.price}</h3>

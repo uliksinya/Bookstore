@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from "./redux/store";
 import { BooksWrapper } from "./components/BooksWrapper/BooksWrapper";
 import { SinglePage } from "./pages/SingleBookPage/singlePage";
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 
 function App() { 
   return (
@@ -18,6 +19,7 @@ function App() {
                   <Route index element={<StartPage/>} />
                   <Route path=":bookid" element={<SinglePage/>} />
                 </Route>
+                <Route path="/signup" element={<SignUpPage/>}></Route>
               </Route>            
             </Routes>
           </BrowserRouter>

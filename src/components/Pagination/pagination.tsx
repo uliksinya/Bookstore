@@ -1,35 +1,91 @@
 import styles from "./pagination.module.scss";
 import prevArrow from "../../utils/img/left_arrow.png";
 import nextArrow from "../../utils/img/right_arrow.png";
-import { Arrows } from "../api/types";
+import { Arrows } from "../../api/types";
+import { useAppDispatch} from "../../redux/hooks";
+import { setPagesArray } from '../../redux/pagination/pagination.ts';
+import { useEffect } from 'react';
+import { useSearchParams } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { selectPagesArray } from "../../redux/pagination/pagination.ts";
+import { BookState } from "../../redux/books/books.ts";
 
 interface PaginationProps{
-    activeNum: number;
-    setActiveNum: (num: number) => void;
+    activeNum: number;    
     activeArrow: Arrows; 
+    setActiveNum: (num: number) => void;
     setActiveArrow: (str: Arrows) => void;
-}
-export const Pagination = ({activeNum, setActiveNum, activeArrow, setActiveArrow}: PaginationProps) => {
+    totalReleasedBooks: string;
+}  
+export const createPaginationRelBooksObject = (booksArr: BookState[] ) => {
+    console.log(booksArr);
+    const booksAtOnePage = 6;       
+    const paginatedBooks: { [key: string]: BookState[] } = {};
+    for (let i = 0; i < booksArr.length; i += booksAtOnePage) {
+        const currentPage = Math.floor(i / booksAtOnePage) + 1;
+        const startIndex = i;
+        const endIndex = i + booksAtOnePage;
+        paginatedBooks[currentPage.toString()] = booksArr.slice(startIndex, endIndex);
+    }
+    console.log(paginatedBooks);
+    return paginatedBooks
+};
+
+export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow, totalReleasedBooks}: PaginationProps) => {
+    const dispatch = useAppDispatch();
+    const allPagesArr = useAppSelector(selectPagesArray);
+    const [searchParams, setSearchParams] = useSearchParams();  
 
     const handleClick = (num: number) => {
         setActiveNum(num);
-    }
+        setSearchParams((prevState) => {
+            prevState.set("page", num.toString());
+            return prevState;
+        });
+    }   
     
     const handleNextArrowClick = () => {
         if (activeArrow === "Prev") {
             setActiveArrow("Next");            
-        }else if(activeNum !== 6){
+        }else if(activeNum !== allPagesArr.length){
             setActiveNum(activeNum + 1); 
+            // setSearchParams((prevState) => {
+            //     prevState.set("page", activeNum.toString());
+            //     return prevState;
+            // });
         }
     }
 
     const handlePrevArrowClick = () => {
         if (activeArrow === "Next") {
             setActiveArrow("Prev");
-        }else if(activeNum !== 1){
+        } else if(activeNum !== 1){
             setActiveNum(activeNum - 1); 
         }
     }  
+
+    const releasedBooksPages = (allBooksQuantity: number) => {
+        const booksOnPageQuantity = 6;
+        if(allBooksQuantity % booksOnPageQuantity !== 0){
+            return Math.floor(allBooksQuantity / booksOnPageQuantity) + 1;
+        } else{
+            return Math.floor(allBooksQuantity / booksOnPageQuantity);
+        }
+    }
+
+    const createPagesArr = () =>{
+        const allPages = releasedBooksPages(Number(totalReleasedBooks));
+        let pagesArr = [];
+        for (let i = 1; i <= allPages; i++) {            
+            pagesArr.push(i);
+        }
+        return pagesArr;
+    }
+
+    const pagesArray = createPagesArr();    
+    useEffect(() => {        
+        dispatch(setPagesArray(pagesArray));          
+    }, []); 
 
     return (
         <div className={styles.pagination_container}>
@@ -38,7 +94,7 @@ export const Pagination = ({activeNum, setActiveNum, activeArrow, setActiveArrow
                 <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
             </div>
             <div className={styles.numeration}>
-                {[1, 2, 3, 4, 5, 6].map((num) => (
+                {pagesArray.map((num) => (
                     <div key={num} onClick={() => handleClick(num)}>
                         <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
                     </div>
