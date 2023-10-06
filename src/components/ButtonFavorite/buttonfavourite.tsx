@@ -1,14 +1,14 @@
 import styles from './buttonfavourite.module.scss';
 import { useState } from 'react';
 
-export const ButtonFavourite = ( disabled: boolean ) => {
-    const [isLiked, setIsLiked] = useState<boolean>(false);
-    const changeLikeState = () => {
-        setIsLiked(!isLiked);
-    }
+interface favouriteProps{
+    isFavourite: boolean;
+    editFavStateFunc: () => void;
+}
+export const ButtonFavourite = ( {isFavourite, editFavStateFunc} : favouriteProps ) => {
     return(
-        <div className={styles.like_icon} onClick={changeLikeState}>
-            <div className={isLiked ? styles.active_like : styles.default_like}></div>
+        <div className={styles.like_icon} onClick={editFavStateFunc}>
+            <div className={isFavourite ? styles.active_like : styles.default_like}></div>
         </div>
     )
 }

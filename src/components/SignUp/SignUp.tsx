@@ -4,7 +4,7 @@ import { CustomInput } from '../CustomInput/Input';
 import styles from "./signup.module.scss";
 import { emailValidator, passwordValidator,confirmPasswordValidator } from "../../hooks/validators/validators";
 import { useState } from 'react';
-import { registerUser } from "../../hooks/localStorage/localstorage";
+import { registerUser } from "../../hooks/localStorage/SignInUpLS";
 import { Button } from '../Button/Button';
 import DoneIcon from "../../utils/img/done_icon.png";
 import { usernameValidator } from '../../hooks/validators/validators';

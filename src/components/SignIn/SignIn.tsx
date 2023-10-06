@@ -2,7 +2,7 @@ import { CustomInput } from "../CustomInput/Input"
 import styles from "./signin.module.scss";
 import {useForm,  SubmitHandler} from 'react-hook-form';
 import { SignInForm } from "../../api/types";
-import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../hooks/localStorage/localstorage";
+import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../hooks/localStorage/SignInUpLS";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
 import { useState } from "react";

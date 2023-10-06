@@ -1,4 +1,4 @@
-import { isThisUserInLS, isThisEmailInLS } from "../localStorage/localstorage";
+import { isThisUserInLS, isThisEmailInLS } from "../localStorage/SignInUpLS";
 
 export function emailValidator(email: string): string | true {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

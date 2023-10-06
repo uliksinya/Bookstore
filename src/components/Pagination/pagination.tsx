@@ -4,7 +4,7 @@ import nextArrow from "../../utils/img/right_arrow.png";
 import { Arrows } from "../../api/types.ts";
 import { useAppDispatch} from "../../redux/hooks.ts";
 import { setPagesArray } from '../../redux/pagination/pagination.ts';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks.ts";
 import { selectPagesArray } from "../../redux/pagination/pagination.ts";
@@ -18,27 +18,38 @@ interface PaginationProps{
     setActiveArrow: (str: Arrows) => void;
     totalReleasedBooks: string;
 }  
-export const createPaginationRelBooksObject = (booksArr: BookState[] ) => {
-    console.log(booksArr);
-    const booksAtOnePage = 6;       
-    const paginatedBooks: { [key: string]: BookState[] } = {};
-    for (let i = 0; i < booksArr.length; i += booksAtOnePage) {
-        const currentPage = Math.floor(i / booksAtOnePage) + 1;
-        const startIndex = i;
-        const endIndex = i + booksAtOnePage;
-        paginatedBooks[currentPage.toString()] = booksArr.slice(startIndex, endIndex);
-    }
-    console.log(paginatedBooks);
-    return paginatedBooks
+function generateNumbersArrByLimit(limit: number, currentPageNumber: number){
+    const numbersArray: number[] = [];
+        for (let i = 1; i <= limit; i++) {            
+            numbersArray.push(i);
+        }
+        if(limit <= 7) return numbersArray;
+
+        const startControlPoint = 4;
+        const endControlPoint = limit - 4;
+
+        if(currentPageNumber >= startControlPoint && currentPageNumber <= endControlPoint){
+            const newArray: number[] = [1, 0];
+            const resultArray: number[] = newArray.concat(numbersArray.slice(currentPageNumber - 2, currentPageNumber + 1));
+            return resultArray.concat([0, limit]);
+        }else if(currentPageNumber < startControlPoint) {
+            const newArray: number[] = numbersArray.slice(0, startControlPoint);
+            return newArray.concat([0, limit]);
+        }else{
+            return [1,0].concat(numbersArray.slice(endControlPoint-2, limit));
+        }
 };
-
-
+   
 export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow, totalReleasedBooks}: PaginationProps) => {
+
     const totalSearchBooks = useAppSelector(selectTotalSearchedBooks);
-    console.log(totalSearchBooks);
-    const dispatch = useAppDispatch();
-    const allPagesArr = useAppSelector(selectPagesArray);
+    const allPages = (Number(totalSearchBooks));
     const [searchParams, setSearchParams] = useSearchParams();  
+
+    const generatedPagesArray = useMemo( 
+        () => generateNumbersArrByLimit(allPages, Number(activeNum)), 
+        [allPages, activeNum]
+    );
 
     const handleClick = (num: number) => {
         setActiveNum(num);
@@ -51,7 +62,7 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
     const handleNextArrowClick = () => {
         if (activeArrow === "Prev") {
             setActiveArrow("Next");            
-        }else if(activeNum !== allPagesArr.length){
+        }else if(activeNum <= allPages){
             setActiveNum(activeNum + 1);
         }
     }
@@ -62,78 +73,22 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
         } else if(activeNum !== 1){
             setActiveNum(activeNum - 1); 
         }
-    }  
-
-    // const releasedBooksPages = (allBooksQuantity: number) => {
-    //     const booksOnPageQuantity = 6;
-    //     if(allBooksQuantity % booksOnPageQuantity !== 0){
-    //         return Math.floor(allBooksQuantity / booksOnPageQuantity) + 1;
-    //     } else{
-    //         return Math.floor(allBooksQuantity / booksOnPageQuantity);
-    //     }
-    // }
-
-    // const createPagesArr = () =>{
-    //     const allPages = releasedBooksPages(Number(totalReleasedBooks));
-    //     let pagesArr = [];
-    //     for (let i = 1; i <= allPages; i++) {            
-    //         pagesArr.push(i);
-    //     }
-    //     return pagesArr;
-    // }
-    const allPages = (Number(totalSearchBooks));
-    const createPagesArr = () =>{
-        
-        let pagesArr = [];
-        for (let i = 1; i <= allPages; i++) {            
-            pagesArr.push(i);
-        }
-        return pagesArr;
-    }    
-
-    const pagesArray = createPagesArr();    
-    // useEffect(() => {        
-    //     dispatch(setPagesArray(pagesArray));          
-    // }, []); 
-    // Пусть maxPagesToShow - это максимальное количество страниц, которые вы хотите отображать перед и после многоточия.
-
-
+    }       
 
     return (
-        // <div className={styles.pagination_container}>
-        //     <div className={styles.prev_container} onClick={handlePrevArrowClick}>
-        //         <div><img src={prevArrow}/></div>
-        //         <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
-        //     </div>
-        //     <div className={styles.numeration}>
-        //         {pagesArray.map((num) => (
-        //             <div key={num} onClick={() => handleClick(num)}>
-        //                 <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
-        //             </div>
-        //         ))}
-        //     </div>
-        //     <div className={styles.next_container} onClick={handleNextArrowClick}>
-        //         <div><img src={nextArrow}/></div>
-        //         <div id={styles.arr_text}><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
-        //     </div>
-        // </div>
             <div className={styles.pagination_container}>
                 <div className={styles.prev_container} onClick={handlePrevArrowClick}>
                     <div><img src={prevArrow}/></div>
                     <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
                 </div>
                 <div className={styles.numeration}>
-                    {pagesArray.map((num) => (
-                        <div key={num} onClick={() => handleClick(num)}>
-                            <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
-                        </div>
-                    ))}
-                    {/* {showEllipsis && <p className={styles.ellipsis}>...</p>} */}
-                    {allPages !== activeNum && (
-                        <div key={allPages} onClick={() => handleClick(allPages)}>
-                            <p className={allPages === activeNum ? styles.active_num : styles.def_num}>{allPages}</p>
-                        </div>
-                    )}
+                    {generatedPagesArray.map((num) => {
+                        if(num === 0) return <p>...</p>
+                            return <div key={num} onClick={() => handleClick(num)}>
+                                <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
+                            </div>
+                        })
+                    }
                 </div>
                 <div className={styles.next_container} onClick={handleNextArrowClick}>
                     <div><img src={nextArrow}/></div>

@@ -7,7 +7,7 @@ import { Button } from '../../components/Button/Button';
 import ArrowIcon from "../../utils/img/arrow_icon.png";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getAuthUsernameFromLS, getAuthPasswordFromLS, getAuthEmailFromLS, updateAutentificationUserInLS} from '../../hooks/localStorage/localstorage';
+import { getAuthUsernameFromLS, getAuthPasswordFromLS, getAuthEmailFromLS, updateAutentificationUserInLS} from '../../hooks/localStorage/SignInUpLS';
 
 export const AccountPage = () => {
     useEffect(() => {

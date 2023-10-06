@@ -6,7 +6,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 export interface BookState {
   title: string;
-  subtitle?: string;
+  subtitle: string;
   isbn13: string;
   price: string;
   image: string;
@@ -17,6 +17,7 @@ export interface BookState {
   pages?: string;
   year?: string;
   desc?: string;
+  rating: string;
 }
 
 export interface FetchFoundedState {
@@ -41,6 +42,8 @@ const initialState: BookSliceState = {
     isbn13: "",
     price: "",
     image: "",
+    rating: "",
+    subtitle: "",
   },
   value: "",
   totalReleasedBooks: "", 
@@ -59,8 +62,7 @@ export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
 export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async({foundedParam, pageParam}: FetchFoundedState) => {
   console.log(foundedParam, pageParam);  
   const response = await axios.get(`https://api.itbook.store/1.0/search/${foundedParam}/${pageParam}`);
-  console.log(response.data);
-  console.log(response.data.total);
+
   return {
     booksSearch: response.data.books,
     totalSearch: response.data.total
