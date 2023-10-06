@@ -1,12 +1,13 @@
 import styles from "./App.module.scss";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout/layout';
-import { StartPage } from "./pages/Start_Page/startpage";
+import { Layout } from './components/Layout/Layout';
+import { StartPage } from './pages/StartPage/Startpage';
 import { Provider } from 'react-redux';
 import store from "./redux/store";
 import { BooksWrapper } from "./components/BooksWrapper/BooksWrapper";
-import { SinglePage } from "./pages/SingleBookPage/singlePage";
-import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { SinglePage } from "./pages/SingleBookPage/SinglePage";
+import {SignInUpPage} from './pages/SignInUpPage/SignInUpPage';
+import { AccountPage } from "./pages/AccountPage/AccountPage";
 
 function App() { 
   return (
@@ -19,7 +20,8 @@ function App() {
                   <Route index element={<StartPage/>} />
                   <Route path=":bookid" element={<SinglePage/>} />
                 </Route>
-                <Route path="/signup" element={<SignUpPage/>}></Route>
+                <Route path="/signup" element={<SignInUpPage/>}></Route>
+                <Route path="/account" element={<AccountPage/>}></Route>
               </Route>            
             </Routes>
           </BrowserRouter>

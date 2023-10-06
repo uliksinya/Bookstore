@@ -29,7 +29,7 @@
   border: 2px solid var(--gray);
 }
 .active_input{
-  width: 100%;
+  width: calc(100% - 20px);
   height: 40px;
   border: 1px solid var(--gray);
   padding-left: 20px;
@@ -58,7 +58,7 @@
   color: var(--red);
 }
 .input_container{
-  height: 40px;
+  // height: 40px;
   position: relative;
 }
 .searchIcon_container{
@@ -67,4 +67,22 @@
   top: 10px;
   width: 24px;
   height: 24px;
+}
+label{
+  font-family: var(--helios-bold);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+#error_message{
+  color: rgb(253, 131, 0);
+  font-family: var(--helios-light);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  font-style: italic;
 }

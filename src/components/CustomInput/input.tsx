@@ -1,17 +1,18 @@
 import React from "react";
 import styles from "./input.module.scss";
-import searchIcon from "../../utils/img/search_icon.png";
 import type {InputType}  from "../../api/types";
-import { FieldValues, InternalFieldName } from "react-hook-form";
 
-export const CustomInput = ({
-  name,
-  inputMode,
+export const CustomInput= ({
+  inpName,
+  inpMode,
   labelValue,
   placeholder,
-  disabled = false,
-  onChange,  
-  ...other
+  disabled = false, 
+  value='',
+  register,
+  validationRules,
+  errors,
+  defValue,
 } : React.InputHTMLAttributes<HTMLInputElement> & InputType ) => {
   
   return (
@@ -19,22 +20,16 @@ export const CustomInput = ({
           <div className={styles.input_container}>
             <label className={styles.inputLabel}>{labelValue}</label>
             <input
-              className={`${other.value ? styles.active_input : styles.default_input}`}
-              value={other.value}
-              placeholder={placeholder}
-              onChange={onChange}
+              className={`${value ? styles.active_input : styles.default_input}`}              
+              defaultValue={defValue}
+              value={value ? value : defValue}
+              placeholder={placeholder}             
               disabled={disabled}
-              type={inputMode}
-              {...other}
-              
+              type={inpMode}   
+              {...register(inpName, validationRules)}            
             />
-            {/* {errors?.[name]?.message !== undefined ?  <label className={styles.errorLabel}>{errors[name]?.message}</label>  : ''}   */}
-            {/* {
-              <div className={styles.searchIcon_container}>
-                <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
-              </div>
-            } */}
           </div> 
+          {errors?.[inpName] ? <span id={styles.error_message}>{errors[inpName]?.message}</span> : ""}
         </div> 
   );
 }

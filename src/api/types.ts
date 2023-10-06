@@ -1,8 +1,45 @@
 import { BookState } from "../redux/books/books";
-import { useSearchParams } from "react-router-dom";
+import { UseFormRegister, FieldValues, UseFormRegisterReturn, InternalFieldName, FieldErrors} from "react-hook-form";
 
 export type Arrows = "Prev" | "Next";
-type InputMode = 'text' | 'email' | 'password';
+
+export type InputModeType = 'text' | 'email' | 'password' ;
+
+export type inpNameSignUpType = 'name' | 'email' | 'password' | 'confirmPassword';
+
+export type SignUpForm = {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+export type SignInForm = {
+    name: string;
+    password: string;
+}
+export type AccountPageType = {
+    name: string;
+    email: string;
+    password: string;
+    newPassword: string;
+    confirmPassword: string;
+}
+export interface InputType <TFieldValues extends FieldValues, TFieldName extends InternalFieldName> {
+    inpName: inpNameSignUpType;
+    inpMode: InputModeType;
+    labelValue: string;
+    value: string | undefined;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    disabled?: boolean;
+    ref?: React.RefObject<HTMLInputElement>;
+    register?: UseFormRegister<TFieldValues>; 
+    validationRules?: UseFormRegisterReturn<TFieldName> | undefined; 
+    errors?: FieldErrors<TFieldValues> | undefined;
+}
+
+export type authorisationType = "SIGN IN" | "SIGN UP";
 
 export interface Book {
     title: string,
@@ -16,21 +53,4 @@ export interface IBookCard{
     book: BookState;
 }
 
-export interface InputType {
-    name: string;
-    inputMode: InputMode;
-    labelValue: string;
-    // value: string | number;
-    // placeholder?: string | undefined;
-    // disabled?: boolean;   
-    // onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
-    // errors?: FieldErrors<TFieldValues> | undefined;
-    // validationSchema?: UseFormRegisterReturn<TFieldName> | undefined; 
-}
 
-export type SignUpForm = {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}

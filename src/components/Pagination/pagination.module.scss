@@ -7,7 +7,6 @@
 .pagination_container, .numeration, .prev_container{
     @include flex-row;
     justify-content: space-between;
-    
 }
 .next_container{
     display: flex;
@@ -24,8 +23,11 @@
     cursor: pointer;
 }
 .numeration{
+    display: flex;
+    flex-wrap: wrap;
     width: calc(175px * 100% / 1120px);
-    height: 24px;
+    // height: 24px;
+    height: auto;
 }
 .active_num{
     color: var(--primary-black);

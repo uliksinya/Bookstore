@@ -30,6 +30,7 @@ export interface BookSliceState {
   selectedBook: BookState;
   value: string;
   totalReleasedBooks: string; 
+  totalSearchedBooks: string;
 }
 
 const initialState: BookSliceState = {
@@ -43,6 +44,7 @@ const initialState: BookSliceState = {
   },
   value: "",
   totalReleasedBooks: "", 
+  totalSearchedBooks: "",
 };
 
 export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
@@ -57,7 +59,12 @@ export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
 export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async({foundedParam, pageParam}: FetchFoundedState) => {
   console.log(foundedParam, pageParam);  
   const response = await axios.get(`https://api.itbook.store/1.0/search/${foundedParam}/${pageParam}`);
-  return response.data;
+  console.log(response.data);
+  console.log(response.data.total);
+  return {
+    booksSearch: response.data.books,
+    totalSearch: response.data.total
+  };
 })
 
 export const fetchSelectedBook = createAsyncThunk("book/fetchSelectedBook", async(bookID: string) => {
@@ -76,18 +83,20 @@ export const bookSlice = createSlice({
         setTotalReleasedBooks: (state, action: PayloadAction<string>) => {
           state.totalReleasedBooks = action.payload;
         },
+        // setTotalSearchedBooks: (state, action: PayloadAction<string>) => {
+        //   state.totalSearchedBooks = action.payload;
+        // },
     },
     extraReducers: (builder) => {
       builder
-        .addCase(fetchBooks.fulfilled, (state, action) => {
-          console.log(action.payload);
-          
+        .addCase(fetchBooks.fulfilled, (state, action) => {          
           state.releasedBooks = [...action.payload.books];
           state.totalReleasedBooks = action.payload.total;
         })  
         .addCase(fetchFoundedBooks.fulfilled, (state, action) => {
-          if(action.payload.books !== undefined){
-            state.foundedBooks = [...action.payload.books];
+          if(action.payload.booksSearch !== undefined){
+            state.foundedBooks = [...action.payload.booksSearch];
+            state.totalSearchedBooks = action.payload.totalSearch;
           }
         })
         .addCase(fetchSelectedBook.fulfilled, (state, action) => {
@@ -98,6 +107,7 @@ export const bookSlice = createSlice({
 
   export const selectReleasedBooks = (state: RootState) => state.book.releasedBooks;
   export const selectTotalReleasedBooks = (state: RootState) => state.book.totalReleasedBooks;
+  export const selectTotalSearchedBooks = (state: RootState) => state.book.totalSearchedBooks;
   export const selectFoundedBooks = (state: RootState) => state.book.foundedBooks;  
   export const selectSelectedBook = (state: RootState) => state.book.selectedBook;  
   export const { setValue } = bookSlice.actions;

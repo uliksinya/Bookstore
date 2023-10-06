@@ -6,6 +6,8 @@
     width: 100%;
     height: 72px;
     box-sizing: border-box;
+    border-bottom: 1px solid var(--gray);
+    justify-content: center;
 }
 #sign_in_text, #sign_up_text{
     font-family: var(--font-bebas);
@@ -18,10 +20,15 @@
 #menu_item{
     width: calc(239px * 100% / 544px);
     @include flex-center;
+    margin-bottom: -2px;
 }
 .active_tab{
     border-bottom: 2px solid var(--primary-black);
+    cursor: pointer;
 }
 .active_tab p{
     color: var(--primary-black);
+}
+.not_active_tab{
+    cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import styles from './buttonfavourite.module.scss';
 import { useState } from 'react';
 
-export const ButtonFavourite = ({ disabled }: { disabled: boolean }) => {
+export const ButtonFavourite = ( disabled: boolean ) => {
     const [isLiked, setIsLiked] = useState<boolean>(false);
     const changeLikeState = () => {
         setIsLiked(!isLiked);

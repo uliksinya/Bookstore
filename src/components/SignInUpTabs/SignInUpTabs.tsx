@@ -1,10 +1,14 @@
 import { useState } from "react";
 import styles from "./signinuptabs.module.scss";
+import { authorisationType } from "../../api/types";
 
-export const SignInUpTabs = () => {
-    const [activeTab, setActiveTab] = useState<string>("Description")
+interface tabsProps{
+    activeTab: authorisationType;    
+    setActiveTab: (str: authorisationType) => void;   
+}  
+export const SignInUpTabs = ({activeTab, setActiveTab} : tabsProps) => {   
 
-    const toggleTabVisibility = (tabName: string) => {
+    const toggleTabVisibility = (tabName: authorisationType) => {
       setActiveTab(tabName);
     };
 

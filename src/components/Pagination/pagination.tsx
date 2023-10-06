@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks.ts";
 import { selectPagesArray } from "../../redux/pagination/pagination.ts";
 import { BookState } from "../../redux/books/books.ts";
+import { selectTotalSearchedBooks } from "../../redux/books/books.ts";
 
 interface PaginationProps{
     activeNum: number;    
@@ -31,7 +32,10 @@ export const createPaginationRelBooksObject = (booksArr: BookState[] ) => {
     return paginatedBooks
 };
 
+
 export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow, totalReleasedBooks}: PaginationProps) => {
+    const totalSearchBooks = useAppSelector(selectTotalSearchedBooks);
+    console.log(totalSearchBooks);
     const dispatch = useAppDispatch();
     const allPagesArr = useAppSelector(selectPagesArray);
     const [searchParams, setSearchParams] = useSearchParams();  
@@ -48,11 +52,7 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
         if (activeArrow === "Prev") {
             setActiveArrow("Next");            
         }else if(activeNum !== allPagesArr.length){
-            setActiveNum(activeNum + 1); 
-            // setSearchParams((prevState) => {
-            //     prevState.set("page", activeNum.toString());
-            //     return prevState;
-            // });
+            setActiveNum(activeNum + 1);
         }
     }
 
@@ -64,46 +64,81 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
         }
     }  
 
-    const releasedBooksPages = (allBooksQuantity: number) => {
-        const booksOnPageQuantity = 6;
-        if(allBooksQuantity % booksOnPageQuantity !== 0){
-            return Math.floor(allBooksQuantity / booksOnPageQuantity) + 1;
-        } else{
-            return Math.floor(allBooksQuantity / booksOnPageQuantity);
-        }
-    }
+    // const releasedBooksPages = (allBooksQuantity: number) => {
+    //     const booksOnPageQuantity = 6;
+    //     if(allBooksQuantity % booksOnPageQuantity !== 0){
+    //         return Math.floor(allBooksQuantity / booksOnPageQuantity) + 1;
+    //     } else{
+    //         return Math.floor(allBooksQuantity / booksOnPageQuantity);
+    //     }
+    // }
 
+    // const createPagesArr = () =>{
+    //     const allPages = releasedBooksPages(Number(totalReleasedBooks));
+    //     let pagesArr = [];
+    //     for (let i = 1; i <= allPages; i++) {            
+    //         pagesArr.push(i);
+    //     }
+    //     return pagesArr;
+    // }
+    const allPages = (Number(totalSearchBooks));
     const createPagesArr = () =>{
-        const allPages = releasedBooksPages(Number(totalReleasedBooks));
+        
         let pagesArr = [];
         for (let i = 1; i <= allPages; i++) {            
             pagesArr.push(i);
         }
         return pagesArr;
-    }
+    }    
 
     const pagesArray = createPagesArr();    
-    useEffect(() => {        
-        dispatch(setPagesArray(pagesArray));          
-    }, []); 
+    // useEffect(() => {        
+    //     dispatch(setPagesArray(pagesArray));          
+    // }, []); 
+    // Пусть maxPagesToShow - это максимальное количество страниц, которые вы хотите отображать перед и после многоточия.
+
+
 
     return (
-        <div className={styles.pagination_container}>
-            <div className={styles.prev_container} onClick={handlePrevArrowClick}>
-                <div><img src={prevArrow}/></div>
-                <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
+        // <div className={styles.pagination_container}>
+        //     <div className={styles.prev_container} onClick={handlePrevArrowClick}>
+        //         <div><img src={prevArrow}/></div>
+        //         <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
+        //     </div>
+        //     <div className={styles.numeration}>
+        //         {pagesArray.map((num) => (
+        //             <div key={num} onClick={() => handleClick(num)}>
+        //                 <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
+        //             </div>
+        //         ))}
+        //     </div>
+        //     <div className={styles.next_container} onClick={handleNextArrowClick}>
+        //         <div><img src={nextArrow}/></div>
+        //         <div id={styles.arr_text}><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
+        //     </div>
+        // </div>
+            <div className={styles.pagination_container}>
+                <div className={styles.prev_container} onClick={handlePrevArrowClick}>
+                    <div><img src={prevArrow}/></div>
+                    <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
+                </div>
+                <div className={styles.numeration}>
+                    {pagesArray.map((num) => (
+                        <div key={num} onClick={() => handleClick(num)}>
+                            <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
+                        </div>
+                    ))}
+                    {/* {showEllipsis && <p className={styles.ellipsis}>...</p>} */}
+                    {allPages !== activeNum && (
+                        <div key={allPages} onClick={() => handleClick(allPages)}>
+                            <p className={allPages === activeNum ? styles.active_num : styles.def_num}>{allPages}</p>
+                        </div>
+                    )}
+                </div>
+                <div className={styles.next_container} onClick={handleNextArrowClick}>
+                    <div><img src={nextArrow}/></div>
+                    <div id={styles.arr_text}><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
+                </div>
             </div>
-            <div className={styles.numeration}>
-                {pagesArray.map((num) => (
-                    <div key={num} onClick={() => handleClick(num)}>
-                        <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
-                    </div>
-                ))}
-            </div>
-            <div className={styles.next_container} onClick={handleNextArrowClick}>
-                <div><img src={nextArrow}/></div>
-                <div id={styles.arr_text}><p className={activeArrow === "Next" ? styles.active_arrow : styles.def_arrow}>Next</p></div>
-            </div>
-        </div>
     )
 }

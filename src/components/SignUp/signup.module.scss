@@ -1,0 +1,41 @@
+@import "../../styles/mixins.scss";
+#sign_up_container{
+    width: calc(480px * 100% / 544px);
+    margin-top: 16px;
+}
+.success_container{
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    border: none; 
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); 
+    @include flex-center;
+}  
+.registration_form{
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 40px;
+}
+#input_item{
+    margin-top: 16px;
+}
+.signup_submit{
+    margin-top: 40px;
+}
+.image{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    @include flex-center;
+}
+#done{
+    width: 25px;
+    height: 25px;
+}
+#success_text{
+    font-family: var(--helios-light);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+}

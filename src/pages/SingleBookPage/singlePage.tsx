@@ -8,12 +8,12 @@ import ArrowIcon from "../../utils/img/arrow_icon.png";
 import styles from "./singlepage.module.scss"
 import Grade from "../../utils/img/grade.png";
 import { Tabs } from "../../components/Tabs/tabs";
-import { ButtonAddToCart } from "../../components/ButtonAddToCart/button";
+import { Button } from "../../components/Button/Button";
 import FacebookIcon from "../../utils/img/facebook_icon.png";
 import TwitterIcon from "../../utils/img/twitter_icon.png";
 import MenuIcon from "../../utils/img/horiz_menu_icon.png";
 import { Subscribe } from "../../components/Subscribe/subscribe";
-import {ButtonFavourite} from "../../components/ButtonFavorite/buttonfavourite";
+import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
 
 export const SinglePage = () => {
     const id = useParams();
@@ -91,7 +91,7 @@ export const SinglePage = () => {
                         </ul>
                         :
                         <ul className={styles.menu}><p id={styles.menu} onClick={toggleEditState}>More detalize</p></ul> }    
-                        <ButtonAddToCart disabled={false}/>                
+                        <Button disabled={false} content={"Add to cart"}/>                
                     </div>
                 </div>            
             </div>

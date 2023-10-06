@@ -24,6 +24,8 @@ export const StartPage = () => {
     const searchValue = useAppSelector(selectSearchInputValue);   
     const [searchParams, setSearchParams] = useSearchParams(); 
     const dispatch =  useAppDispatch();    
+    console.log(searchedBooks);
+
 
     useEffect(() => {
         const currentPage = searchParams.get("page");
@@ -32,51 +34,54 @@ export const StartPage = () => {
         }
     }, [setSearchParams, searchParams]);
 
-    const throttleFetch = throttle((searchValue: string) => {
+    const throttleFetch = throttle((searchValue: string, actPage: string ) => {
        if (!searchValue || searchValue === "") {
             dispatch(fetchBooks());
        } else {
-            dispatch(fetchFoundedBooks({ foundedParam: searchValue, pageParam: "1" }));
+            dispatch(fetchFoundedBooks({ foundedParam: searchValue, pageParam: actPage }));
             setSearchParams((params) => {
-                return { ...params, search: searchValue, page: "1" };
+                return { ...params, search: searchValue, page: actPage };
             });
         }
     }, 500);
 
     useEffect(() => {    
-        throttleFetch(searchValue);
-    }, [searchValue]);
+        throttleFetch(searchValue, activeNum.toString());
+    }, [searchValue, activeNum]);
 
     return (
         <div>
-            {searchedBooks.length === 0 && searchValue === undefined || searchValue === "" 
+            {
+            searchedBooks.length === 0 && searchValue === undefined || searchValue === "" 
             ? 
             <div>
                 <div className={styles.books_container}>
                     <h1 className={styles.title_text}>New Releases Books</h1>
                     <Books booksArr={releasedBooks}/>
                 </div>     
-                <div className={styles.pagination_comp}>
-                <Pagination 
-                activeNum={activeNum} 
-                setActiveNum={setActiveNum} 
-                activeArrow={activeArrow} 
-                setActiveArrow={setActiveArrow}
-                totalReleasedBooks={totalReleasedBooks}/>
-                </div>  
+                {/* <div className={styles.pagination_comp}>
+                    <Pagination 
+                    activeNum={activeNum} 
+                    setActiveNum={setActiveNum} 
+                    activeArrow={activeArrow} 
+                    setActiveArrow={setActiveArrow}
+                    totalReleasedBooks={totalReleasedBooks}/>
+                </div>   */}
             </div>             
             : 
             <div>
                 <div className={styles.books_container}>
                     <h1 className={styles.title_text}>"{searchValue}" search results</h1>
-                    <Books  booksArr={searchedBooks}/>
+                    <Books booksArr={searchedBooks}/>
                 </div>
-                {<Pagination 
-                activeNum={activeNum} 
-                setActiveNum={setActiveNum} 
-                activeArrow={activeArrow} 
-                setActiveArrow={setActiveArrow}
-                totalReleasedBooks={totalReleasedBooks}/>}
+                <div className={styles.pagination_comp}>
+                    <Pagination 
+                    activeNum={activeNum} 
+                    setActiveNum={setActiveNum} 
+                    activeArrow={activeArrow} 
+                    setActiveArrow={setActiveArrow}
+                    totalReleasedBooks={totalReleasedBooks}/>
+                </div>  
             </div>
             }             
             <Subscribe/>            
