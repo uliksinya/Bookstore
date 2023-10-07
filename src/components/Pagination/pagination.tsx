@@ -2,13 +2,9 @@ import styles from "./pagination.module.scss";
 import prevArrow from "../../utils/img/left_arrow.png";
 import nextArrow from "../../utils/img/right_arrow.png";
 import { Arrows } from "../../api/types.ts";
-import { useAppDispatch} from "../../redux/hooks.ts";
-import { setPagesArray } from '../../redux/pagination/pagination.ts';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks.ts";
-import { selectPagesArray } from "../../redux/pagination/pagination.ts";
-import { BookState } from "../../redux/books/books.ts";
 import { selectTotalSearchedBooks } from "../../redux/books/books.ts";
 
 interface PaginationProps{
@@ -82,13 +78,14 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
                     <div id={styles.arr_text}><p className={activeArrow === "Prev" ? styles.active_arrow : styles.def_arrow}>Prev</p></div>
                 </div>
                 <div className={styles.numeration}>
-                    {generatedPagesArray.map((num) => {
-                        if(num === 0) return <p>...</p>
-                            return <div key={num} onClick={() => handleClick(num)}>
-                                <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
-                            </div>
-                        })
-                    }
+                    {generatedPagesArray.map((num, index) => {
+                        if(num === 0) return <p key={index}>...</p>
+                            return (
+                                <div key={index} onClick={() => handleClick(num)}>
+                                    <p className={num === activeNum ? styles.active_num : styles.def_num}>{num}</p>
+                                </div>
+                            );
+                    })}
                 </div>
                 <div className={styles.next_container} onClick={handleNextArrowClick}>
                     <div><img src={nextArrow}/></div>

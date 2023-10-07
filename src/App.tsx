@@ -8,6 +8,7 @@ import { BooksWrapper } from "./components/BooksWrapper/BooksWrapper";
 import { SinglePage } from "./pages/SingleBookPage/SinglePage";
 import {SignInUpPage} from './pages/SignInUpPage/SignInUpPage';
 import { AccountPage } from "./pages/AccountPage/AccountPage";
+import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 
 function App() { 
   return (
@@ -22,6 +23,7 @@ function App() {
                 </Route>
                 <Route path="/signup" element={<SignInUpPage/>}></Route>
                 <Route path="/account" element={<AccountPage/>}></Route>
+                <Route path="/favorites" element={<FavoritesPage/>}></Route>
               </Route>            
             </Routes>
           </BrowserRouter>

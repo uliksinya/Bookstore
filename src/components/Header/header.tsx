@@ -12,11 +12,15 @@ import { HeaderBurgerMenu } from "../HeaderBurgerMenu/Burgermenu";
 import {useState} from "react";
 import throttle from 'lodash/throttle';
 import {useMemo} from "react";
+import ActiveLike from "../../utils/img/active_like.png";
+import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
     const inputValue = useAppSelector(selectSearchInputValue);
-    // const firstPage = 1;
+    const favBooks = useAppSelector(selectFavouriteBooks);
+    const navigate = useNavigate();
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -29,6 +33,9 @@ export const Header = () => {
     const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
     const toogleMenuState = () => {
         setIsActiveMenu(!isActiveMenu);
+    }
+    const toggleNavigateToFavorites = () => {
+        navigate('/favorites');
     }
     return (
         <div>
@@ -43,7 +50,9 @@ export const Header = () => {
                     <img src={SearchIcon} className={styles.search_icon}/>
                 </div>          
                 <div className={styles.header_icons_container}>
-                    <img src={LikeLogo} alt="Like Icon" />
+                    <div className={styles.like_cont} onClick={() => toggleNavigateToFavorites()}>
+                        <img src={favBooks.length === 0 ? LikeLogo : ActiveLike} alt="Like Icon" />
+                    </div>
                     <img src={ShopLogo} alt="Shop Icon" />
                     <img src={UserLogo} alt="User Icon" />
                 </div>

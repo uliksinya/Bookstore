@@ -15,7 +15,7 @@ import MenuIcon from "../../utils/img/horiz_menu_icon.png";
 import { Subscribe } from "../../components/Subscribe/subscribe";
 import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
 import { addFavouriteBook, removeFavouriteBook, selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
-import { addFavBookToLS, removeFavBookFromLS, isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
+import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
  
 export const SinglePage = () => {
     const id = useParams();
@@ -24,6 +24,7 @@ export const SinglePage = () => {
     const book = useAppSelector(selectSelectedBook);
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
+
     const favBooks = useAppSelector(selectFavouriteBooks);
 
     const toggleEditState = () => {
@@ -35,7 +36,25 @@ export const SinglePage = () => {
     const toggleEditFavBookState = () => {
         setIsFavouriteBook(!isFavouriteBook);
     }
-
+    // const addBooksFromLsToStore = () => {
+    //     const favBooksFromLS = localStorage.getItem('favBooks');
+    //     if(favBooksFromLS){
+    //         const favBooks = JSON.parse(favBooksFromLS);
+    //         favBooks.forEach((isbn: string) => {
+    //             const favBookItem = {
+    //                 isbn13: isbn,
+    //                 title: book.title,  
+    //                 subtitle: book.subtitle,  
+    //                 rating: book.rating,  
+    //                 price: book.price, 
+    //                 image: book.image,  
+    //                 isFavourite: isFavouriteBook  
+    //             };
+    //             dispatch(addFavouriteBook(favBookItem));
+    //         })
+    // }
+    // }
+    
     const favBookObj = {
         isbn13: book.isbn13,
         title: book.title,
@@ -55,12 +74,16 @@ export const SinglePage = () => {
     console.log(book.isbn13);
 
     useEffect(() => {
-        const isbn = book.isbn13;
-    
-        if (isThisBookInFavLS(isbn)) {
-            setIsFavouriteBook(true);
-        } else {
-            setIsFavouriteBook(false);
+        if (book.isbn13) {
+            const isbn = book.isbn13;
+
+            if (isThisBookInFavLS(isbn)) {
+                setIsFavouriteBook(true);
+            } else {
+                setIsFavouriteBook(false);
+            }
+
+            // addBooksFromLsToStore();
         }
     }, [book.isbn13]);
     
@@ -68,12 +91,13 @@ export const SinglePage = () => {
         const isbn = book.isbn13;
     
         if (isFavouriteBook) {
-            addFavBookToLS(isbn);
-            dispatch(addFavouriteBook(favBookObj));
+            addFavBookToLS(isbn, favBookObj);
+            // dispatch(addFavouriteBook(favBookObj));
         } else {
             removeFavBookFromLS(isbn);
-            dispatch(removeFavouriteBook(isbn));
+            // dispatch(removeFavouriteBook(isbn));
         }
+        //localStorage.setItem('favBooks', JSON.stringify([]));
     }, [isFavouriteBook]);     
 
     console.log(favBooks);    
