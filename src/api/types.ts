@@ -53,4 +53,14 @@ export interface IBookCard{
     book: BookState;
 }
 
+export interface favBookType{
+    isbn13: string;
+    title: string;
+    subtitle: string;
+    rating: string;
+    price: string;
+    image: string;
+    quantity: number;
+}
+
 

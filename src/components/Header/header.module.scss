@@ -56,7 +56,7 @@ input::placeholder{
   right: 16px
 }
 .header_icons_container{
-  width:  calc(184px * 100% / 1120px);
+  // width:  calc(184px * 100% / 1120px);
   height: 56px;
   @include flex-sp-between;
   position: absolute;
@@ -68,6 +68,12 @@ input::placeholder{
 }
 .media_header_icons_container{
   display: none;
+}
+.user_icon{
+  cursor: pointer;
+}
+.cart_icon{
+  cursor: pointer;
 }
 
 @media (max-width: 768px){

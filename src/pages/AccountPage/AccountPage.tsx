@@ -46,7 +46,7 @@ export const AccountPage = () => {
     const toggleNavigateToHome = () => {
         clearFields();
         if (navigate && navigate !== undefined) {
-            navigate('/');
+            navigate('/books');
         } else {
             console.error('Navigate function is undefined or not set.');
         }

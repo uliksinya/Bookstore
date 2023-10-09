@@ -9,6 +9,7 @@ import { SinglePage } from "./pages/SingleBookPage/SinglePage";
 import {SignInUpPage} from './pages/SignInUpPage/SignInUpPage';
 import { AccountPage } from "./pages/AccountPage/AccountPage";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
+import { CartPage } from "./pages/CartPage/CartPage";
 
 function App() { 
   return (
@@ -21,9 +22,10 @@ function App() {
                   <Route index element={<StartPage/>} />
                   <Route path=":bookid" element={<SinglePage/>} />
                 </Route>
-                <Route path="/signup" element={<SignInUpPage/>}></Route>
+                <Route path="/signin" element={<SignInUpPage/>}></Route>
                 <Route path="/account" element={<AccountPage/>}></Route>
                 <Route path="/favorites" element={<FavoritesPage/>}></Route>
+                <Route path="/cart" element={<CartPage/>}></Route>
               </Route>            
             </Routes>
           </BrowserRouter>

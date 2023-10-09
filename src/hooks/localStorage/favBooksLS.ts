@@ -1,24 +1,5 @@
+import { reverse } from "lodash";
 import {favBookType} from "../../api/types";
-// export const addFavBookToLS = (isbn: string) => {
-//     const favBooksFromLS = localStorage.getItem('favBooks');
-//     const favBooks = favBooksFromLS 
-//     ? 
-//     JSON.parse(favBooksFromLS) 
-//     : 
-//     [];
-//         if (!favBooks.includes(isbn)) {
-//             favBooks.push(isbn);
-//             localStorage.setItem('favBooks', JSON.stringify(favBooks));
-//         }
-// }
-// export const removeFavBookFromLS = (removeIsbn: string) => {
-//     const favBooksFromLS = localStorage.getItem('favBooks');
-//     if(favBooksFromLS){
-//         const favBooks = JSON.parse(favBooksFromLS);
-//         const updatedFavBooks = favBooks.filter((id: string) => id !== removeIsbn);
-//         localStorage.setItem('favBooks', JSON.stringify(updatedFavBooks));
-//     }
-// }
 export const isThisBookInFavLS = (isbn: string): boolean => {
     const favBooksFromLS = localStorage.getItem('favBooks');
     if (favBooksFromLS) {
@@ -27,7 +8,11 @@ export const isThisBookInFavLS = (isbn: string): boolean => {
     }
     return false;
 }
-
+export const getBooksFromLS = () => {
+    const favBooksFromLS = localStorage.getItem('favBooks');
+    const favBooks = favBooksFromLS ? JSON.parse(favBooksFromLS) : [];
+    return favBooks;
+}
 export const addFavBookToLS = (isbn: string, favBookObj : favBookType) => {
     const favBooksFromLS = localStorage.getItem('favBooks');
     const favBooks = favBooksFromLS ? JSON.parse(favBooksFromLS) : [];

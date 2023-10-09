@@ -3,7 +3,7 @@
 
 .bookcard_container{
     width: 100%;
-    height: 453px;
+    min-height: 453px;
     cursor: pointer;
 }
 .background{
@@ -30,9 +30,13 @@
     height: 100%;
     object-fit: contain;
 }
-#bookcard_title{
+.bookcard_description{
     margin-top: 20px;
-    height: 64px;
+    display: flex;
+    flex-direction: column;
+
+}
+#bookcard_title{
     color: var(--primary-black);
 }
 p{
@@ -40,8 +44,14 @@ p{
 }
 .author_data{
     margin-top: 8px;
+    order: 2; 
 }
 .bookcard_footer{
     margin-top: 40px;
+    order: 3;
     @include flex-sp-between;
+    align-items: baseline;
+}
+.bookcard_title{
+    order: 1;
 }

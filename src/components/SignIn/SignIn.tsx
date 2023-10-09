@@ -24,7 +24,6 @@ export const SignIn = () => {
 
         const isUserRegistered = isThisUserInLS(data.name);
         if(isUserRegistered){
-            console.log("Вошли в условие")
             const isThisPassword = confirmPassword(data.name, data.password);
             if(isThisPassword){
                 setIsCorrectPassword(true);
@@ -76,7 +75,7 @@ export const SignIn = () => {
                         <span id={styles.forgot_passw_text}>Forgot password?</span>
                     </div>
                     <div className={styles.signup_submit}>
-                        <Button disabled={false} content={'Sign in'}/>
+                        <Button disabled={false} content={'Sign in'} btnStyle={'dark'}/>
                     </div>
                 </div> 
             </form>

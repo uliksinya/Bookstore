@@ -1,4 +1,8 @@
 @import "../../styles/mixins.scss";
+.cart_container{
+    margin-top: 72px;
+    width: 100%;
+}
 .single_title{
     margin-top: 32px;
 }
@@ -8,7 +12,6 @@
     position: relative;
 }
 .favorites_container{
-    width: 100%;
     margin-top: 72px;
 }
 .background{
@@ -37,7 +40,7 @@
     margin-top: 36px;
 }
 .price_grade{
-    margin-top: 24px;
+    margin-left: 10%;
     display: flex;
     flex-direction: row;
     align-items: center;   
@@ -48,9 +51,34 @@
 .fav_books_line{
     margin-bottom: 48px;
 }
-#like_img{
+#cross_img{
     position: absolute;
     top: 68px;
     right: 0;
     cursor: pointer;
+}
+.button_container{
+    border: none; 
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+.quantity_container{
+    margin-top: 24px;
+    width: 56px;
+    height: 56px;
+    @include flex-row;
+}
+.count_input{
+    @include flex-center;
+    text-align: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    color: var(--primary-black);
+    border: none;
+    font-family: var(--font-bebas);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
 }

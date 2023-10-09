@@ -14,10 +14,14 @@ export const BookCard = ({ book, onClick } : IBookCard) => {
     return (
         <div className={styles.bookcard_container} onClick={onClick}>
             <div className={styles.background} id={styles[randomColor]}>
-                <img src={book.image} id={styles.book_image}/>
-                <h3 id={styles.bookcard_title}>
-                    {book.title}
-                </h3>
+                <img src={book.image} id={styles.book_image}/>       
+            </div>
+            <div className={styles.bookcard_description}>
+                <div className={styles.bookcard_title}>
+                    <h3 id={styles.bookcard_title}>
+                        {book.title}
+                    </h3>
+                </div>
                 <div className={styles.author_data}>
                     <p>{book.subtitle}</p>                    
                 </div>  
@@ -26,8 +30,8 @@ export const BookCard = ({ book, onClick } : IBookCard) => {
                     <div>
                         <img src={Grade}/>
                     </div>
-                </div>             
-            </div>
+                </div>
+            </div>                      
         </div>
     )
 }

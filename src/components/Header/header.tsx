@@ -3,7 +3,6 @@ import LikeLogo from "../../utils/img/Like_icon.png";
 import ShopLogo from "../../utils/img/Shop_icon.png";
 import UserLogo from "../../utils/img/User_icon.png";
 import React from "react";
-import { fetchFoundedBooks } from "../../redux/books/books";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../utils/img/search_icon.png";
 import { selectSearchInputValue } from "../../redux/books/books";
@@ -11,16 +10,23 @@ import { setValue } from "../../redux/books/books";
 import { HeaderBurgerMenu } from "../HeaderBurgerMenu/Burgermenu";
 import {useState} from "react";
 import throttle from 'lodash/throttle';
-import {useMemo} from "react";
+import {useMemo, useEffect} from "react";
 import ActiveLike from "../../utils/img/active_like.png";
-import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
 import { useNavigate } from "react-router-dom";
+import {getBooksFromLS} from "../../hooks/localStorage/favBooksLS";
+import { isAutentificationUserInLS } from "../../hooks/localStorage/SignInUpLS";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
     const inputValue = useAppSelector(selectSearchInputValue);
-    const favBooks = useAppSelector(selectFavouriteBooks);
     const navigate = useNavigate();
+    const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
+    const [favBooks, setFavBooks] = useState([]);
+
+    useEffect(() => {
+        const books = getBooksFromLS();
+        setFavBooks(books);        
+    }, []);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -30,12 +36,17 @@ export const Header = () => {
         return throttle(handleSearchInputChange, 500);       
     }, [handleSearchInputChange]);
 
-    const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
     const toogleMenuState = () => {
         setIsActiveMenu(!isActiveMenu);
     }
     const toggleNavigateToFavorites = () => {
         navigate('/favorites');
+    }
+    const toggleNavigateToCart = () => {
+        navigate('/cart');
+    }
+    const toggleNavigateToAccount = () => {
+        isAutentificationUserInLS() ? navigate('/account') : navigate('/signin');
     }
     return (
         <div>
@@ -51,13 +62,19 @@ export const Header = () => {
                 </div>          
                 <div className={styles.header_icons_container}>
                     <div className={styles.like_cont} onClick={() => toggleNavigateToFavorites()}>
-                        <img src={favBooks.length === 0 ? LikeLogo : ActiveLike} alt="Like Icon" />
+                        <img src={favBooks.length === 0 ? LikeLogo : ActiveLike} alt="Like Icon"/>
                     </div>
-                    <img src={ShopLogo} alt="Shop Icon" />
-                    <img src={UserLogo} alt="User Icon" />
+                    <div onClick={() => toggleNavigateToCart()}>
+                        <img src={ShopLogo} alt="Shop Icon" />
+                    </div>
+                    <div onClick={() => toggleNavigateToAccount()} className={styles.user_icon}>
+                        <img src={UserLogo} alt="User Icon" />
+                    </div>
                 </div>
                 <div className={styles.media_header_icons_container}>
-                    <img src={ShopLogo} alt="Shop Icon" />
+                    <div className={styles.cart_icon}>
+                        <img src={ShopLogo} alt="Shop Icon" />
+                    </div>
                     <HeaderBurgerMenu onClick={toogleMenuState}/>
                 </div>            
             </div>

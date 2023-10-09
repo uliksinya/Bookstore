@@ -14,8 +14,9 @@ import TwitterIcon from "../../utils/img/twitter_icon.png";
 import MenuIcon from "../../utils/img/horiz_menu_icon.png";
 import { Subscribe } from "../../components/Subscribe/subscribe";
 import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
-import { addFavouriteBook, removeFavouriteBook, selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
+import { selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
 import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
+import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
  
 export const SinglePage = () => {
     const id = useParams();
@@ -24,7 +25,6 @@ export const SinglePage = () => {
     const book = useAppSelector(selectSelectedBook);
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
-
     const favBooks = useAppSelector(selectFavouriteBooks);
 
     const toggleEditState = () => {
@@ -36,34 +36,23 @@ export const SinglePage = () => {
     const toggleEditFavBookState = () => {
         setIsFavouriteBook(!isFavouriteBook);
     }
-    // const addBooksFromLsToStore = () => {
-    //     const favBooksFromLS = localStorage.getItem('favBooks');
-    //     if(favBooksFromLS){
-    //         const favBooks = JSON.parse(favBooksFromLS);
-    //         favBooks.forEach((isbn: string) => {
-    //             const favBookItem = {
-    //                 isbn13: isbn,
-    //                 title: book.title,  
-    //                 subtitle: book.subtitle,  
-    //                 rating: book.rating,  
-    //                 price: book.price, 
-    //                 image: book.image,  
-    //                 isFavourite: isFavouriteBook  
-    //             };
-    //             dispatch(addFavouriteBook(favBookItem));
-    //         })
-    // }
-    // }
+    const addBookToLsCart = () => {
+        const isbn = book.isbn13;
+        addBookToCartInLS(isbn, favBookObj);
+    }
     
+    const priseWithoutDollar = book.price.replace('$', '');
+    console.log(priseWithoutDollar);
     const favBookObj = {
         isbn13: book.isbn13,
         title: book.title,
         subtitle: book.subtitle,
         rating: book.rating,
-        price: book.price,
+        price: priseWithoutDollar,
+        quantity: 1,
         image: book.image,
-        isFavourite: isFavouriteBook,
     }
+    console.log(favBookObj.price);
 
     useEffect(() => {
         if(id.bookid !== undefined){
@@ -82,8 +71,6 @@ export const SinglePage = () => {
             } else {
                 setIsFavouriteBook(false);
             }
-
-            // addBooksFromLsToStore();
         }
     }, [book.isbn13]);
     
@@ -92,12 +79,10 @@ export const SinglePage = () => {
     
         if (isFavouriteBook) {
             addFavBookToLS(isbn, favBookObj);
-            // dispatch(addFavouriteBook(favBookObj));
         } else {
             removeFavBookFromLS(isbn);
-            // dispatch(removeFavouriteBook(isbn));
         }
-        //localStorage.setItem('favBooks', JSON.stringify([]));
+
     }, [isFavouriteBook]);     
 
     console.log(favBooks);    
@@ -159,7 +144,7 @@ export const SinglePage = () => {
                         </ul>
                         :
                         <ul className={styles.menu}><p id={styles.menu} onClick={toggleEditState}>More detalize</p></ul> }    
-                        <Button disabled={false} content={"Add to cart"} btnStyle={"dark"}/>                
+                        <Button disabled={false} content={"Add to cart"} btnStyle={"dark"} onClick={() => addBookToLsCart()}/>                
                     </div>
                 </div>            
             </div>
