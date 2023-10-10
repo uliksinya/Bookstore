@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./bookcart.module.scss";
-import { favBookType } from '../../api/types';
-import Plus from "../../utils/img/plus_icon.png";
-import Minus from "../../utils/img/minus_icon.png";
-import Cross from "../../utils/img/little_cross.png";
-import { replace } from 'lodash';
-import { updatePriceInLS } from '../../hooks/localStorage/booksInCartLS';
-import { parsePriceToNumber } from '../../redux/hooks';
-import { updateQuantityInLS } from '../../hooks/localStorage/booksInCartLS';
+import { useState, useEffect } from 'react';
+import styles from "./cartbookcard.module.scss";
+import { favBookType } from '../../../api/types';
+import { updatePriceInLS } from '../../../hooks/localStorage/booksInCartLS';
+import { parsePriceToNumber } from '../../../redux/hooks';
+import { updateQuantityInLS } from '../../../hooks/localStorage/booksInCartLS';
+import Plus from "../../../utils/img/plus_icon.png";
+import Minus from "../../../utils/img/minus_icon.png";
+import Cross from "../../../utils/img/little_cross.png";
 
 interface CartBookCardProps {
     singleBook: favBookType;
+    updateBookInCart: (isbn: string, newQuantity: number, newPrice: number) => void;
 }
 
-const CartBookCard = ({ singleBook } :  CartBookCardProps) => {
-  const [countNumber, setCountNumber] = useState(singleBook.quantity);
-  const startPrice = parsePriceToNumber(singleBook.price)
-  const [bookPrice, setBookPrice] = useState(startPrice);
+const CartBookCard = ({ singleBook, updateBookInCart } :  CartBookCardProps) => {
+  const startPrice = parsePriceToNumber(singleBook.startPrice);
+  const price = parsePriceToNumber(singleBook.price);
+  const [countNumber, setCountNumber] = useState<number>(singleBook.quantity);
+  const [bookPrice, setBookPrice] = useState<number>(price);
 
   const togglePlus = () => {    
     const newCount = countNumber + 1;
     setCountNumber(newCount);
-    setBookPrice(parseFloat((newCount * startPrice).toFixed(2)));  
+    setBookPrice(newCount * startPrice); 
+    updateBookInCart(singleBook.isbn13, countNumber + 1, startPrice + bookPrice); 
   }
   
   const toggleMinus = () => {
     if (countNumber > 1) {
       const newCount = countNumber - 1;
       setCountNumber(newCount);
-      setBookPrice(parseFloat((newCount * startPrice).toFixed(2)));
+      setBookPrice(newCount * startPrice);
+      updateBookInCart(singleBook.isbn13, countNumber - 1, bookPrice - startPrice); 
     }
   }
   
   useEffect(() => {
-    updateQuantityInLS(singleBook.isbn13, countNumber);
-    updatePriceInLS(singleBook.isbn13, bookPrice.toString());        
+        updateQuantityInLS(singleBook.isbn13, countNumber);
+        updatePriceInLS(singleBook.isbn13, bookPrice.toString());        
   },[bookPrice, countNumber]);
     
   return (
@@ -61,7 +64,7 @@ const CartBookCard = ({ singleBook } :  CartBookCardProps) => {
                 </div>                              
             </div> 
             <div className={styles.price_grade}>
-                <h3>{'$' + bookPrice}</h3>
+                <h3>{'$' + bookPrice.toFixed(2)}</h3>
             </div> 
             <div id={styles.cross_img}>
                 <img src={Cross}/>

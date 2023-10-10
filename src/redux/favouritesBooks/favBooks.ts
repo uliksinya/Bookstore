@@ -1,25 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-export interface FavouritesBookState {
-    isbn13: string;
-    title: string;
-    subtitle: string;
-    rating: string;
-    price: string;
-    image: string;
-    isFavourite: boolean;
-}
+import { favBookType } from '../../api/types';
   
-const initialState: FavouritesBookState[] = [];
+const initialState: favBookType[] = [];
   
 export const favBookSlice = createSlice({
     name: 'favBooks',
     initialState,
     reducers: {
-      addFavouriteBook: (state, action: PayloadAction<FavouritesBookState>) => {
-        console.log("nen")
+      addFavouriteBook: (state, action: PayloadAction<favBookType>) => {
+        console.log('добавить книгу');
         state.push(action.payload);
       },
       removeFavouriteBook: (state, action: PayloadAction<string>) => {

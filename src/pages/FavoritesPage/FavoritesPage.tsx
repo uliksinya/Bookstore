@@ -1,34 +1,28 @@
 import styles from "./favpage.module.scss";
 import { useNavigate } from "react-router-dom";
 import ArrowIcon from "../../utils/img/arrow_icon.png";
-import { useAppSelector } from "../../redux/hooks";
-import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
 import Grade from '../../utils/img/grade.png';
 import { getBooksFromLS, removeFavBookFromLS } from "../../hooks/localStorage/favBooksLS";
 import { favBookType } from "../../api/types";
 import HeartIcon from "../../utils/img/heart_icon.png";
 import { useState, useEffect } from "react";
 
-export const FavoritesPage = () => {
-    // const favBooks = getBooksFromLS();
+export const FavoritesPage = () => {    
     const navigate = useNavigate();
+    const [favBooks, setFavBooks] = useState(getBooksFromLS());
+    
     const toggleNavigateToHome = () => {
         navigate('/books');
     }
-    const [favBooks, setFavBooks] = useState([]);
-
+    const toggleRemoveFromFavorites = (isbn: string) => {
+        removeFavBookFromLS(isbn);
+        setFavBooks(getBooksFromLS());
+    }
     useEffect(() => {
         const booksFromLS = getBooksFromLS();
         setFavBooks(booksFromLS);
     }, [setFavBooks]);
-    const toggleRemoveFromFavorites = (isbn: string) => {
-        const allBooks = getBooksFromLS();
-        if(allBooks.length !== 0 ){
-            removeFavBookFromLS(isbn);
-            setFavBooks(allBooks);
-        }
-    }
-    //onClick={() => redirectToPostPage(Number(book.isbn13))}
+    
     return(
         <div className={styles.favorites_container}>
             <div className={styles.img_container} onClick={toggleNavigateToHome}>
@@ -66,7 +60,6 @@ export const FavoritesPage = () => {
                     </div>
                 ))}
             </div>
-        </div>
-        
+        </div>   
     )
 }

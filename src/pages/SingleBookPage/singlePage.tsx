@@ -17,6 +17,7 @@ import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
 import { selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
 import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
 import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
  
 export const SinglePage = () => {
     const id = useParams();
@@ -39,20 +40,20 @@ export const SinglePage = () => {
     const addBookToLsCart = () => {
         const isbn = book.isbn13;
         addBookToCartInLS(isbn, favBookObj);
+        addFavouriteBook(favBookObj);
     }
     
     const priseWithoutDollar = book.price.replace('$', '');
-    console.log(priseWithoutDollar);
     const favBookObj = {
         isbn13: book.isbn13,
         title: book.title,
         subtitle: book.subtitle,
         rating: book.rating,
         price: priseWithoutDollar,
+        startPrice: priseWithoutDollar,
         quantity: 1,
         image: book.image,
-    }
-    console.log(favBookObj.price);
+    }   
 
     useEffect(() => {
         if(id.bookid !== undefined){
@@ -79,8 +80,10 @@ export const SinglePage = () => {
     
         if (isFavouriteBook) {
             addFavBookToLS(isbn, favBookObj);
+            dispatch(addFavouriteBook(favBookObj));
         } else {
             removeFavBookFromLS(isbn);
+            dispatch(removeFavouriteBook(isbn));
         }
 
     }, [isFavouriteBook]);     
