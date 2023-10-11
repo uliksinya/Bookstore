@@ -8,14 +8,23 @@ import CartBookCard from "../../components/Cart/BookCardInCart/CartBookCard";
 import {useMemo} from 'react'
 import { FooterArr } from "../../api/types";
 import { CartTotalFooter } from "../../components/Cart/CartTotalFooter/CartTotalFooter";
+import { removeBookFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { removeBooksFromCartStore } from "../../redux/cart/booksincart";
+import { useAppDispatch } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
+import { selectBooksInCartStore } from "../../redux/cart/booksincart";
+import { addBookToCartStore } from "../../redux/cart/booksincart";
 
 export const CartPage = () => {
-    const [booksInCart, setBooksInCart] = useState<favBookType[]>([]);
     const navigate = useNavigate();   
+    const dispatch = useAppDispatch();
+    const booksInCartStore = useAppSelector(selectBooksInCartStore);
+
+    const [booksInCart, setBooksInCart] = useState<favBookType[]>(getBooksFromCartInLS());
+ 
     const toggleNavigateToHome = () => {
         navigate('/books');
-    }
-    
+    }    
     const getSumTotal = (books: favBookType[]) => {
         const totalSumPrice = books.reduce((total, book) => total + Number(book.price), 0);
         return totalSumPrice;
@@ -23,6 +32,12 @@ export const CartPage = () => {
     const getVatSum = (sum: number) => {
         return sum * 0.2;
     }
+    useEffect(() => { 
+        booksInCart.forEach(book => {
+            dispatch(addBookToCartStore(book));
+        });
+    }, []);
+
     const getCartFooterArray = (books: favBookType[]) => {
         const sum : number = getSumTotal(books);
         const vat : number = getVatSum(sum);
@@ -55,10 +70,13 @@ export const CartPage = () => {
         });
         setBooksInCart(updatedBooks);
     }
-    useEffect(() => {
-        const booksFromLS = getBooksFromCartInLS();
-        setBooksInCart(booksFromLS);
-    }, [setBooksInCart]);
+    const toggleRemoveBook = (isbn: string) => {
+        removeBookFromCartInLS(isbn)
+        dispatch(removeBooksFromCartStore(isbn));
+    }
+    useEffect(() => {   
+        setBooksInCart(getBooksFromCartInLS());
+    }, [booksInCartStore]);
     return(
         <div className={styles.cart_container}>
             <div className={styles.img_container} onClick={toggleNavigateToHome}>
@@ -69,7 +87,7 @@ export const CartPage = () => {
             </div>
             <div className={styles.fav_books}>
                 {booksInCart.map((book: favBookType) => (
-                    <CartBookCard key={book.isbn13} singleBook={book} updateBookInCart={updateBookInCart}/>
+                    <CartBookCard key={book.isbn13} singleBook={book} updateBookInCart={updateBookInCart} removeBook={() => toggleRemoveBook(book.isbn13)}/>
                 ))}
             </div>
             <div className={styles.cart_footer}>

@@ -6,23 +6,38 @@ import { getBooksFromLS, removeFavBookFromLS } from "../../hooks/localStorage/fa
 import { favBookType } from "../../api/types";
 import HeartIcon from "../../utils/img/heart_icon.png";
 import { useState, useEffect } from "react";
+import { removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
+import { addFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 
 export const FavoritesPage = () => {    
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [favBooks, setFavBooks] = useState(getBooksFromLS());
+    const favBooksFromStore = useAppSelector(selectFavouriteBooks);
+
+    useEffect(() => {        
+        favBooks.forEach((book: favBookType) => {
+            dispatch(addFavouriteBook(book));
+        }); 
+    }, []);
     
     const toggleNavigateToHome = () => {
         navigate('/books');
     }
     const toggleRemoveFromFavorites = (isbn: string) => {
         removeFavBookFromLS(isbn);
+        dispatch(removeFavouriteBook(isbn));
         setFavBooks(getBooksFromLS());
     }
     useEffect(() => {
         const booksFromLS = getBooksFromLS();
         setFavBooks(booksFromLS);
     }, [setFavBooks]);
-    
+     
+     console.log(favBooksFromStore);
+
     return(
         <div className={styles.favorites_container}>
             <div className={styles.img_container} onClick={toggleNavigateToHome}>

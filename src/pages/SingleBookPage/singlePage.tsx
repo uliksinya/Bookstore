@@ -18,16 +18,30 @@ import { selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
 import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
 import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
 import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
+import { addBookToCartStore } from "../../redux/cart/booksincart";
+import { selectBooksInCartStore } from "../../redux/cart/booksincart";
  
 export const SinglePage = () => {
     const id = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const booksInCart = useAppSelector(selectBooksInCartStore);
+
     const book = useAppSelector(selectSelectedBook);
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
     const favBooks = useAppSelector(selectFavouriteBooks);
-
+    const priseWithoutDollar = book.price.replace('$', '');
+    const favBookObj = {
+        isbn13: book.isbn13,
+        title: book.title,
+        subtitle: book.subtitle,
+        rating: book.rating,
+        price: priseWithoutDollar,
+        startPrice: priseWithoutDollar,
+        quantity: 1,
+        image: book.image,
+    } 
     const toggleEditState = () => {
         setIsMenuActive(!isMenuActive);
     }
@@ -40,28 +54,15 @@ export const SinglePage = () => {
     const addBookToLsCart = () => {
         const isbn = book.isbn13;
         addBookToCartInLS(isbn, favBookObj);
-        addFavouriteBook(favBookObj);
-    }
-    
-    const priseWithoutDollar = book.price.replace('$', '');
-    const favBookObj = {
-        isbn13: book.isbn13,
-        title: book.title,
-        subtitle: book.subtitle,
-        rating: book.rating,
-        price: priseWithoutDollar,
-        startPrice: priseWithoutDollar,
-        quantity: 1,
-        image: book.image,
-    }   
-
+        dispatch(addBookToCartStore(favBookObj));
+    }      
     useEffect(() => {
         if(id.bookid !== undefined){
             dispatch(fetchSelectedBook(id.bookid));  
         }
     }, [dispatch]);
     
-    console.log(book.isbn13);
+    // console.log(book.isbn13);
 
     useEffect(() => {
         if (book.isbn13) {
@@ -80,7 +81,9 @@ export const SinglePage = () => {
     
         if (isFavouriteBook) {
             addFavBookToLS(isbn, favBookObj);
-            dispatch(addFavouriteBook(favBookObj));
+            if(book.isbn13 !== ""){
+                dispatch(addFavouriteBook(favBookObj));
+            }
         } else {
             removeFavBookFromLS(isbn);
             dispatch(removeFavouriteBook(isbn));
@@ -88,7 +91,8 @@ export const SinglePage = () => {
 
     }, [isFavouriteBook]);     
 
-    console.log(favBooks);    
+    console.log(favBooks);
+    console.log(booksInCart);    
 
     return(
         <div>

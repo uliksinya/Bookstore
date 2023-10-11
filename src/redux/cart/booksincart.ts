@@ -5,20 +5,19 @@ import { favBookType } from '../../api/types';
   
 const initialState: favBookType[] = [];
   
-export const favBookSlice = createSlice({
-    name: 'favBooks',
+export const booksInCartSlice = createSlice({
+    name: 'booksInCart',
     initialState,
     reducers: {
-      addFavouriteBook: (state, action: PayloadAction<favBookType>) => {
+      addBookToCartStore: (state, action: PayloadAction<favBookType>) => {
         const { isbn13 } = action.payload;
         const isBookAlreadyAdded = state.some(book => book.isbn13 === isbn13);
         
         if (!isBookAlreadyAdded) {
-          state.push(action.payload);
+            state.push(action.payload);
         }
       },  
-      removeFavouriteBook: (state, action: PayloadAction<string>) => {
-        console.log('удали!');
+      removeBooksFromCartStore: (state, action: PayloadAction<string>) => {
         const index = state.findIndex(book => book.isbn13 === action.payload);
             if (index !== -1) {
                 state.splice(index, 1);
@@ -27,8 +26,8 @@ export const favBookSlice = createSlice({
     }       
 });
   
-export const { addFavouriteBook, removeFavouriteBook } = favBookSlice.actions;
-export const selectFavouriteBooks = (state: RootState) => state.favBooks;
+export const { addBookToCartStore, removeBooksFromCartStore } = booksInCartSlice.actions;
+export const selectBooksInCartStore = (state: RootState) => state.booksInCart;
   
-export default favBookSlice.reducer;
+export default booksInCartSlice.reducer;
   

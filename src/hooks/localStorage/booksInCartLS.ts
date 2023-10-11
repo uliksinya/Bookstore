@@ -8,6 +8,12 @@ export const addBookToCartInLS = (isbn: string, bookObj : favBookType) => {
         localStorage.setItem('BookCart', JSON.stringify(favBooks));
     }
 }
+export const removeBookFromCartInLS = (removeIsbn: string) => {
+    const booksInCart = localStorage.getItem('BookCart');
+    const favBooks = booksInCart ? JSON.parse(booksInCart) : [];
+    const updatedFavBooks = favBooks.filter((book : favBookType) => book.isbn13 !== removeIsbn);
+    localStorage.setItem('BookCart', JSON.stringify(updatedFavBooks));
+}
 export const getBooksFromCartInLS = () => {
     const booksInCart = localStorage.getItem('BookCart');
     const books = booksInCart ? JSON.parse(booksInCart) : [];

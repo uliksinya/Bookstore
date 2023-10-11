@@ -17,23 +17,19 @@ import { useNavigate } from "react-router-dom";
 import {getBooksFromLS} from "../../hooks/localStorage/favBooksLS";
 import { isAutentificationUserInLS } from "../../hooks/localStorage/SignInUpLS";
 import { getBooksFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
+import { addFavouriteBook } from "../../redux/favouritesBooks/favBooks";
+import { favBookType } from "../../api/types";
+import { selectBooksInCartStore } from "../../redux/cart/booksincart";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
     const inputValue = useAppSelector(selectSearchInputValue);
     const navigate = useNavigate();
     const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
-    const [favBooks, setFavBooks] = useState([]);
-    const [booksInCart, setBooksInCart] = useState([]);
-    useEffect(() => {
-        const books = getBooksFromLS();
-        setFavBooks(books);        
-    }, []);
 
-    useEffect(() => {
-        const booksInCart = getBooksFromCartInLS();
-        setBooksInCart(booksInCart);        
-    }, []);
+    const favBooksFromStore = useAppSelector(selectFavouriteBooks);
+    const booksInCart = useAppSelector(selectBooksInCartStore); 
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -69,7 +65,7 @@ export const Header = () => {
                 </div>          
                 <div className={styles.header_icons_container}>
                     <div className={styles.like_cont} onClick={() => toggleNavigateToFavorites()}>
-                        <img src={favBooks.length === 0 ? LikeLogo : ActiveLike} alt="Like Icon"/>
+                        <img src={favBooksFromStore.length === 0 ? LikeLogo : ActiveLike} alt="Like Icon"/>
                     </div>
                     <div onClick={() => toggleNavigateToCart()}>
                         <img src={booksInCart.length !== 0 ? ActiveCartLogo : CartLogo} alt="Cart Icon" />
