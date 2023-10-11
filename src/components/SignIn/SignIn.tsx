@@ -2,18 +2,23 @@ import { CustomInput } from "../CustomInput/Input"
 import styles from "./signin.module.scss";
 import {useForm,  SubmitHandler} from 'react-hook-form';
 import { SignInForm } from "../../api/types";
-import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../hooks/localStorage/SignInUpLS";
+import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../hooks/localStorage/signInUpLS";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
 import { useState } from "react";
 import CrossIcon from "../../utils/img/cross_icon.png";
+import { useAppDispatch } from "../../redux/hooks";
 
 export const SignIn = () => {
-    const navigate = useNavigate();
+    // const dispatch = useAppDispatch();
+    const navigate = useNavigate(); 
     const [isCorrectPasssword, setIsCorrectPassword] = useState<boolean>(true);
     const redirectToHome = () => {
         navigate('/books');
     } 
+    const toggleNavToResetPassword = () => {
+        navigate('/signin/resetPassw');
+    }
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<SignInForm>({
         reValidateMode:'onChange',
         mode: 'onBlur',
@@ -45,7 +50,7 @@ export const SignIn = () => {
             </div> 
             :
             ""}
-            <form className={styles.signin_form} onSubmit={handleSubmit(onSubmitSignIn)}>
+            <form className={styles.signin_form}>
                 <div>
                     <div id={styles.input_item}>
                         <CustomInput 
@@ -71,11 +76,11 @@ export const SignIn = () => {
                             register={register}
                         /> 
                     </div>
-                    <div className={styles.forgot_passw}>
+                    <div className={styles.forgot_passw} onClick={() => toggleNavToResetPassword()}>
                         <span id={styles.forgot_passw_text}>Forgot password?</span>
                     </div>
                     <div className={styles.signup_submit}>
-                        <Button disabled={false} content={'Sign in'} btnStyle={'dark'}/>
+                        <Button disabled={false} content={'Sign in'} btnStyle={'dark'} onClick={handleSubmit(onSubmitSignIn)}/>
                     </div>
                 </div> 
             </form>

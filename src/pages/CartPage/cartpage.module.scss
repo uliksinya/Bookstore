@@ -2,6 +2,7 @@
 .cart_container{
     margin-top: 72px;
     width: 100%;
+    height: auto;
 }
 .single_title{
     margin-top: 32px;
@@ -27,7 +28,9 @@
 .fav_books{
     margin-top: 48px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    height: 820px;
+    overflow: auto;
 }
 .book_line{
     width: 100%;
@@ -84,6 +87,23 @@
 }
 .cart_footer{
     margin-bottom: 48px;
+    margin-top: 48px;
     display: flex;
     justify-content: flex-end;
+}
+/* Для вебкит-браузеров (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 3px; /* ширина скроллбара */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* цвет фона трека */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* цвет ползунка */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* цвет ползунка при наведении */
 }

@@ -6,7 +6,7 @@ import { parsePriceToNumber, useAppDispatch } from '../../../redux/hooks';
 import { updateQuantityInLS } from '../../../hooks/localStorage/booksInCartLS';
 import Plus from "../../../utils/img/plus_icon.png";
 import Minus from "../../../utils/img/minus_icon.png";
-import Cross from "../../../utils/img/little_cross.png";
+import Cross from "../../../utils/img/cross_ic.png";
 import { removeBookFromCartInLS } from '../../../hooks/localStorage/booksInCartLS';
 import { removeBooksFromCartStore } from '../../../redux/cart/booksincart';
 import { useAppSelector } from '../../../redux/hooks';

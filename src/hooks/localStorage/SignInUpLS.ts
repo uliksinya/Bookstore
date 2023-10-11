@@ -15,14 +15,14 @@ export const registerUser = ({username, email, password} : registrationProps): b
 export const isThisUserInLS = (username: string): boolean => {
     const dataFromLS = localStorage.getItem("Users");
     if(dataFromLS){
-        const usersArr = JSON.parse(dataFromLS);
-        for(let userObject of usersArr){
-            for(let key in userObject){
-                if(key === username){
-                    return true;
+        const usersArr = dataFromLS ? JSON.parse(dataFromLS) : [];
+            for(let userObject of usersArr){
+                for(let key in userObject){
+                    if(key === username){
+                        return true;
+                    }
                 }
             }
-        }
     }
     return false;
 }
@@ -113,7 +113,6 @@ export const getAuthUsernameFromLS = (): string | null => {
     }
     return null;
 }
-
 
 export const getAuthPasswordFromLS = () => {
     const dataFromLS = localStorage.getItem("AutentificationUser");

@@ -7,7 +7,7 @@ import { Button } from '../../components/Button/Button';
 import ArrowIcon from "../../utils/img/arrow_icon.png";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getAuthUsernameFromLS, getAuthPasswordFromLS, getAuthEmailFromLS, updateAutentificationUserInLS} from '../../hooks/localStorage/SignInUpLS';
+import { getAuthUsernameFromLS, getAuthPasswordFromLS, getAuthEmailFromLS, updateAutentificationUserInLS} from '../../hooks/localStorage/signInUpLS';
 
 export const AccountPage = () => {
     useEffect(() => {
@@ -53,8 +53,7 @@ export const AccountPage = () => {
     }
     
     const toggleNavigateToSignIn = () => {
-        clearFields()
-        navigate('/signup');
+        navigate('/signin');
     }
     return(
     <div className={styles.account_container}>

@@ -10,6 +10,9 @@ import {SignInUpPage} from './pages/SignInUpPage/SignInUpPage';
 import { AccountPage } from "./pages/AccountPage/AccountPage";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { CartPage } from "./pages/CartPage/CartPage";
+import { ResetPassword } from "./pages/ResetPasswordPage/ResetPasswordPage";
+import { NewPasswordPage } from "./pages/NewPasswordPage/NewPasswordPage";
+import { AccountLayout } from "./components/AccountLayout/accountlayout";
 
 function App() { 
   return (
@@ -22,11 +25,22 @@ function App() {
                   <Route index element={<StartPage/>} />
                   <Route path=":bookid" element={<SinglePage/>} />
                 </Route>
-                <Route path="/signin" element={<SignInUpPage/>}></Route>
-                <Route path="/account" element={<AccountPage/>}></Route>
+                
+                <Route path="/account" element={<AccountLayout/>}>
+                  <Route index element={<AccountPage/>} />
+                </Route>
+
+                <Route path="/signin" element={<AccountLayout/>}>
+                  <Route index element={<SignInUpPage/>} />
+                  <Route path="resetPassw" element={<ResetPassword/>}>
+                    <Route path="newPassw" element={<NewPasswordPage/>} />
+                  </Route>
+                </Route>
+
                 <Route path="/favorites" element={<FavoritesPage/>}></Route>
                 <Route path="/cart" element={<CartPage/>}></Route>
-              </Route>            
+                
+              </Route>          
             </Routes>
           </BrowserRouter>
       </div>

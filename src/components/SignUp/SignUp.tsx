@@ -4,7 +4,7 @@ import { CustomInput } from '../CustomInput/Input';
 import styles from "./signup.module.scss";
 import { emailValidator, passwordValidator,confirmPasswordValidator } from "../../hooks/validators/validators";
 import { useState } from 'react';
-import { registerUser } from "../../hooks/localStorage/SignInUpLS";
+import { registerUser } from "../../hooks/localStorage/signInUpLS";
 import { Button } from '../Button/Button';
 import DoneIcon from "../../utils/img/done_icon.png";
 import { usernameValidator } from '../../hooks/validators/validators';
@@ -37,7 +37,7 @@ export const SignUp = () => {
         </div> 
         :
          ""}
-        <form className={styles.registration_form} onSubmit={handleSubmit(onSubmitRegistration)}>
+        <form className={styles.registration_form}>
             <div>
                 <div id={styles.input_item}>
                         <CustomInput 
@@ -111,7 +111,7 @@ export const SignUp = () => {
                         }
                         />
                         <div className={styles.signup_submit}>
-                            <Button disabled={false} content={'Sign up'} btnStyle={'dark'}/>
+                            <Button disabled={false} content={'Sign up'} btnStyle={'dark'} onClick={handleSubmit(onSubmitRegistration)}/>
                         </div>
                 </div>
             </div>

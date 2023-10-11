@@ -4,28 +4,26 @@ import CartLogo from "../../utils/img/Shop_icon.png";
 import ActiveCartLogo from "../../utils/img/active_cart_icon.png";
 import UserLogo from "../../utils/img/User_icon.png";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../utils/img/search_icon.png";
 import { selectSearchInputValue } from "../../redux/books/books";
 import { setValue } from "../../redux/books/books";
 import { HeaderBurgerMenu } from "../HeaderBurgerMenu/Burgermenu";
 import {useState} from "react";
 import throttle from 'lodash/throttle';
-import {useMemo, useEffect} from "react";
+import { useMemo } from "react";
 import ActiveLike from "../../utils/img/active_like.png";
-import { useNavigate } from "react-router-dom";
-import {getBooksFromLS} from "../../hooks/localStorage/favBooksLS";
-import { isAutentificationUserInLS } from "../../hooks/localStorage/SignInUpLS";
-import { getBooksFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { isAutentificationUserInLS } from "../../hooks/localStorage/signInUpLS";
 import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
-import { addFavouriteBook } from "../../redux/favouritesBooks/favBooks";
-import { favBookType } from "../../api/types";
 import { selectBooksInCartStore } from "../../redux/cart/booksincart";
+import { useAppDispatch } from "../../redux/hooks";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
-    const inputValue = useAppSelector(selectSearchInputValue);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
+
+    const inputValue = useAppSelector(selectSearchInputValue);    
     const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
 
     const favBooksFromStore = useAppSelector(selectFavouriteBooks);

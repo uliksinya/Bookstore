@@ -86,8 +86,13 @@ export const CartPage = () => {
                 <h1>Your Cart</h1>
             </div>
             <div className={styles.fav_books}>
-                {booksInCart.map((book: favBookType) => (
-                    <CartBookCard key={book.isbn13} singleBook={book} updateBookInCart={updateBookInCart} removeBook={() => toggleRemoveBook(book.isbn13)}/>
+                {booksInCart.reverse().map((book: favBookType) => (
+                    <CartBookCard 
+                        key={book.isbn13} 
+                        singleBook={book} 
+                        updateBookInCart={updateBookInCart} 
+                        removeBook={() => toggleRemoveBook(book.isbn13)}
+                    />
                 ))}
             </div>
             <div className={styles.cart_footer}>
