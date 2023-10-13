@@ -22,8 +22,8 @@ export const CartPage = () => {
 
     const [booksInCart, setBooksInCart] = useState<favBookType[]>(getBooksFromCartInLS());
  
-    const toggleNavigateToHome = () => {
-        navigate('/books');
+    const toggleNavigateToStartPage = () => {
+        navigate('/');
     }    
     const getSumTotal = (books: favBookType[]) => {
         const totalSumPrice = books.reduce((total, book) => total + Number(book.price), 0);
@@ -32,11 +32,11 @@ export const CartPage = () => {
     const getVatSum = (sum: number) => {
         return sum * 0.2;
     }
-    useEffect(() => { 
-        booksInCart.forEach(book => {
-            dispatch(addBookToCartStore(book));
-        });
-    }, []);
+    // useEffect(() => { 
+    //     booksInCart.forEach(book => {
+    //         dispatch(addBookToCartStore(book));
+    //     });
+    // }, []);
 
     const getCartFooterArray = (books: favBookType[]) => {
         const sum : number = getSumTotal(books);
@@ -79,21 +79,21 @@ export const CartPage = () => {
     }, [booksInCartStore]);
     return(
         <div className={styles.cart_container}>
-            <div className={styles.img_container} onClick={toggleNavigateToHome}>
+            <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
                 <img src={ArrowIcon}/>
             </div>
             <div className={styles.single_title}>
                 <h1>Your Cart</h1>
             </div>
             <div className={styles.fav_books}>
-                {booksInCart.reverse().map((book: favBookType) => (
-                    <CartBookCard 
-                        key={book.isbn13} 
-                        singleBook={book} 
-                        updateBookInCart={updateBookInCart} 
-                        removeBook={() => toggleRemoveBook(book.isbn13)}
-                    />
-                ))}
+            {booksInCart.map((book: favBookType) => (
+                <CartBookCard 
+                    key={book.isbn13} 
+                    singleBook={book} 
+                    updateBookInCart={updateBookInCart} 
+                    removeBook={() => toggleRemoveBook(book.isbn13)}
+                />
+            )).reverse()}
             </div>
             <div className={styles.cart_footer}>
                 <CartTotalFooter arr={footerInfArray} onClick={() => console.log("Нажали")} />

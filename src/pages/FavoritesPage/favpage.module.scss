@@ -15,16 +15,29 @@
     width: 256px;
     height: 192px;
     background-color: var(--purple);
+    position: relative;
 }
 .book_img{
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
+#dark_like_img{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: none;
+}
 .fav_books{
+    max-height: 820px;
+    overflow-y: auto;
+    overflow-x: hidden;
     margin-top: 48px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 .book_line{
     width: 100%;
@@ -50,7 +63,100 @@
 }
 #like_img{
     position: absolute;
-    top: 68px;
-    right: 0;
+    top: 88px;
+    right: 19px;
     cursor: pointer;
+}
+.popular_title{
+    margin-top: 24px;
+}
+.popular_books_container{
+    margin-top: 48px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 32px;
+}
+@media (max-width: 768px){
+    .fav_books{
+        max-height: 100%;
+        overflow-y: hidden;
+        // overflow-x: hidden;
+        // margin-top: 48px;
+        // display: flex;
+        // flex-direction: column;
+    }
+    .single_title h1{
+        font-size: 56px;
+    }
+    .background{
+        width: 208px;
+        height: 156px;
+    }
+    .text_container{
+        margin-top: 16px;
+        width: 360px;
+    }
+    #grade{
+        position: absolute;
+        right: 0;
+    }
+    #like_img{
+        top: 20px;
+        right: 19px;
+    }
+    .book_card{
+        margin-bottom: 60px;
+    }
+}
+@media (max-width: 680px){
+    .popular_books{
+        display: none;
+    }
+    #like_img{
+        display: none;
+    };
+    #dark_like_img{
+        display: block;
+    }
+}
+@media (max-width: 400px){
+    .favorites_container{
+        margin-top: 56px;
+    }
+    .book_card{
+        flex-direction: column;
+        margin-bottom: 32px;
+    }
+    #like_img{
+        display: none;
+    }
+    #dark_like_img{
+        width: 46px;
+        height: 46px;
+    }
+    .background{
+        width: 100%;
+        height: 204px;
+    }
+    .fav_books{
+        margin-top: 36px;
+        margin-bottom: 8px;
+        max-height: 100%;
+        overflow-y: hidden;
+    }
+    .single_title h1{
+        font-size: 32px;
+    }
+    .single_title{
+        margin-top: 29px;
+    }
+    .text_container{
+        margin-top: 20px;
+        margin-left: 0;
+        width: 100%;
+    }
+    .popular_books{
+        display: none;
+    }
 }

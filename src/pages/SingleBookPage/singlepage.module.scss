@@ -40,6 +40,12 @@
     justify-content: space-between;
     margin-top: 40px;    
 }
+.rating_container{
+    width: 112px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .main_menu, .additionally_menu{
     margin: 0;
     padding: 0;

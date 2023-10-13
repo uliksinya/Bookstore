@@ -29,7 +29,7 @@
     margin-top: 48px;
     display: flex;
     flex-direction: column;
-    height: 820px;
+    max-height: 820px;
     overflow: auto;
 }
 .book_line{
@@ -91,7 +91,7 @@
     display: flex;
     justify-content: flex-end;
 }
-/* Для вебкит-браузеров (Chrome, Safari, Edge) */
+
 ::-webkit-scrollbar {
     width: 3px; /* ширина скроллбара */
 }

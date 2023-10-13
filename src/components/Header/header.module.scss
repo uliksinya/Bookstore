@@ -13,6 +13,7 @@
 }
 .logo{
   width: 138px;
+  cursor: pointer;
 }
 #logo_text{
   font-size: 30px;
@@ -56,8 +57,8 @@ input::placeholder{
   right: 16px
 }
 .header_icons_container{
-  // width:  calc(184px * 100% / 1120px);
-  height: 56px;
+
+  // height: 56px;
   @include flex-sp-between;
   position: absolute;
   right: 0px;
@@ -75,7 +76,104 @@ input::placeholder{
 .cart_icon{
   cursor: pointer;
 }
+.pop_up_menu{
+  position: absolute;
+  top:0;
+  right: 0;
+  width: 386px;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 99;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(49, 48, 55, 0.5);
+  z-index: 9; 
+}
+.cross_icon{
+  position: absolute;
+  cursor: pointer;
+  top: 40px;
+  right: 40px;
+}
+.line{
+  position: absolute;
+  width: 288px;
+  height: 1px;
+  background-color: var(--gray);
+  right: 40px;
+  top: 103px
+}
+.pop_up_input_container{
+  position: absolute;
+  width: 287px;
+  top: 160px;
+  right: 41px;
+}
+.menu_container{
+  position: absolute;
+  top: 264px;
+  right: 40px;
+  width: 288px;
+ 
+}
+#fav_item{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+#cart_item{
+  cursor: pointer;
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+.btn_log_out{
+  margin-top: 500px;
+  cursor: pointer;
+}
+.btn_sign_in{
+  width: 288px;
+  position: absolute;
+  right: 40px;
+  bottom: 56px
+}
 
+
+
+
+
+
+@media (max-width: 1470px){
+  .logo_tel{
+   display: none;
+  }
+  .cart_tel{
+    display: none;
+  }
+  .header_icons_container img{
+    width: 46px;
+    height: 46px;   
+  }
+  .input_container{
+    width: 40%;
+  }
+}
+@media (max-width: 900px){
+  .logo_tel{
+    display: none;
+   }
+   .cart_tel{
+     display: none;
+   }
+ .input_container{
+    margin-left: 8%;
+ }
+}
 @media (max-width: 768px){
   .header_icons_container, .input_container{
     display: none;
@@ -87,7 +185,7 @@ input::placeholder{
     right: 0;
   }
   #logo_text{
-    font-size: 35px;
+    font-size: 30px;
   }
   .input_container{
     position: absolute;
@@ -103,10 +201,49 @@ input::placeholder{
     margin-top: 72px;
     margin-bottom: -24px;
   }
+  .cart_tel{
+    display: none;
+  }
+  .logo_tel{
+    display: none;
+  }
 
 }
 @media (max-width: 320px){
-  #logo_text{
+  .pop_up_menu{
+    width: 100%;
+    height: 100%;
+  }
+  .logo_tel{
+    position: absolute;
+    top:22px;
+    left: 25px;
     font-size: 30px;
+  }
+  .cart_tel{
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    top: 24px;
+    right: 80px;
+  }
+  .line{
+    width: 271px;
+    right: 24px;
+  }
+  .pop_up_input_container{
+    width: 271px;
+    right: 24px;
+  }
+  .btn_sign_in{
+    top: 528px;
+    width: 271px;
+    right: 24px;
+  }
+  .menu_container{
+    right: 15px;
+  }
+  .btn_log_out{
+    margin-top: 152px;
   }
 }

@@ -7,17 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
 import { useState } from "react";
 import CrossIcon from "../../utils/img/cross_icon.png";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setUser } from "../../redux/authentificationUser/authentificationUser";
+import { selectAuthUser } from "../../redux/authentificationUser/authentificationUser";
 
 export const SignIn = () => {
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate(); 
+    const autUser = useAppSelector(selectAuthUser);
     const [isCorrectPasssword, setIsCorrectPassword] = useState<boolean>(true);
     const redirectToHome = () => {
-        navigate('/books');
+        navigate('/');
     } 
     const toggleNavToResetPassword = () => {
-        navigate('/signin/resetPassw');
+        navigate('/resetPassword');
     }
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<SignInForm>({
         reValidateMode:'onChange',
@@ -33,6 +36,7 @@ export const SignIn = () => {
             if(isThisPassword){
                 setIsCorrectPassword(true);
                 saveAutentificationUserInLS(data.name);
+                dispatch(setUser(data.name))
                 redirectToHome();
             }
         }
@@ -40,6 +44,7 @@ export const SignIn = () => {
             setIsCorrectPassword(false);
         }
     }
+    console.log(autUser);
     return(
         <div className={styles.sign_in_container}>
             {!isCorrectPasssword 
@@ -62,6 +67,7 @@ export const SignIn = () => {
                         errors={errors} 
                         disabled={false}                   
                         register={register}
+                        myMod={'forforms'}
                         />
                     </div>
                     <div id={styles.input_item}>
@@ -74,6 +80,7 @@ export const SignIn = () => {
                             disabled={false} 
                             errors={errors} 
                             register={register}
+                            myMod={'forforms'}
                         /> 
                     </div>
                     <div className={styles.forgot_passw} onClick={() => toggleNavToResetPassword()}>

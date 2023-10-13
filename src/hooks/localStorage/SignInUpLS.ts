@@ -136,10 +136,16 @@ export const getAuthEmailFromLS = () => {
 
 export const isAutentificationUserInLS = () => {
     const dataFromLS = localStorage.getItem("AutentificationUser");
-    if (dataFromLS ) {
-        return true;
+    return dataFromLS !== null;
+}
+export const removeAuthentificationUserFromLS = () => {
+    localStorage.setItem('AutentificationUser', JSON.stringify(null));
+}
+export const getAuthentificationUserFromLS = () => {
+    const dataFromLS = localStorage.getItem("AutentificationUser");
+    if(dataFromLS !== null) {
+        return JSON.parse(dataFromLS);
     }
-    return false;
 }
 
 

@@ -37,21 +37,68 @@
 
 }
 #bookcard_title{
+    height: 100px;
     color: var(--primary-black);
+    display: flex;
+    align-items: center;
 }
 p{
     margin: 0;
 }
 .author_data{
     margin-top: 8px;
-    order: 2; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+
 }
 .bookcard_footer{
     margin-top: 40px;
-    order: 3;
+
     @include flex-sp-between;
     align-items: baseline;
 }
-.bookcard_title{
-    order: 1;
+@media (max-width: 1470px){
+    .author_data{
+        height: 70px;
+    }
+    #bookcard_title{
+        height: 130px;
+    }
 }
+@media (max-width: 960px){
+    .author_data{
+        height: 90px;
+    }
+    #bookcard_title{
+        height: 150px;
+    }
+    #grade_img{
+        width: 90px;
+    }
+}
+@media (max-width: 900px){
+    .author_data{
+        height: 110px;
+    }
+    #bookcard_title{
+        height: 160px;
+    }
+}
+@media (max-width: 768px){
+    .author_data{
+        height: 50px;
+    }
+    #bookcard_title{
+        height: 140px;
+    }
+}
+@media (max-width: 550px){
+    .author_data{
+        height: 60px;
+    }
+    #bookcard_title{
+        height: 100px;
+    }
+}
+

@@ -28,7 +28,7 @@ export const BookCard = ({ book, onClick } : IBookCard) => {
                 <div className={styles.bookcard_footer}>
                     <h3>{book.price}</h3>
                     <div>
-                        <img src={Grade}/>
+                        <img id={styles.grade_img} src={Grade}/>
                     </div>
                 </div>
             </div>                      

@@ -20,6 +20,8 @@ import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
 import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { addBookToCartStore } from "../../redux/cart/booksincart";
 import { selectBooksInCartStore } from "../../redux/cart/booksincart";
+import ActiveStar from "../../utils/img/active_star.png";
+import NotActiveStar from "../../utils/img/not_active_star.png";
  
 export const SinglePage = () => {
     const id = useParams();
@@ -45,8 +47,8 @@ export const SinglePage = () => {
     const toggleEditState = () => {
         setIsMenuActive(!isMenuActive);
     }
-    const toggleNavigateToHome = () => {
-        navigate('/books');
+    const toggleNavigateToStartPage = () => {
+        navigate('/');
     }
     const toggleEditFavBookState = () => {
         setIsFavouriteBook(!isFavouriteBook);
@@ -92,12 +94,37 @@ export const SinglePage = () => {
     }, [isFavouriteBook]);     
 
     console.log(favBooks);
-    console.log(booksInCart);    
+    console.log(booksInCart); 
+    
+    const generateGradeContainer = (bookRating: string) => {
+        const maxRating:number = 5;
+        const activeStars:number = Number(bookRating);
+        const notActiveStars: number = maxRating - activeStars;
+        const stars = [];
+        const notActiveArr = [];
+  
+        for (let i = 0; i < activeStars; i++) {
+            stars.push(<img key={i} src={ActiveStar} alt="Active Star" />);
+        }
+
+        for (let i = 0; i < notActiveStars; i++) {
+            stars.push(<img key={i + activeStars} src={NotActiveStar} alt="Inactive Star" />);
+        }
+        for (let i = 0; i < 5; i++) {
+            notActiveArr.push(<img key={i} src={NotActiveStar} alt="Inactive Star" />);
+        }
+
+        return (
+            <div className={styles.rating_container}>
+                {activeStars !== 0 ? stars : notActiveArr}
+            </div>
+        );
+    }
 
     return(
         <div>
             <div className={styles.content_container}>
-                <div className={styles.img_container} onClick={toggleNavigateToHome}>
+                <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
                     <img src={ArrowIcon}/>
                 </div>
                 <div className={styles.single_title}>
@@ -113,7 +140,7 @@ export const SinglePage = () => {
                     <div className={styles.book_information}>
                         <div className={styles.grade}>
                             <h2>{book.price}</h2>
-                            <div><img src={Grade}/></div>
+                            <div>{generateGradeContainer(book.rating)}</div>
                         </div>
                         <ul className={styles.main_menu}>
                             <li>

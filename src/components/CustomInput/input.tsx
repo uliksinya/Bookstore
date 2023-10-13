@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./input.module.scss";
 import type {InputType}  from "../../api/types";
 
+let inputClass;
 export const CustomInput= ({
   inpName,
   inpMode,
@@ -13,14 +14,14 @@ export const CustomInput= ({
   validationRules,
   errors,
   defValue,
-} : React.InputHTMLAttributes<HTMLInputElement> & InputType ) => {
-  
+} : React.InputHTMLAttributes<HTMLInputElement> & InputType ) => {   
+
   return (
         <div>
           <div className={styles.input_container}>
             <label className={styles.inputLabel}>{labelValue}</label>
             <input
-              className={`${value ? styles.active_input : styles.default_input}`}              
+              className={`${value || defValue ? styles.active_input : styles.default_input}`}           
               defaultValue={defValue}
               value={value ? value : defValue}
               placeholder={placeholder}             
@@ -33,3 +34,4 @@ export const CustomInput= ({
         </div> 
   );
 }
+    

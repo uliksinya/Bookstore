@@ -13,32 +13,47 @@ import { CartPage } from "./pages/CartPage/CartPage";
 import { ResetPassword } from "./pages/ResetPasswordPage/ResetPasswordPage";
 import { NewPasswordPage } from "./pages/NewPasswordPage/NewPasswordPage";
 import { AccountLayout } from "./components/AccountLayout/accountlayout";
+import { Navigate } from "react-router-dom";
+import {useState} from 'react';
+import { useAppSelector } from "./redux/hooks";
+import { selectSearchInputValue } from "./redux/books/books";
 
 function App() { 
+  //const value = useAppSelector(selectSearchInputValue);
+
+  // const handleSearchSubmit = () => {
+  //   if (value) {
+  //     return <Navigate to="/books" />;
+  //   }
+  //   return false; 
+  // };
+
   return (
     <Provider store={store}>
       <div className={styles.main_container}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path="/books" element={<BooksWrapper/>}>
-                  <Route index element={<StartPage/>} />
+            <Route
+              path="/"
+              element={<Layout />}
+              //handleSearchSubmit={handleSearchSubmit} 
+            >
+                <Route index element={<StartPage/>} />
+                <Route path="/books">                 
                   <Route path=":bookid" element={<SinglePage/>} />
-                </Route>
-                
-                <Route path="/account" element={<AccountLayout/>}>
-                  <Route index element={<AccountPage/>} />
+                  <Route path="favorites" element={<FavoritesPage/>}/>
+                  <Route path="cart" element={<CartPage/>}/>
+                  <Route path="account" element={<AccountPage/>}/>
                 </Route>
 
                 <Route path="/signin" element={<AccountLayout/>}>
-                  <Route index element={<SignInUpPage/>} />
-                  <Route path="resetPassw" element={<ResetPassword/>}>
-                    <Route path="newPassw" element={<NewPasswordPage/>} />
-                  </Route>
+                  <Route index element={<SignInUpPage/>} />                 
                 </Route>
 
-                <Route path="/favorites" element={<FavoritesPage/>}></Route>
-                <Route path="/cart" element={<CartPage/>}></Route>
+                <Route path="/resetPassword" element={<AccountLayout/>}>
+                  <Route index element={<ResetPassword/>} /> 
+                  <Route path="newPassword" element={<NewPasswordPage/>}/>                
+                </Route>             
                 
               </Route>          
             </Routes>

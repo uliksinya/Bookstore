@@ -8,7 +8,7 @@ export function emailValidator(email: string): string | true {
     }
 
     if (!emailRegex.test(email)) {
-      return 'Введите действительный email-адрес';
+      return 'Введите верный email-адрес';
     } 
     return true; 
     
@@ -53,7 +53,7 @@ export function usernameValidator(username: string) : string | true {
 export function isSuchUsernameInLS(name: string): string | true {
 
     if(!isThisUserInLS(name)){
-      return 'Не верное емя пользователя';
+      return 'Не верное имя пользователя';
     }
 
     return true; 

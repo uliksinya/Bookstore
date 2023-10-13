@@ -16,7 +16,7 @@ export const ResetPassword = () => {
     const onSubmitReset: SubmitHandler<ResetPasswordForm> = data => {
         setValue('name', '');
         saveResetUser(data.name);
-        navigate('/signin/resetPassw/newPassw');
+        navigate('/resetPassword/newPassword');
     }
     return(            
        <div className={styles.reset_passw_cont}>

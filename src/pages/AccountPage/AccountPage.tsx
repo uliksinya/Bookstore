@@ -43,10 +43,10 @@ export const AccountPage = () => {
         updateAutentificationUserInLS(data.name, data.email, data.newPassword);   
         toggleNavigateToSignIn();
     }
-    const toggleNavigateToHome = () => {
+    const toggleNavigateToStartPage = () => {
         clearFields();
         if (navigate && navigate !== undefined) {
-            navigate('/books');
+            navigate('/');
         } else {
             console.error('Navigate function is undefined or not set.');
         }
@@ -57,7 +57,7 @@ export const AccountPage = () => {
     }
     return(
     <div className={styles.account_container}>
-        <div className={styles.img_container} onClick={toggleNavigateToHome}>
+        <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
             <img src={ArrowIcon}/>
         </div>
         <h1 className={styles.title_text}>Account</h1>
@@ -166,7 +166,7 @@ export const AccountPage = () => {
                                 <Button disabled={false} content={'Save changes'} btnStyle={'dark'} onClick={handleSubmit(onSubmitRegistration)}/>
                             </div>
                             <div className={styles.cancel_btn}>
-                                <Button disabled={false} content={'Cancel'} btnStyle={'light'} onClick={() => toggleNavigateToHome()}/>
+                                <Button disabled={false} content={'Cancel'} btnStyle={'light'} onClick={() => toggleNavigateToStartPage()}/>
                             </div>
                         </div>
                 </div>

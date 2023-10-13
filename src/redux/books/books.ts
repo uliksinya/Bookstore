@@ -85,9 +85,6 @@ export const bookSlice = createSlice({
         setTotalReleasedBooks: (state, action: PayloadAction<string>) => {
           state.totalReleasedBooks = action.payload;
         },
-        // setTotalSearchedBooks: (state, action: PayloadAction<string>) => {
-        //   state.totalSearchedBooks = action.payload;
-        // },
     },
     extraReducers: (builder) => {
       builder

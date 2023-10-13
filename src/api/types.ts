@@ -1,11 +1,10 @@
 import { BookState } from "../redux/books/books";
 import { UseFormRegister, FieldValues, UseFormRegisterReturn, InternalFieldName, FieldErrors} from "react-hook-form";
-import { useAppDispatch } from "../redux/hooks";
-import { useNavigate } from "react-router-dom";
 
 export type Arrows = "Prev" | "Next";
 export type InputModeType = 'text' | 'email' | 'password' ;
 export type inpNameSignUpType = 'name' | 'email' | 'password' | 'confirmPassword';
+export type myMod = 'search' | 'subscribe' | 'forforms';
 export type SignUpForm = {
     name: string;
     email: string;
@@ -15,6 +14,9 @@ export type SignUpForm = {
 export type SignInForm = {
     name: string;
     password: string;
+}
+export type SubscribeEmailForm = {
+    email: string;
 }
 export type ResetPasswordForm = {
     name: string;

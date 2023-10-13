@@ -4,7 +4,7 @@
 }
 .default_input {
   width: calc(100% - 20px);
-  height: 40px;
+  height: 56px;
   border: 1px solid var(--gray);
   padding-left: 20px;
   font-size: 15px;
@@ -30,7 +30,7 @@
 }
 .active_input{
   width: calc(100% - 20px);
-  height: 40px;
+  height: 56px;
   border: 1px solid var(--gray);
   padding-left: 20px;
   font-size: 15px;
@@ -58,7 +58,6 @@
   color: var(--red);
 }
 .input_container{
-  // height: 40px;
   position: relative;
 }
 .searchIcon_container{
@@ -85,4 +84,10 @@ label{
   letter-spacing: 0em;
   text-align: left;
   font-style: italic;
+}
+.mod_subscribe{
+  height: 56px;
+}
+.mod_forms{
+  height: 56px;
 }

@@ -29,6 +29,10 @@
     margin-top: 32px;
     box-sizing: border-box;
 }
+.input_item{
+    width: 100%;
+    height: 56px;
+}
 .subscribe_input{
     width: calc(845px * 100% / 992px);
     height: 100%;
@@ -51,6 +55,11 @@
     text-transform: uppercase;
     @include flex-center;
 }
+@media (max-width: 960px){
+    #button_text{
+        font-size: 13px;
+    }
+}
 @media (max-width: 768px){
     .subscribe_input{
         width: calc(441px * 100% / 608px)
@@ -62,6 +71,32 @@
         width: 77.778%;
         height: 116px;
     }
+    .input_item{
+        width: 441px;
+    }
+    #button_text{
+        font-size: 18px;
+    }
+}
+@media (max-width: 640px){
+    .input_container{
+        margin-top: 60px;
+    }
+}
+@media (max-width: 500px){
+    .subscribe_container{
+        width: 100%;
+        height: 350px;       
+    }
+    .input_container{
+        margin-top: 120px;
+    }
+    #title{
+        font-size: 30px;    
+    }
+    #button_text{
+        font-size: 14px;
+    }
 }
 @media (max-width: 320px){
     .subscribe_content_container{
@@ -69,7 +104,7 @@
         padding-top: calc(24px * 100% / 272px);
     }
     .subscribe_container{
-        height: 360px;
+        height: 400px;
     }
     .text_container{
         height: 152px;
@@ -79,25 +114,23 @@
         font-weight: 700;
         line-height: 40px;
     }
-    // #subscr_text{
-    //     height: 72px;
-    // }
     .title_container{
         height: 80px;
-    }
-    .input_container{
-        margin-top: 24px;
     }
     .input_container{
         @include flex-column;
         width: calc(224px * 100% / 248px);
         height: 136px;
+        margin-top: 60px;
     }
     .subscribe_input{
-        width: 100%;
+        width: 260px;
     }
     .subscribe_button{
         margin-top: 24px;
+        width: 100%;
+    }
+    .input_item{
         width: 100%;
     }
 }

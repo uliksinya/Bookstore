@@ -13,11 +13,12 @@ import { useSearchParams } from "react-router-dom";
 import throttle from 'lodash/throttle';
 import { fetchBooks } from "../../redux/books/books";
 import { fetchFoundedBooks } from "../../redux/books/books";
+import { selectAuthUser } from "../../redux/authentificationUser/authentificationUser";
 
 export const StartPage = () => {   
     const [activeNum, setActiveNum] = useState<number>(1);
     const [activeArrow, setActiveArrow] = useState<Arrows>("Next");
-    
+    const autUser = useAppSelector(selectAuthUser);
     const releasedBooks = useAppSelector(selectReleasedBooks);    
     const totalReleasedBooks = useAppSelector(selectTotalReleasedBooks);
     const searchedBooks = useAppSelector(selectFoundedBooks);
@@ -48,7 +49,7 @@ export const StartPage = () => {
     useEffect(() => {    
         throttleFetch(searchValue, activeNum.toString());
     }, [searchValue, activeNum]);
-
+    console.log(autUser);
     return (
         <div>
             {
@@ -58,15 +59,7 @@ export const StartPage = () => {
                 <div className={styles.books_container}>
                     <h1 className={styles.title_text}>New Releases Books</h1>
                     <Books booksArr={releasedBooks}/>
-                </div>     
-                {/* <div className={styles.pagination_comp}>
-                    <Pagination 
-                    activeNum={activeNum} 
-                    setActiveNum={setActiveNum} 
-                    activeArrow={activeArrow} 
-                    setActiveArrow={setActiveArrow}
-                    totalReleasedBooks={totalReleasedBooks}/>
-                </div>   */}
+                </div>    
             </div>             
             : 
             <div>

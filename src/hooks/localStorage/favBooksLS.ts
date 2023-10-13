@@ -1,5 +1,5 @@
-import { reverse } from "lodash";
 import {favBookType} from "../../api/types";
+
 export const isThisBookInFavLS = (isbn: string): boolean => {
     const favBooksFromLS = localStorage.getItem('favBooks');
     if (favBooksFromLS) {

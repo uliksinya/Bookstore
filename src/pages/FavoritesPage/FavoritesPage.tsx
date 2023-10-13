@@ -4,12 +4,16 @@ import ArrowIcon from "../../utils/img/arrow_icon.png";
 import Grade from '../../utils/img/grade.png';
 import { getBooksFromLS, removeFavBookFromLS } from "../../hooks/localStorage/favBooksLS";
 import { favBookType } from "../../api/types";
-import HeartIcon from "../../utils/img/heart_icon.png";
+import HeartIcon from "../../utils/img/heart_2.png";
 import { useState, useEffect } from "react";
 import { removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
 import { addFavouriteBook } from "../../redux/favouritesBooks/favBooks";
+import { selectReleasedBooks } from "../../redux/books/books";
+import { BookCard } from "../../components/Books/BookCard/Bookcard";
+import { BookState } from "../../redux/books/books";
+import DarkLike from "../../utils/img/dark_like.png";
 
 export const FavoritesPage = () => {    
     const navigate = useNavigate();
@@ -17,14 +21,14 @@ export const FavoritesPage = () => {
     const [favBooks, setFavBooks] = useState(getBooksFromLS());
     const favBooksFromStore = useAppSelector(selectFavouriteBooks);
 
-    useEffect(() => {        
-        favBooks.forEach((book: favBookType) => {
-            dispatch(addFavouriteBook(book));
-        }); 
-    }, []);
+    // useEffect(() => {        
+    //     favBooks.forEach((book: favBookType) => {
+    //         dispatch(addFavouriteBook(book));
+    //     }); 
+    // }, []);
     
-    const toggleNavigateToHome = () => {
-        navigate('/books');
+    const toggleNavigateToStartPage = () => {
+        navigate('/');
     }
     const toggleRemoveFromFavorites = (isbn: string) => {
         removeFavBookFromLS(isbn);
@@ -37,10 +41,16 @@ export const FavoritesPage = () => {
     }, [setFavBooks]);
      
      console.log(favBooksFromStore);
-
+     const releasedBooks = useAppSelector(selectReleasedBooks);
+     const redirectToPostPage = (id: number) => {
+        navigate(`/books/${id}`);
+    };
+    console.log(releasedBooks);
+    const newMas = releasedBooks.slice(0, 3);
+    console.log(newMas);
     return(
         <div className={styles.favorites_container}>
-            <div className={styles.img_container} onClick={toggleNavigateToHome}>
+            <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
                 <img src={ArrowIcon}/>
             </div>
             <div className={styles.single_title}>
@@ -51,7 +61,8 @@ export const FavoritesPage = () => {
                     <div key={book.isbn13} className={styles.fav_books_line}>
                         <div className={styles.book_card}>
                             <div className={styles.background}>
-                                <img src={book.image} className={styles.book_img}/>                       
+                                <img src={book.image} className={styles.book_img}/>
+                                <img src={DarkLike} id={styles.dark_like_img} onClick={() => toggleRemoveFromFavorites(book.isbn13)}/>                     
                             </div>  
                             <div className={styles.text_container}>
                                 <h3 id={styles.bookcard_title}>
@@ -75,6 +86,18 @@ export const FavoritesPage = () => {
                     </div>
                 ))}
             </div>
+            <div className={styles.popular_books}>
+                    <div className={styles.popular_title}>
+                        <h1>Popular Books</h1>
+                    </div>
+                    <div className={styles.popular_books_container}>
+                        {newMas.length !== 0 ? newMas.map((book: BookState) => (
+                            <div key={book.isbn13} className={styles.book_card}>
+                                <BookCard book={book} onClick={() => redirectToPostPage(Number(book.isbn13))}/>                   
+                            </div>
+                        )): null}
+                    </div>
+                </div>
         </div>   
     )
 }
