@@ -34,45 +34,48 @@ export const Header = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate(); 
     const authUser = useAppSelector(selectAuthUser);
+    const inputValue = useAppSelector(selectSearchInputValue);
+    const favBooksFromStore = useAppSelector(selectFavouriteBooks);
+    const booksInCart = useAppSelector(selectBooksInCartStore); 
 
     const favBooksFromLS : favBookType[] = getBooksFromLS();
     const booksInCartFromLS: favBookType[] = getBooksFromCartInLS();
+
+    const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
 
     useEffect(() => {        
         favBooksFromLS.forEach((book: favBookType) => {
             dispatch(addFavouriteBook(book));
         }); 
-    }, []);
 
-    useEffect(() => {        
         dispatch(setUser(getAuthentificationUserFromLS()));
-    }, []);
-    useEffect(() => { 
+
         booksInCartFromLS.forEach(book => {
             dispatch(addBookToCartStore(book));
         });
-    }, []);
-
-    const inputValue = useAppSelector(selectSearchInputValue);    
-    const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
-
-    const favBooksFromStore = useAppSelector(selectFavouriteBooks);
-    const booksInCart = useAppSelector(selectBooksInCartStore); 
+        
+    }, []);     
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         dispatch(setValue(value));  
     } 
+
     const throttlingSearchInputChange = useMemo(() => {
         return throttle(handleSearchInputChange, 500);       
     }, [handleSearchInputChange]);
 
-    const toggleNavigateToStartPage = () => {
-        navigate('/');
-    }
     const toogleMenuState = () => {
         setIsActiveMenu(!isActiveMenu);
     }
+    const toggleLogOut = () => {
+        removeAuthentificationUserFromLS();
+        dispatch(clearUser());
+    }
+
+    const toggleNavigateToStartPage = () => {
+        navigate('/');
+    }    
     const toggleNavigateToFavorites = () => {
         navigate('/books/favorites');
     }
@@ -85,12 +88,7 @@ export const Header = () => {
     const toggleNavigateToSignIn = () => {
         navigate('/signin');
     }
-    const toggleLogOut = () => {
-        removeAuthentificationUserFromLS();
-        dispatch(clearUser());
-    }
-    console.log(favBooksFromStore);
-    console.log(authUser);
+
     return (
         <div>
             <div className={styles.header}>
@@ -135,39 +133,38 @@ export const Header = () => {
                         <div className={styles.cross_icon} onClick={toogleMenuState}>
                             <img src={CrossPopUp}/>
                         </div>
-                        <div className={styles.line}></div>
-                        <div className={styles.pop_up_menu_input}>
-                        <div className={styles.pop_up_input_container}>
-                            <input onChange={throttlingSearchInputChange} value={inputValue} placeholder="Search..." type='text' disabled={false}/>
-                            <img src={SearchIcon} className={styles.search_icon}/>
-                        </div> 
-                        
-                        {
-                        authUser.user !== null 
-                        ?
-                        <div className={styles.menu_container}>
-                            <div id={styles.fav_item} onClick={toggleNavigateToFavorites}>
-                                <h1>Favorites</h1>
-                            </div>
-                            <div id={styles.cart_item} onClick={toggleNavigateToCart}>
-                                <h1>Cart</h1>
-                            </div>
-                            <div className={styles.btn_log_out}>
-                                <Button disabled={false} content={'Log out'} btnStyle={'dark'} onClick={toggleLogOut}/>
+                        <div className={styles.menu_content}>
+                            <div className={styles.line}></div>
+                            <div className={styles.pop_up_menu_input}>
+                            <div className={styles.pop_up_input_container}>
+                                <input onChange={throttlingSearchInputChange} value={inputValue} placeholder="Search..." type='text' disabled={false}/>
+                                <img src={SearchIcon} className={styles.search_icon}/>
+                            </div>                             
+                            {
+                                authUser.user !== null 
+                                ?
+                                <div className={styles.menu_container}>
+                                    <div id={styles.fav_item} onClick={toggleNavigateToFavorites}>
+                                        <h1>Favorites</h1>
+                                    </div>
+                                    <div id={styles.cart_item} onClick={toggleNavigateToCart}>
+                                        <h1>Cart</h1>
+                                    </div>
+                                    <div className={styles.btn_log_out}>
+                                        <Button disabled={false} content={'Log out'} btnStyle={'dark'} onClick={toggleLogOut}/>
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                    <div className={styles.btn_sign_in}>
+                                        <Button disabled={false} content={'Sign In'} btnStyle={'dark'} onClick={toggleNavigateToSignIn}/>                            
+                                    </div>
+                                </div>
+                            }
                             </div>
                         </div>
-                        :
-                        <div>
-                            <div className={styles.btn_sign_in}>
-                                <Button disabled={false} content={'Sign In'} btnStyle={'dark'} onClick={toggleNavigateToSignIn}/>                            
-                            </div>
-                        </div>
-                        }
-                        </div>
-                    </div>
-                    
+                    </div>                    
                     <div className={styles.overlay}></div>
-
                 </div>
             }
       </div>

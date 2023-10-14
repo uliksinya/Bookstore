@@ -13,53 +13,38 @@ import { removeBooksFromCartStore } from "../../redux/cart/booksincart";
 import { useAppDispatch } from "../../redux/hooks";
 import { useAppSelector } from "../../redux/hooks";
 import { selectBooksInCartStore } from "../../redux/cart/booksincart";
-import { addBookToCartStore } from "../../redux/cart/booksincart";
+import Cart from '../../utils/img/cart.gif';
+import { getSumTotal, getVatSum } from "../../hooks/utilsHooks/utilsHooks";
 
+const getCartFooterArray = (books: favBookType[]) => {
+    const sum : number = getSumTotal(books);
+    const vat : number = getVatSum(sum);
+    const totalSum : number = sum + vat;
+    return [
+        {
+            title: 'Sum Total',
+            price: '$ ' + sum.toFixed(2),
+        },
+        {
+            title: 'VAT',
+            price: '$ ' + vat.toFixed(2),
+        },
+        {
+            title: 'Total',
+            price: '$' + totalSum.toFixed(2),
+        }
+    ]        
+}
 export const CartPage = () => {
     const navigate = useNavigate();   
     const dispatch = useAppDispatch();
     const booksInCartStore = useAppSelector(selectBooksInCartStore);
-
     const [booksInCart, setBooksInCart] = useState<favBookType[]>(getBooksFromCartInLS());
+    const footerInfArray: FooterArr[] = useMemo(() => getCartFooterArray(booksInCart), [booksInCart]);
  
     const toggleNavigateToStartPage = () => {
         navigate('/');
-    }    
-    const getSumTotal = (books: favBookType[]) => {
-        const totalSumPrice = books.reduce((total, book) => total + Number(book.price), 0);
-        return totalSumPrice;
-    }
-    const getVatSum = (sum: number) => {
-        return sum * 0.2;
-    }
-    // useEffect(() => { 
-    //     booksInCart.forEach(book => {
-    //         dispatch(addBookToCartStore(book));
-    //     });
-    // }, []);
-
-    const getCartFooterArray = (books: favBookType[]) => {
-        const sum : number = getSumTotal(books);
-        const vat : number = getVatSum(sum);
-        const totalSum : number = sum + vat;
-        return [
-            {
-                title: 'Sum Total',
-                price: '$ ' + sum.toFixed(2),
-            },
-            {
-                title: 'VAT',
-                price: '$ ' + vat.toFixed(2),
-            },
-            {
-                title: 'Total',
-                price: '$' + totalSum.toFixed(2),
-            }
-        ]
-        
-    }
-    const footerInfArray: FooterArr[] = useMemo(() => getCartFooterArray(booksInCart), [booksInCart]);
-
+    }     
     const updateBookInCart = (isbn: string, newQuantity: number, newPrice:number) => {
         const updatedBooks = booksInCart.map(book => {
           if (book.isbn13 === isbn) {
@@ -74,9 +59,11 @@ export const CartPage = () => {
         removeBookFromCartInLS(isbn)
         dispatch(removeBooksFromCartStore(isbn));
     }
+
     useEffect(() => {   
         setBooksInCart(getBooksFromCartInLS());
     }, [booksInCartStore]);
+
     return(
         <div className={styles.cart_container}>
             <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
@@ -95,9 +82,18 @@ export const CartPage = () => {
                 />
             )).reverse()}
             </div>
-            <div className={styles.cart_footer}>
-                <CartTotalFooter arr={footerInfArray} onClick={() => console.log("Нажали")} />
-            </div>
+            {
+                booksInCart.length !== 0 
+                ? 
+                <div className={styles.cart_footer}>
+                    <CartTotalFooter arr={footerInfArray} onClick={() => console.log("Нажали")} />
+                </div>
+                :
+                <div className={styles.not_active_cart}>
+                <div><h1>Your cart is empty!</h1></div>
+                    <img id={styles.cart_img} src={Cart}/>
+                </div>
+            }            
         </div>
     )
 }

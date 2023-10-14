@@ -4,10 +4,9 @@ import pagination from './pagination/pagination';
 import favBooks from './favouritesBooks/favBooks';
 import booksInCart from './cart/booksincart';
 import authentificationUser from './authentificationUser/authentificationUser';
-import password from "./forPassword/forPassword";
 
 export const store = configureStore({
-  reducer: {book, pagination, favBooks, booksInCart, authentificationUser, password}
+  reducer: {book, pagination, favBooks, booksInCart, authentificationUser}
 })
 
 export type RootState = ReturnType<typeof store.getState>

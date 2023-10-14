@@ -37,3 +37,8 @@
     letter-spacing: 0em;
     color: var( --primary-black);
 }
+@media (max-width: 640px){
+    .cart_footer{
+        width: 100%;
+    }
+}

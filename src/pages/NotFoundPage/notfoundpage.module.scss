@@ -1,0 +1,10 @@
+@import "../../styles/mixins.scss";
+.not_found_page{
+    @include flex-center;
+    flex-direction: column;
+    height: 100vh;
+}
+#eroor_img{
+    width: 150px;
+    height: 140px;
+}

@@ -1,15 +1,13 @@
-.default_like {
-    background-image: url('../../utils/img/favourite_def.png');
+.default_like, .active_like, .default_like:hover{
     width: 56px;
     height: 56px;
+}
+.default_like {
+    background-image: url('../../utils/img/favourite_def.png');   
 }
 .default_like:hover {
-    background-image: url('../../utils/img/favourite_hover.png');
-    width: 56px;
-    height: 56px;
+    background-image: url('../../utils/img/favourite_hover.png');  
 }
 .active_like{
-    background-image: url('../../utils/img/favourite_active.png');
-    width: 56px;
-    height: 56px;
+    background-image: url('../../utils/img/favourite_active.png');    
 }

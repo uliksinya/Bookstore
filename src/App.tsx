@@ -4,7 +4,6 @@ import { Layout } from './components/Layout/Layout';
 import { StartPage } from './pages/StartPage/Startpage';
 import { Provider } from 'react-redux';
 import store from "./redux/store";
-import { BooksWrapper } from "./components/BooksWrapper/BooksWrapper";
 import { SinglePage } from "./pages/SingleBookPage/SinglePage";
 import {SignInUpPage} from './pages/SignInUpPage/SignInUpPage';
 import { AccountPage } from "./pages/AccountPage/AccountPage";
@@ -13,20 +12,9 @@ import { CartPage } from "./pages/CartPage/CartPage";
 import { ResetPassword } from "./pages/ResetPasswordPage/ResetPasswordPage";
 import { NewPasswordPage } from "./pages/NewPasswordPage/NewPasswordPage";
 import { AccountLayout } from "./components/AccountLayout/accountlayout";
-import { Navigate } from "react-router-dom";
-import {useState} from 'react';
-import { useAppSelector } from "./redux/hooks";
-import { selectSearchInputValue } from "./redux/books/books";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 function App() { 
-  //const value = useAppSelector(selectSearchInputValue);
-
-  // const handleSearchSubmit = () => {
-  //   if (value) {
-  //     return <Navigate to="/books" />;
-  //   }
-  //   return false; 
-  // };
 
   return (
     <Provider store={store}>
@@ -36,9 +24,8 @@ function App() {
             <Route
               path="/"
               element={<Layout />}
-              //handleSearchSubmit={handleSearchSubmit} 
             >
-                <Route index element={<StartPage/>} />
+              <Route index element={<StartPage/>} />
                 <Route path="/books">                 
                   <Route path=":bookid" element={<SinglePage/>} />
                   <Route path="favorites" element={<FavoritesPage/>}/>
@@ -53,9 +40,10 @@ function App() {
                 <Route path="/resetPassword" element={<AccountLayout/>}>
                   <Route index element={<ResetPassword/>} /> 
                   <Route path="newPassword" element={<NewPasswordPage/>}/>                
-                </Route>             
-                
-              </Route>          
+                </Route>
+
+              </Route>  
+              <Route path='*' element={<NotFoundPage/>}/>               
             </Routes>
           </BrowserRouter>
       </div>

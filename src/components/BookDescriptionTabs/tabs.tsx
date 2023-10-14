@@ -1,11 +1,10 @@
-import { useState } from "react";
 import styles from "./tabs.module.scss";
+import { BooksDescrType } from "../../api/types";
+import { tabsProps } from "../../api/types";
 
-export const Tabs = () => {  
+export const BookDescriptionTabs = ({activeTab, setActiveTab} : tabsProps) => {  
 
-  const [activeTab, setActiveTab]=useState<string>("Description")
-
-  const toggleTabVisibility = (tabName: string) => {
+  const toggleTabVisibility = (tabName: BooksDescrType) => {
     setActiveTab(tabName);
   };
 

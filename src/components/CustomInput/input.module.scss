@@ -8,8 +8,8 @@
   border: 1px solid var(--gray);
   padding-left: 20px;
   font-size: 15px;
-  color: var(--secondary-gray);
-  background-color: white;  
+  color: var(--primary-black);
+  background-color: var( --white-standart);  
   outline:none;  
 }
 .default_input::placeholder {
@@ -34,8 +34,8 @@
   border: 1px solid var(--gray);
   padding-left: 20px;
   font-size: 15px;
-  color: var(--secondary-gray);
-  background-color: white;  
+  color: var(--primary-black);
+  background-color: var( --white-standart);  
   outline: none;
 }
 .error_input {
@@ -47,7 +47,7 @@
   height: 24px;
 }
 #error_text{
-  font-family: "Helios", sans-serif;
+  font-family: var(--helios-light);
   font-size: 16px;
   font-weight: 400;
   line-height: 32px;

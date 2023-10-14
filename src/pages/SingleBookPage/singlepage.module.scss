@@ -40,10 +40,14 @@
     justify-content: space-between;
     margin-top: 40px;    
 }
+#preview{
+    margin-top: 40px;
+    color: var(--primary-black);
+    text-align: center;
+}
 .rating_container{
     width: 112px;
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     justify-content: space-between;
 }
 .main_menu, .additionally_menu{
@@ -55,6 +59,9 @@
     @include flex-row;
     justify-content: space-between;
 }
+.additionally_menu{
+    margin-bottom: 20px;
+}
 #descr{
     color: var(--primary-black);
     text-align: right;
@@ -64,16 +71,16 @@
     cursor: pointer;
     padding: 0;
 }
-#menu::after{
-    content: "";
-    background-image: url("../../utils/img/arr_down.jpg");
-    display: block; 
-    width: 16px; 
-    height: 16px; 
-    position: absolute;
-    top: 6px;
-    left: 104px;
-    color: var(--primary-black);
+.more_detalise{
+    @include flex-row;
+    align-items: center;
+}
+.more_detalise img{
+    width: 20px;
+    height: 20px;
+}
+#arr{
+    margin-left: 10px;
 }
 .book_description{
     margin-top: 48px;
@@ -93,4 +100,46 @@
     @include flex-row;
     justify-content: space-between;
     margin-bottom: 72px;
+}
+@media (max-width: 768px){
+    .book_desription{
+        flex-direction: column;
+    }
+    .img_background{
+        width: 100%;
+    }
+    .book_information{
+        width: 100%;
+        height: auto;
+    }
+    .single_title h1{
+        font-size: 56px;
+    }
+    .single_title{
+        margin-top: 32px;
+        margin-bottom: 48px;
+        height: auto;
+    }
+    .tabs{
+        width: 518px;
+    }
+}
+@media (max-width: 320px){
+    .img_background{
+        height: 272px;
+    }
+    .main_menu li{
+        flex-direction: column;
+    }
+    #descr{
+        text-align: left;
+        margin-top: 5px;
+    }
+    .additionally_menu li{
+        flex-direction: column;
+    }
+    .single_title h1{       
+        font-size: 32px;       
+        line-height: 44px;     
+    }
 }

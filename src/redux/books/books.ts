@@ -52,17 +52,14 @@ const initialState: BookSliceState = {
 
 export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
   const response = await axios.get("https://api.itbook.store/1.0/new");
-  console.log(response);
   return {
     books: response.data.books,
     total: response.data.total
   };
 }); 
 
-export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async({foundedParam, pageParam}: FetchFoundedState) => {
-  console.log(foundedParam, pageParam);  
+export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", async({foundedParam, pageParam}: FetchFoundedState) => { 
   const response = await axios.get(`https://api.itbook.store/1.0/search/${foundedParam}/${pageParam}`);
-
   return {
     booksSearch: response.data.books,
     totalSearch: response.data.total
@@ -71,7 +68,6 @@ export const fetchFoundedBooks = createAsyncThunk("book/fetchFoundedBooks", asyn
 
 export const fetchSelectedBook = createAsyncThunk("book/fetchSelectedBook", async(bookID: string) => {
   const response = await axios.get(`https://api.itbook.store/1.0/books/${bookID || ""}`);
-  console.log(response.data);
   return response.data;
 })
 

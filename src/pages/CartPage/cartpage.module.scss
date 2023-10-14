@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;   
+    margin-top: 66px;
 }
 #grade{
     margin-left: 40%;
@@ -56,7 +57,7 @@
 }
 #cross_img{
     position: absolute;
-    top: 68px;
+    top: 70px;
     right: 0;
     cursor: pointer;
 }
@@ -91,6 +92,17 @@
     display: flex;
     justify-content: flex-end;
 }
+.not_active_cart{
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#cart_img{
+    width: 100px;
+    height: 100px;
+}
 
 ::-webkit-scrollbar {
     width: 3px; /* ширина скроллбара */
@@ -106,4 +118,22 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555; /* цвет ползунка при наведении */
+}
+.not_active_cart h1{
+    text-align: center;
+}
+@media (max-width: 768px){
+    .fav_books{
+        max-height: 100%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    .cart_container{
+        margin-top: 56px;
+    }
+}
+@media (max-width: 330px){
+    .not_active_cart h1{
+        font-size: 28px;
+    }
 }

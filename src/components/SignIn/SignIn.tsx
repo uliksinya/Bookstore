@@ -7,25 +7,26 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
 import { useState } from "react";
 import CrossIcon from "../../utils/img/cross_icon.png";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/authentificationUser/authentificationUser";
-import { selectAuthUser } from "../../redux/authentificationUser/authentificationUser";
 
 export const SignIn = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate(); 
-    const autUser = useAppSelector(selectAuthUser);
+    const navigate = useNavigate();
     const [isCorrectPasssword, setIsCorrectPassword] = useState<boolean>(true);
+
     const redirectToHome = () => {
         navigate('/');
     } 
     const toggleNavToResetPassword = () => {
         navigate('/resetPassword');
     }
+
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<SignInForm>({
         reValidateMode:'onChange',
         mode: 'onBlur',
     }); 
+
     const onSubmitSignIn: SubmitHandler<SignInForm> = data => {
         setValue('name', '');
         setValue('password', '');
@@ -44,17 +45,19 @@ export const SignIn = () => {
             setIsCorrectPassword(false);
         }
     }
-    console.log(autUser);
+ 
     return(
         <div className={styles.sign_in_container}>
-            {!isCorrectPasssword 
-            ? 
-            <div className={styles.not_success_container}>
-                <div className={styles.image}><img id={styles.done} src={CrossIcon}/></div>
-                <span id={styles.not_success_text}>Неверное имя пользователя или пароль!</span>
-            </div> 
-            :
-            ""}
+            {
+                !isCorrectPasssword 
+                ? 
+                <div className={styles.not_success_container}>
+                    <div className={styles.image}><img id={styles.done} src={CrossIcon}/></div>
+                    <span id={styles.not_success_text}>Неверное имя пользователя или пароль!</span>
+                </div> 
+                :
+                ""
+            }
             <form className={styles.signin_form}>
                 <div>
                     <div id={styles.input_item}>

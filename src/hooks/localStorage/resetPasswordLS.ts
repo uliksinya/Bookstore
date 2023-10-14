@@ -3,12 +3,10 @@ export const saveResetUser = (username: string) => {
 }
 export const saveNewPasswordByResetUserLS = (newPassword: string) => {
     const userDataFromLS = localStorage.getItem("Users");
-    const resetUsernameDataFromLS = localStorage.getItem('resetUser')
-
+    const resetUsernameDataFromLS = localStorage.getItem('resetUser');
     if (userDataFromLS && resetUsernameDataFromLS) {
         const usersArr = JSON.parse(userDataFromLS);
         const resetUser = JSON.parse(resetUsernameDataFromLS);
-
         if (usersArr.length === 1) {
             const userObject = usersArr[0];
             if (resetUser in userObject) {

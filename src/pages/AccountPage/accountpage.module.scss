@@ -36,3 +36,37 @@
 .save_btn, .cancel_btn{
     width: 255px;
 }
+@media (max-width: 768px){
+    .profile_container{
+        flex-direction: column;
+    }
+    #input_item{
+        width: 100%;
+    }
+    .new_password{
+        flex-direction: column;
+    }
+    .email_inp{
+        margin-top: 16px;
+    }
+    .confirm_passw_inp{
+        margin-top: 16px;
+    }
+    .buttont_container{
+        width: 100%;
+    }
+    .save_btn, .cancel_btn{
+        width: 328px;
+    }
+}
+@media (max-width: 400px){
+    .buttont_container{
+        flex-direction: column;
+    }
+    .save_btn, .cancel_btn{
+        width: 100%;
+    }
+    .cancel_btn{
+        margin-top: 24px;
+    }
+}

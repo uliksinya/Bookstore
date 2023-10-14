@@ -27,3 +27,13 @@
   font-family: var(--helios-light);
   cursor: pointer;
 }
+@media (max-width: 768px){
+  .tabs{
+    width: 518px;
+  }
+}
+@media (max-width: 530px){
+  .tabs{
+    width: 100%;
+  }
+}

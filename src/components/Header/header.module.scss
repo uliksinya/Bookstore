@@ -6,7 +6,6 @@
   width: 100%;
   height: 104px;
   @include flex-vertical-center;
-  align-items: center;
   position: relative;
   border-bottom: 1px solid var(--gray);
   box-sizing: border-box;
@@ -25,13 +24,16 @@
   position: relative;
   box-sizing: border-box;
 }
+#cart_img{
+  cursor: pointer;
+}
 input{
   height: 56px;
   border: 1px solid var(--gray);
   font-size: 15px;
   color: var(--secondary-gray);
-  background-color: white;  
-  outline:none; 
+  background-color: var( --white-standart);  
+  outline: none; 
   width: calc(100% - 20px); 
   margin: 0;
   padding: 0; 
@@ -57,8 +59,6 @@ input::placeholder{
   right: 16px
 }
 .header_icons_container{
-
-  // height: 56px;
   @include flex-sp-between;
   position: absolute;
   right: 0px;
@@ -70,20 +70,19 @@ input::placeholder{
 .media_header_icons_container{
   display: none;
 }
-.user_icon{
+.user_icon, .cart_icon{
   cursor: pointer;
 }
-.cart_icon{
-  cursor: pointer;
-}
+
 .pop_up_menu{
-  position: absolute;
+  position: fixed;
   top:0;
   right: 0;
-  width: 386px;
+  width: 368px;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var( --white-standart);
   z-index: 99;
+  margin-bottom: 56px;
 }
 .overlay {
   position: fixed;
@@ -101,39 +100,36 @@ input::placeholder{
   right: 40px;
 }
 .line{
-  position: absolute;
   width: 288px;
   height: 1px;
   background-color: var(--gray);
-  right: 40px;
-  top: 103px
+  margin-top: 103px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 .pop_up_input_container{
-  position: absolute;
-  width: 287px;
-  top: 160px;
-  right: 41px;
+  margin-top: 56px;
+  margin-left: 40px;
+  margin-right: 40px;
+  position: relative;
 }
 .menu_container{
-  position: absolute;
-  top: 264px;
-  right: 40px;
-  width: 288px;
- 
+  margin-top: 48px;
 }
 #fav_item{
   cursor: pointer;
-  display: flex;
-  justify-content: center;
+  @include flex-horizontal-center;
 }
 #cart_item{
   cursor: pointer;
   margin-top: 48px;
-  display: flex;
-  justify-content: center;
+  @include flex-horizontal-center;
 }
 .btn_log_out{
-  margin-top: 500px;
+  position: absolute;
+  bottom: 56px;
+  width: 288px;
+  right: 40px;
   cursor: pointer;
 }
 .btn_sign_in{
@@ -142,11 +138,6 @@ input::placeholder{
   right: 40px;
   bottom: 56px
 }
-
-
-
-
-
 
 @media (max-width: 1470px){
   .logo_tel{
@@ -207,7 +198,24 @@ input::placeholder{
   .logo_tel{
     display: none;
   }
-
+}
+@media (max-width: 368px){
+  .pop_up_menu{
+    width: 100vw;
+  }
+  .pop_up_input_container, .line{
+    margin-left: 25px;
+  }
+  .pop_up_input_container{
+    right: 0;
+  }
+  .btn_log_out, .btn_sign_in{
+    width: 272px;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;    
+  }
 }
 @media (max-width: 320px){
   .pop_up_menu{
@@ -215,12 +223,14 @@ input::placeholder{
     height: 100%;
   }
   .logo_tel{
+    display: block;
     position: absolute;
     top:22px;
     left: 25px;
     font-size: 30px;
   }
   .cart_tel{
+    display: block;
     width: 56px;
     height: 56px;
     position: absolute;
@@ -232,8 +242,7 @@ input::placeholder{
     right: 24px;
   }
   .pop_up_input_container{
-    width: 271px;
-    right: 24px;
+    right: 0;
   }
   .btn_sign_in{
     top: 528px;

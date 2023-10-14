@@ -27,38 +27,28 @@ export const updatePriceInLS = (isbn: string, newPrice: string): boolean => {
 
         const updatedFavBooks = favBooks.map((book: favBookType) => {
             if (book.isbn13 === isbn) {
-
-                book.price = newPrice.toString() ;
-
-                return { ...book, price: newPrice.toString() }; 
+                book.price = newPrice.toString();
+                    return { ...book, price: newPrice.toString() }; 
             }
             return book;
         });
-
         localStorage.setItem('BookCart', JSON.stringify(updatedFavBooks)); 
-
         return true;
     }
     return false;
 }
 export const updateQuantityInLS = (isbn: string, count: number): boolean => {
     const booksInCart = localStorage.getItem('BookCart');
-
     if (booksInCart) {
         const favBooks = JSON.parse(booksInCart);
-
         const updatedFavBooks = favBooks.map((book: favBookType) => {
-            if (book.isbn13 === isbn) {
-            
+            if (book.isbn13 === isbn) {            
                 book.quantity = count ;
-
                 return { ...book, quantity:  count};
             }
             return book;
         });
-
         localStorage.setItem('BookCart', JSON.stringify(updatedFavBooks));
-
         return true;
     }
     return false;

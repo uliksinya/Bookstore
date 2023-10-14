@@ -1,19 +1,15 @@
-import { useState } from "react";
 import styles from "./signinuptabs.module.scss";
 import { authorisationType } from "../../api/types";
+import { SignInUpTabsProps } from "../../api/types";
 
-interface tabsProps{
-    activeTab: authorisationType;    
-    setActiveTab: (str: authorisationType) => void;   
-}  
-export const SignInUpTabs = ({activeTab, setActiveTab} : tabsProps) => {   
+export const SignInUpTabs = ({activeTab, setActiveTab} : SignInUpTabsProps) => {   
 
     const toggleTabVisibility = (tabName: authorisationType) => {
       setActiveTab(tabName);
     };
 
     return(           
-          <div className={styles.sign_in_up_tabs}>
+        <div className={styles.sign_in_up_tabs}>
             <div
                 id={styles.menu_item}    
                 onClick={() => toggleTabVisibility("SIGN IN")}
@@ -29,6 +25,6 @@ export const SignInUpTabs = ({activeTab, setActiveTab} : tabsProps) => {
                 <p id={styles.sign_up_text}>SIGN UP</p>
             </div>            
             <div id={styles.line}></div>
-          </div>
+        </div>
     )
 }

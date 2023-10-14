@@ -1,8 +1,4 @@
-interface registrationProps{
-    username: string;
-    email: string;
-    password: string;
-}
+import { registrationProps } from "../../api/types";
 
 export const registerUser = ({username, email, password} : registrationProps): boolean => {
         const dataFromLS = localStorage.getItem("Users");
@@ -11,7 +7,6 @@ export const registerUser = ({username, email, password} : registrationProps): b
         localStorage.setItem("Users", JSON.stringify(usersArr));
     return true;
 }
-
 export const isThisUserInLS = (username: string): boolean => {
     const dataFromLS = localStorage.getItem("Users");
     if(dataFromLS){
@@ -26,7 +21,6 @@ export const isThisUserInLS = (username: string): boolean => {
     }
     return false;
 }
-
 export const confirmPassword = (username: string, password: string): boolean => {
     const dataFromLS = localStorage.getItem("Users");
     if (dataFromLS) {
@@ -42,7 +36,6 @@ export const confirmPassword = (username: string, password: string): boolean => 
     console.log("проверка на пароль");
     return false;
 }
-
 export const isThisEmailInLS = (email: string) => {
     const dataFromLS = localStorage.getItem("Users");
     if(dataFromLS){
@@ -75,8 +68,7 @@ export const saveAutentificationUserInLS = (username: string) => {
                 }
             }
         }        
-}
-   
+}   
 export const updateAutentificationUserInLS = (newUsername: string, email:string, newPassword:string) => {
     const userFromLS = localStorage.getItem("AutentificationUser");
     const usersArrFromLS = localStorage.getItem("Users"); 
@@ -84,7 +76,6 @@ export const updateAutentificationUserInLS = (newUsername: string, email:string,
     if(userFromLS && usersArrFromLS){   
         const oldUsername =  Object.keys(JSON.parse(userFromLS))[0];   
         const usersArr = usersArrFromLS ? JSON.parse(usersArrFromLS) : [];
-
         for (let userObject of usersArr) {
             for (let key in userObject) {
                 if (key === oldUsername) {
@@ -99,11 +90,9 @@ export const updateAutentificationUserInLS = (newUsername: string, email:string,
                 }
             }
         }
-        localStorage.setItem("Users", JSON.stringify(usersArr));
-        
+        localStorage.setItem("Users", JSON.stringify(usersArr));        
     }        
 }
-
 export const getAuthUsernameFromLS = (): string | null => {
     const dataFromLS = localStorage.getItem("AutentificationUser");
     if (dataFromLS !== null) {
@@ -113,7 +102,6 @@ export const getAuthUsernameFromLS = (): string | null => {
     }
     return null;
 }
-
 export const getAuthPasswordFromLS = () => {
     const dataFromLS = localStorage.getItem("AutentificationUser");
     if (dataFromLS) {
@@ -123,7 +111,6 @@ export const getAuthPasswordFromLS = () => {
     }
     return null;
 }
-
 export const getAuthEmailFromLS = () => {
     const dataFromLS = localStorage.getItem("AutentificationUser");
     if (dataFromLS) {
@@ -133,7 +120,6 @@ export const getAuthEmailFromLS = () => {
     }
     return null;
 }
-
 export const isAutentificationUserInLS = () => {
     const dataFromLS = localStorage.getItem("AutentificationUser");
     return dataFromLS !== null;

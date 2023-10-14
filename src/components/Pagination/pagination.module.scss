@@ -11,7 +11,6 @@
 .next_container{
     display: flex;
     flex-direction: row-reverse;
-    // align-items: center;
 }
 .pagination_container p{
     font-family: var(--helios-bold);
@@ -25,8 +24,7 @@
 .numeration{
     display: flex;
     flex-wrap: wrap;
-    width: calc(175px * 100% / 1120px);
-    // height: 24px;
+    width: calc(175px * 100% / 1120px);;
     height: auto;
 }
 .active_num{

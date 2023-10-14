@@ -3,12 +3,9 @@ import { BookState} from "../../../redux/books/books.ts";
 import { BookCard } from "../BookCard/Bookcard.tsx";
 import styles from "./Books.module.scss"
 import { useNavigate } from "react-router-dom";
+import { BooksProps } from "../../../api/types.ts";
 
-interface BooksProps{
-    booksArr: BookState[];
-}
 export const Books = ({ booksArr} : BooksProps) => {  
-    console.log(booksArr);
     const navigate = useNavigate();    
     const redirectToPostPage = (id: number) => {
         navigate(`/books/${id}`);

@@ -6,34 +6,60 @@ import { useNavigate, useParams } from "react-router-dom";
 import { selectSelectedBook } from "../../redux/books/books";
 import ArrowIcon from "../../utils/img/arrow_icon.png";
 import styles from "./singlepage.module.scss"
-import Grade from "../../utils/img/grade.png";
-import { Tabs } from "../../components/Tabs/tabs";
 import { Button } from "../../components/Button/Button";
 import FacebookIcon from "../../utils/img/facebook_icon.png";
 import TwitterIcon from "../../utils/img/twitter_icon.png";
 import MenuIcon from "../../utils/img/horiz_menu_icon.png";
 import { Subscribe } from "../../components/Subscribe/subscribe";
 import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
-import { selectFavouriteBooks} from "../../redux/favouritesBooks/favBooks";
 import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
 import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
 import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { addBookToCartStore } from "../../redux/cart/booksincart";
-import { selectBooksInCartStore } from "../../redux/cart/booksincart";
 import ActiveStar from "../../utils/img/active_star.png";
 import NotActiveStar from "../../utils/img/not_active_star.png";
- 
+import arrUp from "../../utils/img/arr_up.png";
+import arrDown from '../../utils/img/arr_down.png';
+import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/tabs";
+import { BooksDescrType } from "../../api/types";
+
+const generateGradeContainer = (bookRating: string) => {
+    const maxRating:number = 5;
+    const activeStars:number = Number(bookRating);
+    const notActiveStars: number = maxRating - activeStars;
+    const stars = [];
+    const notActiveArr = [];
+
+    for (let i = 0; i < activeStars; i++) {
+        stars.push(<img key={i} src={ActiveStar} alt="Active Star" />);
+    }
+
+    for (let i = 0; i < notActiveStars; i++) {
+        stars.push(<img key={i + activeStars} src={NotActiveStar} alt="Inactive Star" />);
+    }
+    for (let i = 0; i < 5; i++) {
+        notActiveArr.push(<img key={i} src={NotActiveStar} alt="Inactive Star" />);
+    }
+
+    return (
+        <div className={styles.rating_container}>
+            {activeStars !== 0 ? stars : notActiveArr}
+        </div>
+    );
+}
 export const SinglePage = () => {
     const id = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const booksInCart = useAppSelector(selectBooksInCartStore);
 
     const book = useAppSelector(selectSelectedBook);
+    
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
-    const favBooks = useAppSelector(selectFavouriteBooks);
+    const [activeTab, setActiveTab] = useState<BooksDescrType>('Description');
+   
     const priseWithoutDollar = book.price.replace('$', '');
+
     const favBookObj = {
         isbn13: book.isbn13,
         title: book.title,
@@ -63,13 +89,10 @@ export const SinglePage = () => {
             dispatch(fetchSelectedBook(id.bookid));  
         }
     }, [dispatch]);
-    
-    // console.log(book.isbn13);
 
     useEffect(() => {
         if (book.isbn13) {
             const isbn = book.isbn13;
-
             if (isThisBookInFavLS(isbn)) {
                 setIsFavouriteBook(true);
             } else {
@@ -79,8 +102,7 @@ export const SinglePage = () => {
     }, [book.isbn13]);
     
     useEffect(() => {
-        const isbn = book.isbn13;
-    
+        const isbn = book.isbn13;    
         if (isFavouriteBook) {
             addFavBookToLS(isbn, favBookObj);
             if(book.isbn13 !== ""){
@@ -92,34 +114,6 @@ export const SinglePage = () => {
         }
 
     }, [isFavouriteBook]);     
-
-    console.log(favBooks);
-    console.log(booksInCart); 
-    
-    const generateGradeContainer = (bookRating: string) => {
-        const maxRating:number = 5;
-        const activeStars:number = Number(bookRating);
-        const notActiveStars: number = maxRating - activeStars;
-        const stars = [];
-        const notActiveArr = [];
-  
-        for (let i = 0; i < activeStars; i++) {
-            stars.push(<img key={i} src={ActiveStar} alt="Active Star" />);
-        }
-
-        for (let i = 0; i < notActiveStars; i++) {
-            stars.push(<img key={i + activeStars} src={NotActiveStar} alt="Inactive Star" />);
-        }
-        for (let i = 0; i < 5; i++) {
-            notActiveArr.push(<img key={i} src={NotActiveStar} alt="Inactive Star" />);
-        }
-
-        return (
-            <div className={styles.rating_container}>
-                {activeStars !== 0 ? stars : notActiveArr}
-            </div>
-        );
-    }
 
     return(
         <div>
@@ -162,7 +156,11 @@ export const SinglePage = () => {
                         </ul>
                         {isMenuActive 
                         ? 
-                        <ul className={styles.additionally_menu}><p onClick={toggleEditState}>More detalize</p>
+                        <ul className={styles.additionally_menu}>
+                            <div className={styles.more_detalise} onClick={toggleEditState}>
+                                <p>More detalize</p>
+                                <img src={arrUp} id={styles.arr}/>
+                            </div>
                             <li>
                                 <div><p id={styles.title}>Pages</p></div>
                                 <div><p id={styles.descr}>{book.pages}</p></div>
@@ -177,14 +175,36 @@ export const SinglePage = () => {
                             </li>                       
                         </ul>
                         :
-                        <ul className={styles.menu}><p id={styles.menu} onClick={toggleEditState}>More detalize</p></ul> }    
-                        <Button disabled={false} content={"Add to cart"} btnStyle={"dark"} onClick={() => addBookToLsCart()}/>                
+                        <ul className={styles.menu}>
+                            <div className={styles.more_detalise} onClick={toggleEditState}>
+                                <p>More detalize</p>
+                                <img src={arrDown} id={styles.arr}/>
+                            </div>
+                        </ul> }    
+                        <Button disabled={false} content={"Add to cart"} btnStyle={"dark"} onClick={() => addBookToLsCart()}/> 
+                        <div className={styles.prewiew_container}><p id={styles.preview}>Prewiew book</p></div>               
                     </div>
                 </div>            
             </div>
-            <Tabs/>
+            <BookDescriptionTabs activeTab={activeTab} setActiveTab={setActiveTab}/>
             <div className={styles.book_description}>
-                <span id={styles.single_desc}>{book.desc}</span>
+                {activeTab === 'Description' ? 
+                    <span id={styles.single_desc}>{book.desc}</span>
+                    :
+                    null
+                }
+
+                {activeTab === 'Authors' ? 
+                    <span id={styles.single_desc}>{book.authors}</span>
+                    :
+                    null
+                }
+
+                {activeTab === 'Rewiews' ? 
+                    <span id={styles.single_desc}>Rewiews</span>
+                    :
+                    null
+                }
             </div>
             <div className={styles.icons_container}>
                 <div><img src={FacebookIcon}/></div>

@@ -2,12 +2,8 @@ import styles from "./bookcard.module.scss";
 import Grade from "../../../utils/img/grade.png";
 import { IBookCard } from "../../../api/types";
 import {useMemo} from 'react';
-
-const palette = ['purple', 'orange', 'green', 'blue'];
-
-function getRandomNum(max: number){
-    return Math.floor(Math.random() * max);
-}
+import { palette } from "../../../api/types";
+import { getRandomNum } from "../../../hooks/utilsHooks/utilsHooks";
 
 export const BookCard = ({ book, onClick } : IBookCard) => {
     const randomColor = useMemo(() => palette[getRandomNum(4)], []);   

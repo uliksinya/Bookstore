@@ -1,8 +1,7 @@
 @import "../../styles/mixins.scss";
 
 .sign_in_up_tabs{
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     width: 100%;
     height: 72px;
     box-sizing: border-box;
@@ -24,11 +23,10 @@
 }
 .active_tab{
     border-bottom: 2px solid var(--primary-black);
-    cursor: pointer;
 }
 .active_tab p{
     color: var(--primary-black);
 }
-.not_active_tab{
+.active_tab, .not_active_tab{
     cursor: pointer;
 }

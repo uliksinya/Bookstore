@@ -5,28 +5,33 @@ export type Arrows = "Prev" | "Next";
 export type InputModeType = 'text' | 'email' | 'password' ;
 export type inpNameSignUpType = 'name' | 'email' | 'password' | 'confirmPassword';
 export type myMod = 'search' | 'subscribe' | 'forforms';
-export type SignUpForm = {
+export type BooksDescrType = 'Description' | 'Authors' | 'Rewiews';
+export type authorisationType = "SIGN IN" | "SIGN UP";
+
+export const palette = ['purple', 'orange', 'green', 'blue'];
+
+export interface SignUpForm{
     name: string;
     email: string;
     password: string;
     confirmPassword: string;
 }
-export type SignInForm = {
+export interface SignInForm{
     name: string;
     password: string;
 }
-export type SubscribeEmailForm = {
+export interface SubscribeEmailForm{
     email: string;
 }
-export type ResetPasswordForm = {
+export interface ResetPasswordForm{
     name: string;
 }
-export type NewPasswordForm = {
+export interface NewPasswordForm{
     name: string;
     newPassword: string;
     confirmNewPassword: string;
 }
-export type AccountPageType = {
+export interface AccountPageType{
     name: string;
     email: string;
     password: string;
@@ -47,7 +52,6 @@ export interface InputType <TFieldValues extends FieldValues, TFieldName extends
     validationRules?: UseFormRegisterReturn<TFieldName> | undefined; 
     errors?: FieldErrors<TFieldValues> | undefined;
 }
-export type authorisationType = "SIGN IN" | "SIGN UP";
 export interface Book {
     title: string,
     isbn13: string,
@@ -72,5 +76,40 @@ export interface FooterArr{
     title: string;
     price: string;
 }
+export interface registrationProps{
+    username: string;
+    email: string;
+    password: string;
+}
+
+export interface tabsProps{
+    activeTab: BooksDescrType;    
+    setActiveTab: (str: BooksDescrType) => void;   
+}  
+export interface BooksProps{
+    booksArr: BookState[];
+}
+export interface favouriteProps{
+    isFavourite: boolean;
+    editFavStateFunc: () => void;
+}
+export interface CartBookCardProps {
+    singleBook: favBookType;
+    updateBookInCart: (isbn: string, newQuantity: number, newPrice: number) => void;
+    removeBook: (isbn: string) => void,
+}
+export interface BurgMenuProps{
+    onClick: () => void;
+}
+export interface PaginationProps{
+    activeNum: number;    
+    activeArrow: Arrows; 
+    setActiveNum: (num: number) => void;
+    setActiveArrow: (str: Arrows) => void;
+}  
+export interface SignInUpTabsProps{
+    activeTab: authorisationType;    
+    setActiveTab: (str: authorisationType) => void;   
+}  
 
 

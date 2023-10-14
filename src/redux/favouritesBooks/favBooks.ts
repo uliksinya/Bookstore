@@ -18,7 +18,6 @@ export const favBookSlice = createSlice({
         }
       },  
       removeFavouriteBook: (state, action: PayloadAction<string>) => {
-        console.log('удали!');
         const index = state.findIndex(book => book.isbn13 === action.payload);
             if (index !== -1) {
                 state.splice(index, 1);

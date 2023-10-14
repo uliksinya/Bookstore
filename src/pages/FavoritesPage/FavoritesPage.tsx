@@ -8,24 +8,18 @@ import HeartIcon from "../../utils/img/heart_2.png";
 import { useState, useEffect } from "react";
 import { removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectFavouriteBooks } from "../../redux/favouritesBooks/favBooks";
-import { addFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { selectReleasedBooks } from "../../redux/books/books";
 import { BookCard } from "../../components/Books/BookCard/Bookcard";
 import { BookState } from "../../redux/books/books";
 import DarkLike from "../../utils/img/dark_like.png";
+import HeartGif from "../../utils/img/heart_gif_icon.gif";
 
 export const FavoritesPage = () => {    
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [favBooks, setFavBooks] = useState(getBooksFromLS());
-    const favBooksFromStore = useAppSelector(selectFavouriteBooks);
 
-    // useEffect(() => {        
-    //     favBooks.forEach((book: favBookType) => {
-    //         dispatch(addFavouriteBook(book));
-    //     }); 
-    // }, []);
+    const [favBooks, setFavBooks] = useState(getBooksFromLS());
+    const releasedBooks = useAppSelector(selectReleasedBooks);
     
     const toggleNavigateToStartPage = () => {
         navigate('/');
@@ -38,16 +32,13 @@ export const FavoritesPage = () => {
     useEffect(() => {
         const booksFromLS = getBooksFromLS();
         setFavBooks(booksFromLS);
-    }, [setFavBooks]);
-     
-     console.log(favBooksFromStore);
-     const releasedBooks = useAppSelector(selectReleasedBooks);
-     const redirectToPostPage = (id: number) => {
+    }, [setFavBooks]);   
+  
+    const redirectToPostPage = (id: number) => {
         navigate(`/books/${id}`);
     };
-    console.log(releasedBooks);
     const newMas = releasedBooks.slice(0, 3);
-    console.log(newMas);
+
     return(
         <div className={styles.favorites_container}>
             <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
@@ -56,6 +47,7 @@ export const FavoritesPage = () => {
             <div className={styles.single_title}>
                 <h1>Favorites</h1>
             </div>
+            {favBooks.length !== 0 ?
             <div className={styles.fav_books}>
                 {favBooks.map((book: favBookType) => (
                     <div key={book.isbn13} className={styles.fav_books_line}>
@@ -84,18 +76,24 @@ export const FavoritesPage = () => {
                         </div>
                         <div className={styles.book_line}></div>           
                     </div>
-                ))}
+                )).reverse()}
             </div>
+            :
+            <div className={styles.not_favorites_page}>
+                <h1>You don't have any favorites!</h1>
+                <img src={HeartGif}/>
+            </div>
+            }
             <div className={styles.popular_books}>
                     <div className={styles.popular_title}>
                         <h1>Popular Books</h1>
                     </div>
                     <div className={styles.popular_books_container}>
-                        {newMas.length !== 0 ? newMas.map((book: BookState) => (
+                        {newMas.map((book: BookState) => (
                             <div key={book.isbn13} className={styles.book_card}>
                                 <BookCard book={book} onClick={() => redirectToPostPage(Number(book.isbn13))}/>                   
                             </div>
-                        )): null}
+                        ))}
                     </div>
                 </div>
         </div>   

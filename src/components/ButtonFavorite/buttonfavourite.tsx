@@ -1,10 +1,6 @@
 import styles from './buttonfavourite.module.scss';
-import { useState } from 'react';
+import { favouriteProps } from '../../api/types';
 
-interface favouriteProps{
-    isFavourite: boolean;
-    editFavStateFunc: () => void;
-}
 export const ButtonFavourite = ( {isFavourite, editFavStateFunc} : favouriteProps ) => {
     return(
         <div className={styles.like_icon} onClick={editFavStateFunc}>

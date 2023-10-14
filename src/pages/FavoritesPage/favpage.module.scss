@@ -36,8 +36,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: 48px;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
 }
 .book_line{
     width: 100%;
@@ -51,8 +50,7 @@
 }
 .price_grade{
     margin-top: 24px;
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     align-items: center;   
 }
 #grade{
@@ -77,14 +75,18 @@
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 32px;
 }
+.not_favorites_page{
+    @include flex-center;
+    flex-direction: column;
+    height: 820px;
+}
+.not_favorites_page h1{
+    text-align: center;
+}
 @media (max-width: 768px){
     .fav_books{
         max-height: 100%;
         overflow-y: hidden;
-        // overflow-x: hidden;
-        // margin-top: 48px;
-        // display: flex;
-        // flex-direction: column;
     }
     .single_title h1{
         font-size: 56px;
