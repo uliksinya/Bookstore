@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./input.module.scss";
 import type {InputType}  from "../../api/types";
 
-let inputClass;
 export const CustomInput= ({
   inpName,
   inpMode,

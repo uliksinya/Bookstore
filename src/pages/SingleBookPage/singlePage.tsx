@@ -20,7 +20,7 @@ import ActiveStar from "../../utils/img/active_star.png";
 import NotActiveStar from "../../utils/img/not_active_star.png";
 import arrUp from "../../utils/img/arr_up.png";
 import arrDown from '../../utils/img/arr_down.png';
-import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/tabs";
+import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/BookDescriptionTabs";
 import { BooksDescrType } from "../../api/types";
 
 const generateGradeContainer = (bookRating: string) => {
