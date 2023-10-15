@@ -65,23 +65,8 @@
     right: 19px;
     cursor: pointer;
 }
-.popular_title{
-    margin-top: 24px;
-}
-.popular_books_container{
-    margin-top: 48px;
-    margin-bottom: 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 32px;
-}
-.not_favorites_page{
-    @include flex-center;
-    flex-direction: column;
-    height: 820px;
-}
-.not_favorites_page h1{
-    text-align: center;
+.pagination_container{
+    margin-top: 72px;
 }
 @media (max-width: 768px){
     .fav_books{

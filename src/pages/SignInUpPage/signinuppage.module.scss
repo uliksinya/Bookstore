@@ -21,7 +21,7 @@
     margin-top:-2px;
 }
 .inputs_container{
-    @include flex-horizontal-center;  
+    @include flex-horizontal-center; 
 }
 .tabs_line{
     width: 100%;
@@ -31,6 +31,25 @@
     margin-left: auto;
     margin-right: auto; 
     margin-bottom: 40px;
+}
+.changed_container{
+    background-color: var(--tertiary);
+    height: 64px;
+    width: calc((480px * 100% / 544px) - 20px);
+    @include flex-vertical-center;
+    padding-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+}
+.changed_container p{
+    font-family: var(--helios-light);
+    color: var(--primary-black);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 @media (max-width: 768px){
     .sign_up_container{

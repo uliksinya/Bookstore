@@ -1,5 +1,5 @@
 import {Books} from "../../components/Books/Books/Books";
-import { Subscribe } from "../../components/Subscribe/subscribe";
+import { Subscribe } from "../../components/Subscribe/Subscribe";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectFoundedBooks} from "../../redux/books/books";
 import styles from "./startpage.module.scss";
@@ -12,7 +12,6 @@ import { useSearchParams } from "react-router-dom";
 import throttle from 'lodash/throttle';
 import { fetchBooks } from "../../redux/books/books";
 import { fetchFoundedBooks } from "../../redux/books/books";
-import { selectAuthUser } from "../../redux/authentificationUser/authentificationUser";
 
 const scrollToStart = () => {
     setTimeout(() => {
@@ -27,7 +26,6 @@ export const StartPage = () => {
     const [activeArrow, setActiveArrow] = useState<Arrows>("Next");
     const [searchParams, setSearchParams] = useSearchParams(); 
 
-    const autUser = useAppSelector(selectAuthUser);
     const releasedBooks = useAppSelector(selectReleasedBooks);    
     const searchedBooks = useAppSelector(selectFoundedBooks);
     const searchValue = useAppSelector(selectSearchInputValue);       

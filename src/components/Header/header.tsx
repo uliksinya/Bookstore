@@ -83,7 +83,7 @@ export const Header = () => {
         navigate('/books/cart');
     }
     const toggleNavigateToAccount = () => {
-        authUser.user !== null ? navigate('/books/account') : navigate('/signin');
+        authUser.user !== null && authUser.user !== undefined ? navigate('/books/account') : navigate('/signin');
     }
     const toggleNavigateToSignIn = () => {
         navigate('/signin');

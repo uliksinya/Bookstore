@@ -11,7 +11,7 @@ import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { CartPage } from "./pages/CartPage/CartPage";
 import { ResetPassword } from "./pages/ResetPasswordPage/ResetPasswordPage";
 import { NewPasswordPage } from "./pages/NewPasswordPage/NewPasswordPage";
-import { AccountLayout } from "./components/AccountLayout/accountlayout";
+import { AccountLayout } from  './components/AccountLayout/Accountlayout';
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 function App() { 

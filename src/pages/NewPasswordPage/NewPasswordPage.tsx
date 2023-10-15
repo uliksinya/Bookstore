@@ -1,14 +1,15 @@
 import styles from './newpasswordpage.module.scss';
-import { NewPasswordForm, ResetPasswordForm } from "../../api/types";
+import { NewPasswordForm } from "../../api/types";
 import {useForm,  SubmitHandler} from 'react-hook-form';
 import { CustomInput } from "../../components/CustomInput/Input";
 import { Button } from "../../components/Button/Button";
 import {passwordValidator, confirmPasswordValidator } from "../../hooks/validators/validators";
 import { saveNewPasswordByResetUserLS } from "../../hooks/localStorage/resetPasswordLS";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const NewPasswordPage = () => {    
     const navigate = useNavigate();
+    const location = useLocation();
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<NewPasswordForm>({
         reValidateMode:'onChange',
         mode: 'onBlur',
@@ -17,8 +18,9 @@ export const NewPasswordPage = () => {
         setValue('newPassword', '');
         setValue('confirmNewPassword', '');
         saveNewPasswordByResetUserLS(data.newPassword);
-        navigate('/signin');
+        navigate('/signin', {state: {from: location}});
     }
+    console.log(location);
     return(            
        <div className={styles.new_passw_cont}>
             <div className={styles.content_container}>

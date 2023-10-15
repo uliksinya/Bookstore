@@ -1,0 +1,48 @@
+@import '../../styles/mixins.scss';
+
+.popular_books_container{
+    margin-top: 48px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 32px;
+}
+.not_favorites_page{
+    @include flex-center;
+    flex-direction: column;
+    height: 820px;
+}
+.not_favorites_page h1{
+    text-align: center;
+}
+#left_arr, #right_arr{
+    cursor: pointer;
+}
+.pagination_header{
+    @include flex-row;
+    justify-content: space-between;
+}
+.paginationButtons{
+    width: 64px;
+    height: 24px;
+    margin-top: 40px;
+    align-items: center;
+    @include flex-row;
+    justify-content: space-between;
+}
+@media (max-width: 768px){
+    .popular_books_container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 410px){
+    .popular_books_container{
+        grid-template-columns: 1fr;
+    }
+    .paginationButtons{
+        margin-top: 25px;
+    }
+    .pagination_header h1{
+        font-size: 28px;
+    }
+}

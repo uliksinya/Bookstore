@@ -7,19 +7,16 @@ import { favBookType } from "../../api/types";
 import HeartIcon from "../../utils/img/heart_2.png";
 import { useState, useEffect } from "react";
 import { removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectReleasedBooks } from "../../redux/books/books";
-import { BookCard } from "../../components/Books/BookCard/Bookcard";
-import { BookState } from "../../redux/books/books";
+import { useAppDispatch } from "../../redux/hooks";
 import DarkLike from "../../utils/img/dark_like.png";
 import HeartGif from "../../utils/img/heart_gif_icon.gif";
+import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
 
 export const FavoritesPage = () => {    
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const [favBooks, setFavBooks] = useState(getBooksFromLS());
-    const releasedBooks = useAppSelector(selectReleasedBooks);
+    const [favBooks, setFavBooks] = useState<favBookType[]>(getBooksFromLS()); 
     
     const toggleNavigateToStartPage = () => {
         navigate('/');
@@ -33,11 +30,6 @@ export const FavoritesPage = () => {
         const booksFromLS = getBooksFromLS();
         setFavBooks(booksFromLS);
     }, [setFavBooks]);   
-  
-    const redirectToPostPage = (id: number) => {
-        navigate(`/books/${id}`);
-    };
-    const newMas = releasedBooks.slice(0, 3);
 
     return(
         <div className={styles.favorites_container}>
@@ -84,18 +76,9 @@ export const FavoritesPage = () => {
                 <img src={HeartGif}/>
             </div>
             }
-            <div className={styles.popular_books}>
-                    <div className={styles.popular_title}>
-                        <h1>Popular Books</h1>
-                    </div>
-                    <div className={styles.popular_books_container}>
-                        {newMas.map((book: BookState) => (
-                            <div key={book.isbn13} className={styles.book_card}>
-                                <BookCard book={book} onClick={() => redirectToPostPage(Number(book.isbn13))}/>                   
-                            </div>
-                        ))}
-                    </div>
-                </div>
+            <div className={styles.pagination_container}>
+                <PaginationReleasedBooks title={'Popular Books'} />
+            </div>
         </div>   
     )
 }

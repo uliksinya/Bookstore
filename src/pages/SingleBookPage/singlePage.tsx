@@ -10,7 +10,7 @@ import { Button } from "../../components/Button/Button";
 import FacebookIcon from "../../utils/img/facebook_icon.png";
 import TwitterIcon from "../../utils/img/twitter_icon.png";
 import MenuIcon from "../../utils/img/horiz_menu_icon.png";
-import { Subscribe } from "../../components/Subscribe/subscribe";
+import { Subscribe } from "../../components/Subscribe/Subscribe";
 import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
 import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
 import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
@@ -22,6 +22,7 @@ import arrUp from "../../utils/img/arr_up.png";
 import arrDown from '../../utils/img/arr_down.png';
 import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/BookDescriptionTabs";
 import { BooksDescrType } from "../../api/types";
+import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
 
 const generateGradeContainer = (bookRating: string) => {
     const maxRating:number = 5;
@@ -212,6 +213,9 @@ export const SinglePage = () => {
                 <div><img src={MenuIcon}/></div>                
             </div>
             <Subscribe/>
+            <div>
+                <PaginationReleasedBooks title={'Similar Books'} />
+            </div>
         </div>        
     )
 }
