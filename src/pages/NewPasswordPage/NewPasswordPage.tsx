@@ -1,10 +1,10 @@
 import styles from './newpasswordpage.module.scss';
-import { NewPasswordForm } from "../../api/types";
+import { NewPasswordForm } from "../../types/types";
 import {useForm,  SubmitHandler} from 'react-hook-form';
 import { CustomInput } from "../../components/CustomInput/Input";
 import { Button } from "../../components/Button/Button";
-import {passwordValidator, confirmPasswordValidator } from "../../hooks/validators/validators";
-import { saveNewPasswordByResetUserLS } from "../../hooks/localStorage/resetPasswordLS";
+import {passwordValidator, confirmPasswordValidator } from "../../utils/validators/validators";
+import { saveNewPasswordByResetUserLS } from "../../utils/localStorage/resetPasswordLS";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const NewPasswordPage = () => {    
@@ -29,38 +29,30 @@ export const NewPasswordPage = () => {
                         <div className={styles.new_password}>
                             <div id={styles.input_item}>                    
                                 <CustomInput 
-                                inpName='newPassword'
+                                {...register('newPassword', {
+                                    required: 'Необходимо заполнить поле Password',
+                                    validate: (value) => passwordValidator(value),
+                                })}
+                                name='newPassword'
                                 value={watch('newPassword')} 
+                                errorMessage={errors.newPassword?.message}                        
                                 labelValue="Password"
                                 placeholder="Your Password" 
-                                inpMode="password"
-                                disabled={false} 
-                                errors={errors} 
-                                register={register}
-                                validationRules={
-                                    {
-                                        required: 'Необходимо заполнить поле newPassword', 
-                                        validate: passwordValidator,
-                                    }
-                                }
+                                type='password'   
                                 />                
                             </div>
                             <div id={styles.input_item_new_passw}>                
                                 <CustomInput 
-                                inpName='confirmNewPassword'
+                                {...register('confirmNewPassword', {
+                                    required: 'Необходимо заполнить поле Confirm password', 
+                                    validate: (value) => confirmPasswordValidator(value, watch('confirmNewPassword')),
+                                })}
+                                name='confirmNewPassword'
                                 value={watch('confirmNewPassword')} 
+                                errorMessage={errors.confirmNewPassword?.message}                        
                                 labelValue="Confirm Password"
                                 placeholder="Confirm your password" 
-                                inpMode="password" 
-                                disabled={false} 
-                                errors={errors} 
-                                register={register}
-                                validationRules={
-                                    {
-                                        required: 'Необходимо заполнить поле Confirm password', 
-                                        validate: (value: string) => confirmPasswordValidator(value, watch('newPassword')),
-                                    }
-                                }
+                                type='password'   
                                 />
                             </div> 
                         </div>

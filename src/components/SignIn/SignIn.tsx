@@ -1,12 +1,12 @@
 import { CustomInput } from "../CustomInput/Input"
 import styles from "./signin.module.scss";
 import {useForm,  SubmitHandler} from 'react-hook-form';
-import { SignInForm } from "../../api/types";
-import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../hooks/localStorage/signInUpLS";
+import { SignInForm } from "../../types/types";
+import { isThisUserInLS, confirmPassword, saveAutentificationUserInLS } from "../../utils/localStorage/signInUpLS";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
 import { useState } from "react";
-import CrossIcon from "../../utils/img/cross_icon.png";
+import CrossIcon from "../../assets/img/cross_icon.png";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/authentificationUser/authentificationUser";
 
@@ -49,41 +49,38 @@ export const SignIn = () => {
     return(
         <div className={styles.sign_in_container}>
             {
-                !isCorrectPasssword 
-                ? 
+                !isCorrectPasssword && 
                 <div className={styles.not_success_container}>
                     <div className={styles.image}><img id={styles.done} src={CrossIcon}/></div>
                     <span id={styles.not_success_text}>Неверное имя пользователя или пароль!</span>
                 </div> 
-                :
-                ""
             }
             <form className={styles.signin_form}>
                 <div>
                     <div id={styles.input_item}>
                         <CustomInput 
-                        inpName='name'
-                        value={watch('name')} 
-                        labelValue="Name"
-                        placeholder="Your Name" 
-                        inpMode="text" 
-                        errors={errors} 
-                        disabled={false}                   
-                        register={register}
-                        myMod={'forforms'}
+                            {...register('name', {
+                                required: 'Необходимо заполнить поле Name',
+                            })}
+                            name='name'
+                            value={watch('name')} 
+                            errorMessage={errors.name?.message}                        
+                            labelValue="Name"
+                            placeholder="Your Name" 
+                            inputMode="text"                        
                         />
                     </div>
                     <div id={styles.input_item}>
                         <CustomInput 
-                            inpName='password'
+                            {...register('password',{
+                                required: 'Необходимо заполнить поле Password', 
+                            })}
+                            name='password'
                             value={watch('password')} 
+                            errorMessage={errors.password?.message}                        
                             labelValue="Password"
                             placeholder="Your Password" 
-                            inpMode="password"
-                            disabled={false} 
-                            errors={errors} 
-                            register={register}
-                            myMod={'forforms'}
+                            inputMode="text"       
                         /> 
                     </div>
                     <div className={styles.forgot_passw} onClick={() => toggleNavToResetPassword()}>

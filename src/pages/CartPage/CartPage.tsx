@@ -1,18 +1,18 @@
 import styles from "./cartpage.module.scss";
-import { favBookType } from "../../api/types";
+import { favBookType } from "../../types/types";
 import { useState, useEffect } from 'react';
-import { getBooksFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
-import CartBookCard from "../../components/Cart/BookCardInCart/CartBookCard";
+import { getBooksFromCartInLS } from "../../utils/localStorage/booksInCartLS";
+import CartBookCard from '../../components/Cart/BookCardInCart/CartBookCard'
 import {useMemo} from 'react'
-import { FooterArr } from "../../api/types";
+import { FooterArr } from "../../types/types";
 import { CartTotalFooter } from "../../components/Cart/CartTotalFooter/CartTotalFooter";
-import { removeBookFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { removeBookFromCartInLS } from "../../utils/localStorage/booksInCartLS";
 import { removeBooksFromCartStore } from "../../redux/cart/booksincart";
 import { useAppDispatch } from "../../redux/hooks";
 import { useAppSelector } from "../../redux/hooks";
 import { selectBooksInCartStore } from "../../redux/cart/booksincart";
-import Cart from '../../utils/img/cart.gif';
-import { getSumTotal, getVatSum } from "../../hooks/utilsHooks/utilsHooks";
+import Cart from '../../assets/img/cart.gif';
+import { getSumTotal, getVatSum } from "../../utils/utilsFunctions/utilsFunctions";
 import { ArrowBack } from "../../components/ArrowBack/ArrowBack";
 
 const getCartFooterArray = (books: favBookType[]) => {

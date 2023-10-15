@@ -1,4 +1,4 @@
-import ErrorImg from '../../utils/img/404.png';
+import ErrorImg from '../../assets/img/404.png';
 import styles from "./notfoundpage.module.scss";
 
 export const NotFoundPage = () => {

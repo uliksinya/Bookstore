@@ -40,6 +40,9 @@ export function usernameValidator(username: string) : string | true {
   if(isThisUserInLS(username)){
     return 'Такое имя пользователя уже существует';
   }
+  if(username.length < 6 ){
+    return 'Имя пользователя должно быть не менее 6 символов';
+  }
   return true;
 }
 export function isSuchUsernameInLS(name: string): string | true {

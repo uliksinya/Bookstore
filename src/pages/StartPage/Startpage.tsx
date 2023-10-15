@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectFoundedBooks} from "../../redux/books/books";
 import styles from "./startpage.module.scss";
 import { useState, useEffect } from "react";
-import { Arrows } from "../../api/types";
+import { Arrows } from "../../types/types";
 import { selectSearchInputValue } from "../../redux/books/books";
 import { selectReleasedBooks } from "../../redux/books/books";
 import { Pagination } from "../../components/Pagination/Pagination";

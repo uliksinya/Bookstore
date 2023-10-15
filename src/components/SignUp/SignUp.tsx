@@ -1,13 +1,13 @@
 import {useForm,  SubmitHandler} from 'react-hook-form';
-import { SignUpForm } from '../../api/types';
+import { SignUpForm } from '../../types/types';
 import { CustomInput } from '../CustomInput/Input';
 import styles from "./signup.module.scss";
-import { emailValidator, passwordValidator,confirmPasswordValidator } from "../../hooks/validators/validators";
+import { emailValidator, passwordValidator,confirmPasswordValidator } from "../../utils/validators/validators";
 import { useState } from 'react';
-import { registerUser } from "../../hooks/localStorage/signInUpLS";
+import { registerUser } from "../../utils/localStorage/signInUpLS";
 import { Button } from '../Button/Button';
-import DoneIcon from "../../utils/img/done_icon.png";
-import { usernameValidator } from '../../hooks/validators/validators';
+import DoneIcon from "../../assets/img/done_icon.png";
+import { usernameValidator } from '../../utils/validators/validators';
 
 export const SignUp = () => {
     const [isUserRegister, setIsUserRegistered] = useState<boolean>(false);
@@ -43,74 +43,58 @@ export const SignUp = () => {
             <div>
                 <div id={styles.input_item}>
                         <CustomInput 
-                        inpName='name'
+                        {...register('name', {
+                            required: 'Необходимо заполнить поле Name',
+                            validate: (value) => usernameValidator(value),
+                        })}
+                        name='name'
                         value={watch('name')} 
+                        errorMessage={errors.name?.message}                        
                         labelValue="Name"
                         placeholder="Your Name" 
-                        inpMode="text" 
-                        errors={errors} 
-                        disabled={false}                   
-                        register={register}
-                        validationRules={
-                            {
-                                required: 'Необходимо заполнить поле Name',
-                                validate: usernameValidator,
-                            }
-                        }
+                        inputMode="text"                            
                         />
                     </div>
                     <div id={styles.input_item}>
                         <CustomInput 
-                        inpName='email'
+                        {...register('email', {
+                            required: 'Необходимо заполнить поле Email',
+                            validate: (value) => emailValidator(value),
+                        })}
+                        name='email'
                         value={watch('email')} 
+                        errorMessage={errors.email?.message}                        
                         labelValue="Email"
                         placeholder="Your Email" 
-                        inpMode="text" 
-                        errors={errors} 
-                        disabled={false} 
-                        register={register}
-                        validationRules={
-                            {
-                                required: 'Необходимо заполнить поле Email', 
-                                validate: emailValidator,
-                            }
-                        }
+                        inputMode="email"            
                         />
                     </div>                
                     <div id={styles.input_item}>                    
                         <CustomInput 
-                        inpName='password'
+                        {...register('password', {
+                            required: 'Необходимо заполнить поле Password',
+                            validate: (value) => passwordValidator(value),
+                        })}
+                        name='password'
                         value={watch('password')} 
+                        errorMessage={errors.password?.message}                        
                         labelValue="Password"
                         placeholder="Your Password" 
-                        inpMode="password"
-                        disabled={false} 
-                        errors={errors} 
-                        register={register}
-                        validationRules={
-                            {
-                                required: 'Необходимо заполнить поле Password', 
-                                validate: passwordValidator,
-                            }
-                        }
+                        type='password'             
                         />                
                     </div>
                     <div id={styles.input_item}>                
                         <CustomInput 
-                        inpName='confirmPassword'
+                        {...register('confirmPassword', {
+                            required: 'Необходимо заполнить поле Confirm Password',
+                            validate: (value) => confirmPasswordValidator(value, watch('password')),
+                        })}
+                        name='confirmPassword'
                         value={watch('confirmPassword')} 
+                        errorMessage={errors.confirmPassword?.message}                        
                         labelValue="Confirm Password"
-                        placeholder="Confirm your password" 
-                        inpMode="password" 
-                        disabled={false} 
-                        errors={errors} 
-                        register={register}
-                        validationRules={
-                            {
-                                required: 'Необходимо заполнить поле Confirm password', 
-                                validate: (value: string) => confirmPasswordValidator(value, watch('password')),
-                            }
-                        }
+                        placeholder="Confirm Your Password" 
+                        type='password'  
                         />
                         <div className={styles.signup_submit}>
                             <Button disabled={false} content={'Sign up'} btnStyle={'dark'} onClick={handleSubmit(onSubmitRegistration)}/>

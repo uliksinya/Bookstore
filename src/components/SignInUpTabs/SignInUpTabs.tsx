@@ -1,6 +1,6 @@
 import styles from "./signinuptabs.module.scss";
-import { authorisationType } from "../../api/types";
-import { SignInUpTabsProps } from "../../api/types";
+import { authorisationType } from "../../types/types";
+import { SignInUpTabsProps } from "../../types/types";
 
 export const SignInUpTabs = ({activeTab, setActiveTab} : SignInUpTabsProps) => {   
 

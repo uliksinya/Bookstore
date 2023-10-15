@@ -1,36 +1,29 @@
-import React from "react";
+import React, {ForwardedRef} from "react";
 import styles from "./input.module.scss";
-import type {InputType}  from "../../api/types";
 
-export const CustomInput= ({
-  inpName,
-  inpMode,
+export const CustomInput = React.forwardRef(({
   labelValue,
-  placeholder,
-  disabled = false, 
-  value='',
-  register,
-  validationRules,
-  errors,
-  defValue,
-} : React.InputHTMLAttributes<HTMLInputElement> & InputType ) => {   
+  errorMessage, 
+  value,
+  ...rest
+} : React.InputHTMLAttributes<HTMLInputElement> & {
+  labelValue?: string,
+  errorMessage?: string
+},
+  ref : ForwardedRef<HTMLInputElement>
+) => {  
 
   return (
         <div>
           <div className={styles.input_container}>
             <label className={styles.inputLabel}>{labelValue}</label>
             <input
-              className={`${value || defValue ? styles.active_input : styles.default_input}`}           
-              defaultValue={defValue}
-              value={value ? value : defValue}
-              placeholder={placeholder}             
-              disabled={disabled}
-              type={inpMode}   
-              {...register(inpName, validationRules)}            
+              className={value ? styles.active_input : styles.default_input} {...rest} ref={ref}                   
             />
           </div> 
-          {errors?.[inpName] ? <span id={styles.error_message}>{errors[inpName]?.message}</span> : ""}
+          {errorMessage && <span id={styles.error_message}>{errorMessage}</span>}
         </div> 
   );
 }
+);
     

@@ -68,6 +68,11 @@
 .pagination_container{
     margin-top: 72px;
 }
+.not_favorites_page{
+    @include flex-center;
+    flex-direction: column;
+    height: 820px;
+}
 @media (max-width: 768px){
     .fav_books{
         max-height: 100%;

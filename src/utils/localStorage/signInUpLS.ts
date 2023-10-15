@@ -1,4 +1,4 @@
-import { registrationProps } from "../../api/types";
+import { registrationProps } from '../../types/types';
 
 export const registerUser = ({username, email, password} : registrationProps): boolean => {
         const dataFromLS = localStorage.getItem("Users");

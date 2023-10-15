@@ -1,7 +1,7 @@
 import styles from './signinuppage.module.scss';
 import { SignInUpTabs } from "../../components/SignInUpTabs/SignInUpTabs";
 import { useState } from "react";
-import { authorisationType } from "../../api/types";
+import { authorisationType } from "../../types/types";
 import { SignIn } from "../../components/SignIn/SignIn";
 import { SignUp } from "../../components/SignUp/SignUp";
 import { useLocation } from 'react-router-dom';
@@ -9,8 +9,6 @@ import { useLocation } from 'react-router-dom';
 export const SignInUpPage = () => {    
     const [activeTab, setActiveTab] = useState<authorisationType>("SIGN IN"); 
     const location = useLocation();
-    console.log(location);
-
     const isLocationFromNewPassword = location.state?.from.pathname === '/resetPassword/newPassword';
 
     return(

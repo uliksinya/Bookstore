@@ -1,5 +1,5 @@
 import styles from './buttonfavourite.module.scss';
-import { favouriteProps } from '../../api/types';
+import { favouriteProps } from '../../types/types';
 
 export const ButtonFavourite = ( {isFavourite, editFavStateFunc} : favouriteProps ) => {
     return(

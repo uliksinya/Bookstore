@@ -1,6 +1,6 @@
 import styles from "./arrowback.module.scss";
 import { useNavigate } from "react-router-dom";
-import ArrowIcon from "../../utils/img/arrow_icon.png";
+import ArrowIcon from "../../assets/img/arrow_icon.png";
 
 export const ArrowBack = () => {
     const navigate = useNavigate();  

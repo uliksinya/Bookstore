@@ -7,6 +7,7 @@ export type inpNameSignUpType = 'name' | 'email' | 'password' | 'confirmPassword
 export type myMod = 'search' | 'subscribe' | 'forforms';
 export type BooksDescrType = 'Description' | 'Authors' | 'Rewiews';
 export type authorisationType = "SIGN IN" | "SIGN UP";
+export type btnTypes = "dark" | "light";
 
 export const palette = ['purple', 'orange', 'green', 'blue'];
 
@@ -111,6 +112,16 @@ export interface SignInUpTabsProps{
     activeTab: authorisationType;    
     setActiveTab: (str: authorisationType) => void;   
 }  
+export interface ButtonProps{
+    disabled: boolean;
+    content: string;
+    btnStyle: btnTypes;
+    onClick?: () => void;
+}
+export interface CartFooterProps{
+    arr: FooterArr[],
+    onClick: () => void,
+}
 
 
 

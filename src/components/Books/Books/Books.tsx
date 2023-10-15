@@ -3,7 +3,7 @@ import { BookState} from "../../../redux/books/books.ts";
 import { BookCard } from "../BookCard/Bookcard.tsx";
 import styles from "./Books.module.scss"
 import { useNavigate } from "react-router-dom";
-import { BooksProps } from "../../../api/types.ts";
+import { BooksProps } from "../../../types/types.ts";
 
 export const Books = ({ booksArr} : BooksProps) => {  
     const navigate = useNavigate();    

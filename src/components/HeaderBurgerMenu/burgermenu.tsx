@@ -1,6 +1,6 @@
 import styles from "./burgermenu.module.scss";
-import Burger from "../../utils/img/burger_menu_icon.png";
-import { BurgMenuProps } from "../../api/types";
+import Burger from "../../assets/img/burger_menu_icon.png";
+import { BurgMenuProps } from "../../types/types";
 
 export const HeaderBurgerMenu = ({onClick} : BurgMenuProps) => {
     return(

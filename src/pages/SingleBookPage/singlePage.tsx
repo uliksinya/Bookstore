@@ -4,24 +4,24 @@ import { useEffect, useState } from "react";
 import { fetchSelectedBook } from "../../redux/books/books";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectSelectedBook } from "../../redux/books/books";
-import ArrowIcon from "../../utils/img/arrow_icon.png";
+import ArrowIcon from "../../assets/img/arrow_icon.png";
 import styles from "./singlepage.module.scss"
 import { Button } from "../../components/Button/Button";
-import FacebookIcon from "../../utils/img/facebook_icon.png";
-import TwitterIcon from "../../utils/img/twitter_icon.png";
-import MenuIcon from "../../utils/img/horiz_menu_icon.png";
+import FacebookIcon from "../../assets/img/facebook_icon.png";
+import TwitterIcon from "../../assets/img/twitter_icon.png";
+import MenuIcon from "../../assets/img/horiz_menu_icon.png";
 import { Subscribe } from "../../components/Subscribe/Subscribe";
 import {ButtonFavourite} from "../../components/ButtonFavorite/Buttonfavourite";
-import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../hooks/localStorage/favBooksLS";
-import { addBookToCartInLS } from "../../hooks/localStorage/booksInCartLS";
+import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../utils/localStorage/favBooksLS";
+import { addBookToCartInLS } from "../../utils/localStorage/booksInCartLS";
 import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { addBookToCartStore } from "../../redux/cart/booksincart";
-import ActiveStar from "../../utils/img/active_star.png";
-import NotActiveStar from "../../utils/img/not_active_star.png";
-import arrUp from "../../utils/img/arr_up.png";
-import arrDown from '../../utils/img/arr_down.png';
+import ActiveStar from "../../assets/img/active_star.png";
+import NotActiveStar from "../../assets/img//not_active_star.png";
+import arrUp from "../../assets/img/arr_up.png";
+import arrDown from '../../assets/img/arr_down.png';
 import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/BookDescriptionTabs";
-import { BooksDescrType } from "../../api/types";
+import { BooksDescrType } from "../../types/types";
 import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
 
 const generateGradeContainer = (bookRating: string) => {

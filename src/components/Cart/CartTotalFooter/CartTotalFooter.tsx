@@ -1,11 +1,7 @@
-import { FooterArr } from "../../../api/types";
 import { Button } from "../../Button/Button";
-import styles from "./carttotal.module.scss"
+import styles from "./carttotalfooter.module.scss"
+import { CartFooterProps } from "../../../types/types";
 
-interface CartFooterProps{
-    arr: FooterArr[],
-    onClick: () => void,
-}
 export const CartTotalFooter = ({arr, onClick} : CartFooterProps) => {
     return(
         <div className={styles.cart_footer}>

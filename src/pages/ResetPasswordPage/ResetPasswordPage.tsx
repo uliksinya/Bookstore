@@ -1,9 +1,9 @@
-import { ResetPasswordForm } from "../../api/types";
+import { ResetPasswordForm } from "../../types/types";
 import {useForm,  SubmitHandler} from 'react-hook-form';
 import { CustomInput } from "../../components/CustomInput/Input";
-import { isSuchUsernameInLS } from "../../hooks/validators/validators";
+import { isSuchUsernameInLS } from "../../utils/validators/validators";
 import { Button } from "../../components/Button/Button";
-import { saveResetUser } from "../../hooks/localStorage/resetPasswordLS";
+import { saveResetUser } from "../../utils/localStorage/resetPasswordLS";
 import styles from './resetpassword.module.scss';
 import { useNavigate } from "react-router-dom";
 
@@ -24,20 +24,16 @@ export const ResetPassword = () => {
             <h1 className={styles.title}>Reset Password</h1>
             <div id={styles.input_item}>
                 <CustomInput 
-                    inpName='name'
+                    {...register('name', {
+                        required: 'Необходимо заполнить поле Name',
+                        validate: (value) => isSuchUsernameInLS(value),
+                    })}
+                    name='name'
                     value={watch('name')} 
+                    errorMessage={errors.name?.message}                        
                     labelValue="Name"
                     placeholder="Your Name" 
-                    inpMode="text" 
-                    errors={errors} 
-                    disabled={false}                   
-                    register={register}
-                    validationRules={
-                        {
-                            required: 'Необходимо заполнить поле Name', 
-                            validate: isSuchUsernameInLS,
-                        }
-                    }
+                    inputMode="text"            
                 />
                 <div className={styles.btn_container}>
                     <Button disabled={false} content={'Reset'} btnStyle={"dark"} onClick={handleSubmit(onSubmitReset)}/>

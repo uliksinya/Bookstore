@@ -1,4 +1,4 @@
-import { favBookType } from "../../api/types";
+import { favBookType } from "../../types/types";
 
 export function parsePriceToNumber(price: string){
     const newStr = price.replace('$', '');

@@ -5,8 +5,8 @@ import { selectReleasedBooks } from "../../redux/books/books";
 import { BookState } from "../../redux/books/books";
 import { BookCard } from "../Books/BookCard/Bookcard";
 import { useState, useEffect } from "react";
-import LeftArr from "../../utils/img/arr_left.png";
-import RightArr from "../../utils/img/arr_right.png";
+import LeftArr from "../../assets/img/arr_left.png";
+import RightArr from "../../assets/img/arr_right.png";
 import { throttle } from "lodash";
 
 interface PaginationProps{

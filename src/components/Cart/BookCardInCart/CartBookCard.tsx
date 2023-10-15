@@ -1,13 +1,13 @@
 import styles from "./cartbookcard.module.scss";
 import { useState, useEffect } from 'react';
-import { updatePriceInLS } from '../../../hooks/localStorage/booksInCartLS';
-import { parsePriceToNumber} from '../../../hooks/utilsHooks/utilsHooks';
-import { updateQuantityInLS } from '../../../hooks/localStorage/booksInCartLS';
-import DarkCross from "../../../utils/img/cross_dark.png";
-import Plus from "../../../utils/img/plus_icon.png";
-import Minus from "../../../utils/img/minus_icon.png";
-import Cross from "../../../utils/img/cross_ic.png";
-import { CartBookCardProps } from "../../../api/types";
+import { updatePriceInLS } from '../../../utils/localStorage/booksInCartLS';
+import { parsePriceToNumber} from '../../../utils/utilsFunctions/utilsFunctions';
+import { updateQuantityInLS } from '../../../utils/localStorage/booksInCartLS';
+import DarkCross from '../../../assets/img/cross_dark.png';
+import Plus from "../../../assets/img/plus_icon.png";
+import Minus from "../../../assets/img/minus_icon.png";
+import Cross from "../../../assets/img/cross_ic.png";
+import { CartBookCardProps } from "../../../types/types";
 
 const CartBookCard = ({ singleBook, updateBookInCart, removeBook } :  CartBookCardProps) => {
   const startPrice = parsePriceToNumber(singleBook.startPrice);

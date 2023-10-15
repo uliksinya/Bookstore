@@ -1,17 +1,16 @@
 import styles from "./favpage.module.scss";
-import Grade from '../../utils/img/grade.png';
-import { getBooksFromLS, removeFavBookFromLS } from "../../hooks/localStorage/favBooksLS";
-import { favBookType } from "../../api/types";
-import HeartIcon from "../../utils/img/heart_2.png";
+import { getBooksFromLS, removeFavBookFromLS } from "../../utils/localStorage/favBooksLS";
+import { favBookType } from "../../types/types";
+import HeartIcon from "../../assets/img/heart_2.png";
 import { useState, useEffect } from "react";
 import { removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { useAppDispatch } from "../../redux/hooks";
-import DarkLike from "../../utils/img/dark_like.png";
-import HeartGif from "../../utils/img/heart_gif_icon.gif";
+import DarkLike from "../../assets/img/dark_like.png";
+import HeartGif from "../../assets/img/heart_gif_icon.gif";
 import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
 import { ArrowBack } from "../../components/ArrowBack/ArrowBack";
-import ActiveStar from "../../utils/img/active_star.png";
-import NotActiveStar from "../../utils/img/not_active_star.png";
+import ActiveStar from "../../assets/img/active_star.png";
+import NotActiveStar from "../../assets/img/not_active_star.png";
 
 const generateGradeContainer = (bookRating: string) => {
     const maxRating:number = 5;

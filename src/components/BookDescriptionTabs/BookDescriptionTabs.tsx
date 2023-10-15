@@ -1,6 +1,6 @@
 import styles from "./tabs.module.scss";
-import { BooksDescrType } from "../../api/types";
-import { tabsProps } from "../../api/types";
+import { BooksDescrType } from "../../types/types";
+import { tabsProps } from "../../types/types";
 
 export const BookDescriptionTabs = ({activeTab, setActiveTab} : tabsProps) => {  
 
