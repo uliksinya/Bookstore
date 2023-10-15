@@ -1,6 +1,4 @@
 import styles from "./favpage.module.scss";
-import { useNavigate } from "react-router-dom";
-import ArrowIcon from "../../utils/img/arrow_icon.png";
 import Grade from '../../utils/img/grade.png';
 import { getBooksFromLS, removeFavBookFromLS } from "../../hooks/localStorage/favBooksLS";
 import { favBookType } from "../../api/types";
@@ -11,16 +9,39 @@ import { useAppDispatch } from "../../redux/hooks";
 import DarkLike from "../../utils/img/dark_like.png";
 import HeartGif from "../../utils/img/heart_gif_icon.gif";
 import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
+import { ArrowBack } from "../../components/ArrowBack/ArrowBack";
+import ActiveStar from "../../utils/img/active_star.png";
+import NotActiveStar from "../../utils/img/not_active_star.png";
 
+const generateGradeContainer = (bookRating: string) => {
+    const maxRating:number = 5;
+    const activeStars:number = Number(bookRating);
+    const notActiveStars: number = maxRating - activeStars;
+    const stars = [];
+    const notActiveArr = [];
+
+    for (let i = 0; i < activeStars; i++) {
+        stars.push(<img key={i} src={ActiveStar} alt="Active Star" />);
+    }
+
+    for (let i = 0; i < notActiveStars; i++) {
+        stars.push(<img key={i + activeStars} src={NotActiveStar} alt="Inactive Star" />);
+    }
+    for (let i = 0; i < 5; i++) {
+        notActiveArr.push(<img key={i} src={NotActiveStar} alt="Inactive Star" />);
+    }
+
+    return (
+        <div className={styles.rating_container}>
+            {activeStars !== 0 ? stars : notActiveArr}
+        </div>
+    );
+}
 export const FavoritesPage = () => {    
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const [favBooks, setFavBooks] = useState<favBookType[]>(getBooksFromLS()); 
     
-    const toggleNavigateToStartPage = () => {
-        navigate('/');
-    }
     const toggleRemoveFromFavorites = (isbn: string) => {
         removeFavBookFromLS(isbn);
         dispatch(removeFavouriteBook(isbn));
@@ -33,9 +54,7 @@ export const FavoritesPage = () => {
 
     return(
         <div className={styles.favorites_container}>
-            <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
-                <img src={ArrowIcon}/>
-            </div>
+            <ArrowBack/>
             <div className={styles.single_title}>
                 <h1>Favorites</h1>
             </div>
@@ -58,7 +77,7 @@ export const FavoritesPage = () => {
                                 <div className={styles.price_grade}>
                                     <h3>{book.price}</h3>
                                     <div id={styles.grade}>
-                                        <img src={Grade}/>
+                                        {generateGradeContainer(book.rating)}
                                     </div>
                                 </div>
                             </div>  

@@ -4,10 +4,10 @@ import styles from "./accountpage.module.scss";
 import { CustomInput } from '../../components/CustomInput/Input';
 import { usernameValidator, emailValidator, passwordValidator,confirmPasswordValidator } from "../../hooks/validators/validators";
 import { Button } from '../../components/Button/Button';
-import ArrowIcon from "../../utils/img/arrow_icon.png";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getAuthUsernameFromLS, getAuthPasswordFromLS, getAuthEmailFromLS, updateAutentificationUserInLS} from '../../hooks/localStorage/signInUpLS';
+import { ArrowBack } from '../../components/ArrowBack/ArrowBack';
 
 export const AccountPage = () => {
     const navigate = useNavigate();
@@ -57,9 +57,7 @@ export const AccountPage = () => {
     }
     return(
         <div className={styles.account_container}>
-            <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
-                <img src={ArrowIcon}/>
-            </div>
+            <ArrowBack/>
             <h1 className={styles.title_text}>Account</h1>            
             <form className={styles.registration_form}>
                     <div className={styles.inputs_cont}>

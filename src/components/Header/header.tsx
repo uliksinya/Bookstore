@@ -54,7 +54,13 @@ export const Header = () => {
             dispatch(addBookToCartStore(book));
         });
         
-    }, []);     
+    }, []);  
+    
+    useEffect(() => {
+        if (inputValue){
+            navigate('/');
+        }
+    }, [inputValue])
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

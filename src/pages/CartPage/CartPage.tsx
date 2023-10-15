@@ -1,6 +1,4 @@
-import ArrowIcon from "../../utils/img/arrow_icon.png";
 import styles from "./cartpage.module.scss";
-import { useNavigate } from "react-router-dom";
 import { favBookType } from "../../api/types";
 import { useState, useEffect } from 'react';
 import { getBooksFromCartInLS } from "../../hooks/localStorage/booksInCartLS";
@@ -15,6 +13,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectBooksInCartStore } from "../../redux/cart/booksincart";
 import Cart from '../../utils/img/cart.gif';
 import { getSumTotal, getVatSum } from "../../hooks/utilsHooks/utilsHooks";
+import { ArrowBack } from "../../components/ArrowBack/ArrowBack";
 
 const getCartFooterArray = (books: favBookType[]) => {
     const sum : number = getSumTotal(books);
@@ -35,16 +34,12 @@ const getCartFooterArray = (books: favBookType[]) => {
         }
     ]        
 }
-export const CartPage = () => {
-    const navigate = useNavigate();   
+export const CartPage = () => { 
     const dispatch = useAppDispatch();
     const booksInCartStore = useAppSelector(selectBooksInCartStore);
     const [booksInCart, setBooksInCart] = useState<favBookType[]>(getBooksFromCartInLS());
     const footerInfArray: FooterArr[] = useMemo(() => getCartFooterArray(booksInCart), [booksInCart]);
- 
-    const toggleNavigateToStartPage = () => {
-        navigate('/');
-    }     
+
     const updateBookInCart = (isbn: string, newQuantity: number, newPrice:number) => {
         const updatedBooks = booksInCart.map(book => {
           if (book.isbn13 === isbn) {
@@ -59,16 +54,13 @@ export const CartPage = () => {
         removeBookFromCartInLS(isbn)
         dispatch(removeBooksFromCartStore(isbn));
     }
-
     useEffect(() => {   
         setBooksInCart(getBooksFromCartInLS());
     }, [booksInCartStore]);
 
     return(
         <div className={styles.cart_container}>
-            <div className={styles.img_container} onClick={toggleNavigateToStartPage}>
-                <img src={ArrowIcon}/>
-            </div>
+            <ArrowBack/>
             <div className={styles.single_title}>
                 <h1>Your Cart</h1>
             </div>

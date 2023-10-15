@@ -58,7 +58,6 @@ export const SinglePage = () => {
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<BooksDescrType>('Description');
-   
     const priseWithoutDollar = book.price.replace('$', '');
 
     const favBookObj = {
@@ -84,7 +83,14 @@ export const SinglePage = () => {
         const isbn = book.isbn13;
         addBookToCartInLS(isbn, favBookObj);
         dispatch(addBookToCartStore(favBookObj));
-    }      
+    } 
+    const scrollToTop = () => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }
+    useEffect(() => {
+        scrollToTop();
+    }, []);
+
     useEffect(() => {
         if(id.bookid !== undefined){
             dispatch(fetchSelectedBook(id.bookid));  
