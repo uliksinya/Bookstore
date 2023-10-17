@@ -30,14 +30,11 @@ export const SignUp = () => {
     return(
         <div id={styles.sign_up_container}>
         {
-            isUserRegister 
-            ? 
+            isUserRegister &&
             <div className={styles.success_container}>
                 <div className={styles.image}><img id={styles.done} src={DoneIcon}/></div>
-                <span id={styles.success_text}>Вы успешно зарегистрировались!</span>
+                <span id={styles.success_text}>You have successfully registered!</span>
             </div> 
-            :
-            ""
         }
         <form className={styles.registration_form}>
             <div>

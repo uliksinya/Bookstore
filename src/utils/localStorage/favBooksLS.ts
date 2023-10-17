@@ -1,4 +1,4 @@
-import {favBookType} from "../../api/types";
+import {favBookType} from "../../types/types";
 
 export const isThisBookInFavLS = (isbn: string): boolean => {
     const favBooksFromLS = localStorage.getItem('favBooks');

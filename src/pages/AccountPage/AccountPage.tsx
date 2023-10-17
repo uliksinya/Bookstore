@@ -105,6 +105,7 @@ export const AccountPage = () => {
                                     labelValue="Password"
                                     placeholder="Your Password" 
                                     type='password'
+                                    readOnly
                                 />                
                             </div>
                             <div className={styles.new_password}>

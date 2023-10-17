@@ -15,7 +15,6 @@ import { AccountLayout } from  './components/AccountLayout/Accountlayout';
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 function App() { 
-
   return (
     <Provider store={store}>
       <div className={styles.main_container}>

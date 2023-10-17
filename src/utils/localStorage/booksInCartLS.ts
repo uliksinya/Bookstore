@@ -1,4 +1,4 @@
-import {favBookType} from "../../api/types";
+import {favBookType} from "../../types/types";
 
 export const addBookToCartInLS = (isbn: string, bookObj : favBookType) => {
     const booksInCart = localStorage.getItem('BookCart');

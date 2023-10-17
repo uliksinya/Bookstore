@@ -16,45 +16,20 @@ import { addFavBookToLS, removeFavBookFromLS , isThisBookInFavLS } from "../../u
 import { addBookToCartInLS } from "../../utils/localStorage/booksInCartLS";
 import { addFavouriteBook, removeFavouriteBook } from "../../redux/favouritesBooks/favBooks";
 import { addBookToCartStore } from "../../redux/cart/booksincart";
-import ActiveStar from "../../assets/img/active_star.png";
-import NotActiveStar from "../../assets/img//not_active_star.png";
 import arrUp from "../../assets/img/arr_up.png";
 import arrDown from '../../assets/img/arr_down.png';
 import { BookDescriptionTabs } from "../../components/BookDescriptionTabs/BookDescriptionTabs";
 import { BooksDescrType } from "../../types/types";
 import { PaginationReleasedBooks } from "../../components/PaginationReleasedBooks/PaginationReleasedBooks";
-
-const generateGradeContainer = (bookRating: string) => {
-    const maxRating:number = 5;
-    const activeStars:number = Number(bookRating);
-    const notActiveStars: number = maxRating - activeStars;
-    const stars = [];
-    const notActiveArr = [];
-
-    for (let i = 0; i < activeStars; i++) {
-        stars.push(<img key={i} src={ActiveStar} alt="Active Star" />);
-    }
-
-    for (let i = 0; i < notActiveStars; i++) {
-        stars.push(<img key={i + activeStars} src={NotActiveStar} alt="Inactive Star" />);
-    }
-    for (let i = 0; i < 5; i++) {
-        notActiveArr.push(<img key={i} src={NotActiveStar} alt="Inactive Star" />);
-    }
-
-    return (
-        <div className={styles.rating_container}>
-            {activeStars !== 0 ? stars : notActiveArr}
-        </div>
-    );
-}
+import { scrollToTop } from "../../utils/utilsFunctions/utilsFunctions";
+import { GradeContainer } from "../../components/GradeContainer/GradeContainer";
+  
 export const SinglePage = () => {
     const id = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const book = useAppSelector(selectSelectedBook);
-    
+    const book = useAppSelector(selectSelectedBook);    
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [isFavouriteBook, setIsFavouriteBook] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<BooksDescrType>('Description');
@@ -69,7 +44,7 @@ export const SinglePage = () => {
         startPrice: priseWithoutDollar,
         quantity: 1,
         image: book.image,
-    } 
+    }     
     const toggleEditState = () => {
         setIsMenuActive(!isMenuActive);
     }
@@ -84,9 +59,7 @@ export const SinglePage = () => {
         addBookToCartInLS(isbn, favBookObj);
         dispatch(addBookToCartStore(favBookObj));
     } 
-    const scrollToTop = () => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    }
+    
     useEffect(() => {
         scrollToTop();
     }, []);
@@ -141,7 +114,7 @@ export const SinglePage = () => {
                     <div className={styles.book_information}>
                         <div className={styles.grade}>
                             <h2>{book.price}</h2>
-                            <div>{generateGradeContainer(book.rating)}</div>
+                            <GradeContainer bookRating={book.rating}/>
                         </div>
                         <ul className={styles.main_menu}>
                             <li>
@@ -195,22 +168,16 @@ export const SinglePage = () => {
             </div>
             <BookDescriptionTabs activeTab={activeTab} setActiveTab={setActiveTab}/>
             <div className={styles.book_description}>
-                {activeTab === 'Description' ? 
+                {activeTab === 'Description' && 
                     <span id={styles.single_desc}>{book.desc}</span>
-                    :
-                    null
                 }
 
-                {activeTab === 'Authors' ? 
+                {activeTab === 'Authors' &&
                     <span id={styles.single_desc}>{book.authors}</span>
-                    :
-                    null
                 }
 
-                {activeTab === 'Rewiews' ? 
+                {activeTab === 'Rewiews' &&
                     <span id={styles.single_desc}>Rewiews</span>
-                    :
-                    null
                 }
             </div>
             <div className={styles.icons_container}>

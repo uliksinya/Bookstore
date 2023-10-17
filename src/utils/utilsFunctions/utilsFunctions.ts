@@ -34,4 +34,7 @@ export const getSumTotal = (books: favBookType[]) => {
 export const getVatSum = (sum: number) => {
     return sum * 0.2;
 }
+export const scrollToTop = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+}
 

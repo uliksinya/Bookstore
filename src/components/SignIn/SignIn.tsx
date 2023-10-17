@@ -52,7 +52,7 @@ export const SignIn = () => {
                 !isCorrectPasssword && 
                 <div className={styles.not_success_container}>
                     <div className={styles.image}><img id={styles.done} src={CrossIcon}/></div>
-                    <span id={styles.not_success_text}>Неверное имя пользователя или пароль!</span>
+                    <span id={styles.not_success_text}>The username or password is incorrect!</span>
                 </div> 
             }
             <form className={styles.signin_form}>
@@ -80,7 +80,8 @@ export const SignIn = () => {
                             errorMessage={errors.password?.message}                        
                             labelValue="Password"
                             placeholder="Your Password" 
-                            inputMode="text"       
+                            inputMode="text"
+                            type="password"       
                         /> 
                     </div>
                     <div className={styles.forgot_passw} onClick={() => toggleNavToResetPassword()}>

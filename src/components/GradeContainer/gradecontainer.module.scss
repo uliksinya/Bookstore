@@ -1,0 +1,7 @@
+@import '../../styles/mixins.scss';
+
+.rating_container{
+    width: 112px;
+    @include flex-row;
+    justify-content: space-between;
+}
