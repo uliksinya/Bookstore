@@ -8,7 +8,7 @@ import { useAppSelector } from "../../redux/hooks";
 import SearchIcon from "../../assets/img/search_icon.png";
 import { selectSearchInputValue } from "../../redux/books/books";
 import { setValue } from "../../redux/books/books";
-import { HeaderBurgerMenu } from "../HeaderBurgerMenu/Burgermenu";
+import { HeaderBurgerMenu } from "../HeaderBurgerMenu/burgermenu";
 import {useState} from "react";
 import throttle from 'lodash/throttle';
 import { useMemo, useEffect } from "react";
