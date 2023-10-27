@@ -24,7 +24,8 @@ export const Pagination = ({activeNum, activeArrow, setActiveNum, setActiveArrow
             prevState.set("page", num.toString());
             return prevState;
         });
-    }   
+    }  
+    console.log(searchParams);
     
     const handleNextArrowClick = () => {
         if (activeArrow === "Prev") {

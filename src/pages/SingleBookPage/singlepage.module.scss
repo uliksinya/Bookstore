@@ -22,6 +22,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 }
 .book_desription{
     width: 100%;
@@ -44,11 +45,6 @@
     margin-top: 40px;
     color: var(--primary-black);
     text-align: center;
-}
-.rating_container{
-    width: 112px;
-    @include flex-row;
-    justify-content: space-between;
 }
 .main_menu, .additionally_menu{
     margin: 0;
@@ -74,6 +70,7 @@
 .more_detalise{
     @include flex-row;
     align-items: center;
+    cursor: pointer;
 }
 .more_detalise img{
     width: 20px;

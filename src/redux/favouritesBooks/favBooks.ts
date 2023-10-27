@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { favBookType } from '../../api/types';
+import { favBookType } from '../../types/types';
   
 const initialState: favBookType[] = [];
   
